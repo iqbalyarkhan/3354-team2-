@@ -118,7 +118,6 @@ public class CalendarViewAdapter extends PagerAdapter implements OnDayViewClickL
 
     }
 
-    @Override
     public void setOnDateSelecteListener (OnDateSelectedListener l){
 
         listener = l;
