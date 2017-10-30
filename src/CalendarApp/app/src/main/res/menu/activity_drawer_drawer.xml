@@ -6,19 +6,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/month_view"
-            android:icon="@drawable/ic_menu_camera"
+
             android:title="@string/monthView" />
         <item
             android:id="@+id/week_view"
-            android:icon="@drawable/ic_menu_gallery"
+
             android:title="@string/weekView" />
         <item
             android:id="@+id/day_view"
-            android:icon="@drawable/ic_menu_slideshow"
+
             android:title="@string/dayView" />
         <item
             android:id="@+id/agenda_view"
-            android:icon="@drawable/ic_menu_manage"
+
             android:title="@string/agenda" />
     </group>
 
