@@ -5,8 +5,10 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DayView extends BaseView {
@@ -14,12 +16,13 @@ public class DayView extends BaseView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_bar_drawer);
-        ConstraintLayout constraintLayout = findViewById(R.id.constraint); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.acitivity_day, constraintLayout);
+        setContentView(R.layout.acitivity_day);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(new SimpleDateFormat("MM/dd").format(new Date()));
+        ArrayList<ListView> events = new ArrayList<ListView>(24);
+
+        //TODO: List of hour expandable lists of events
     }
 }
