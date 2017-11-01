@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="team2.calendarapp.CreateEvent">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event Page"
+        android:textSize="25dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvEventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Event Name"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+    <EditText
+        android:id="@+id/etEventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventName"
+        app:layout_constraintStart_toEndOf="@+id/tvEventName"
+        app:layout_constraintTop_toTopOf="@+id/tvEventName" />
+
+    <TextView
+        android:id="@+id/tvEventDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Event Date"
+        app:layout_constraintStart_toStartOf="@+id/tvEventName"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
+
+    <EditText
+        android:id="@+id/etEventDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventDate"
+        app:layout_constraintStart_toEndOf="@+id/tvEventDate"
+        app:layout_constraintTop_toTopOf="@+id/tvEventDate" />
+
+    <TextView
+        android:id="@+id/tvEventLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Event Location"
+        app:layout_constraintStart_toStartOf="@+id/tvEventEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventEnd" />
+
+    <EditText
+        android:id="@+id/etEventLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventLoc"
+        app:layout_constraintStart_toEndOf="@+id/tvEventLoc"
+        app:layout_constraintTop_toTopOf="@+id/tvEventLoc" />
+
+    <TextView
+        android:id="@+id/tvEventDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="EventDescription"
+        app:layout_constraintStart_toStartOf="@+id/tvEventLoc"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventLoc" />
+
+    <EditText
+        android:id="@+id/etEventDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventDescription"
+        app:layout_constraintStart_toEndOf="@+id/tvEventDescription"
+        app:layout_constraintTop_toTopOf="@+id/tvEventDescription" />
+
+    <TextView
+        android:id="@+id/tvEventCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Event Category"
+        app:layout_constraintStart_toStartOf="@+id/tvEventDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventDescription" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventCategory"
+        app:layout_constraintStart_toEndOf="@+id/tvEventCategory"
+        app:layout_constraintTop_toTopOf="@+id/tvEventCategory" />
+
+    <TextView
+        android:id="@+id/tvEventTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Event Start Time"
+        app:layout_constraintStart_toStartOf="@+id/tvEventDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventDate" />
+
+    <EditText
+        android:id="@+id/etEventTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventTime"
+        app:layout_constraintStart_toEndOf="@+id/tvEventTime"
+        app:layout_constraintTop_toTopOf="@+id/tvEventTime" />
+
+    <TextView
+        android:id="@+id/tvEventEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Event End Time"
+        app:layout_constraintStart_toStartOf="@+id/tvEventTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventTime" />
+
+    <EditText
+        android:id="@+id/etEventEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventEnd"
+        app:layout_constraintStart_toEndOf="@+id/tvEventEnd"
+        app:layout_constraintTop_toTopOf="@+id/tvEventEnd" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="saveEvent"
+        android:text="Save Event"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
