@@ -1,17 +1,31 @@
 package team2.calendarapp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 /**
  * Created by Daryl on 11/1/2017.
  */
 
-public class Event {
+public class Event implements Comparable<Event> {
     private String name, description, location;
     private Date date;
     private int start, end, category;
-    private static ArrayList<String> categories = new ArrayList<>();
+    private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
+
+    public Event(){}
+
+    public Event(String newName, String newDescription, String newLocation, Date newDate, int newStart, int newEnd, int newCategory){
+        name = newName;
+        description = newDescription;
+        location = newLocation;
+        date = newDate;
+        start = newStart;
+        end = newEnd;
+        category = newCategory;
+    }
 
     public void setName(String newName){
         name = newName;
@@ -69,11 +83,21 @@ public class Event {
         return category;
     }
 
-    public boolean addCategory(String newCategory){
-        return categories.add(newCategory);
+    public static boolean addCategory(String newCategory){
+        boolean worked = categories.add(newCategory);
+        Collections.sort(categories, new StringComparator());
+        return worked;
     }
 
-    public String[] getCategories(){
+    public static String[] getCategories(){
         return categories.toArray(new String[]{""});
+    }
+
+    public int compareTo(Event other){
+        return date.compareTo(other.getDate());
+    }
+
+    public String toString(){
+        return (name + "\n" + start);
     }
 }
