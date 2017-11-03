@@ -47,28 +47,59 @@ public class CreateEvent extends AppCompatActivity {
         String name = etEventName.getText().toString();
         String description = etEventDescription.getText().toString();
         String location = etEventLocation.getText().toString();
-        int start = parseTime(etEventStart.getText().toString(), startAM);
-        int end = parseTime(etEventEnd.getText().toString(), endAM);
+        String startString = etEventStart.getText().toString();
         int category = sEventCategory.getSelectedItemPosition();
-        int month = Integer.parseInt(etEventMonth.getText().toString());
-        int day = Integer.parseInt(etEventDay.getText().toString());
-        int year = Integer.parseInt(etEventYear.getText().toString());
+        try {
+            int month = Integer.parseInt(etEventMonth.getText().toString());
+            int day = Integer.parseInt(etEventDay.getText().toString());
+            int year = Integer.parseInt(etEventYear.getText().toString());
 
-        if (month > 12 || month < 1 || day > 31 || day < 1){
-            Toast message = Toast.makeText(this, "Please enter a valid date", Toast.LENGTH_SHORT);
-            message.show();
+            if (name.equals("")){
+                makeToast("Please enter an event name");
+            }
+            else if (month > 12 || month < 1 || day > 31 || day < 1){
+                makeToast("Please enter a valid date");
+            }
+            else {
+                try {
+                    int start = parseTime(etEventStart.getText().toString(), startAM);
+                    int end = parseTime(etEventEnd.getText().toString(), endAM);
+                    Date date = new Date(year, month, day);
+                    Event event = new Event(name, description, location, date, start, end, category);
+                    EventDB.addEvent(event);
+                    makeToast("hello " + EventDB.getEvents().toString());
+                }
+                catch (IllegalArgumentException e){
+                    makeToast("Please enter a valid start/end time");
+                }
+            }
         }
-        else {
-            Date date = new Date(year, month, day);
-            Event event = new Event(name, description, location, date, start, end, category);
-            EventDB.addEvent(event);
-            System.out.println(EventDB.getEvents().toString());
+        catch(NumberFormatException e){
+            makeToast("Please enter a valid date");
         }
     }
 
+    private void makeToast(String message){
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
     private int parseTime(String time, boolean am){
-        int hours = Integer.parseInt(time.substring(0, 2));
-        int mins = Integer.parseInt(time.substring(3));
+        int hours = 0, mins = 0;
+        if (time.length() < 4 || time.length() > 5 || time.indexOf(':') != time.lastIndexOf(':')){
+            throw new IllegalArgumentException();
+        }
+        else if (time.charAt(1) == ':') {
+            hours = Integer.parseInt(time.substring(0, 1));
+            mins = Integer.parseInt(time.substring(2));
+        }
+        else if (time.charAt(2) == ':'){
+            hours = Integer.parseInt(time.substring(0, 2));
+            mins = Integer.parseInt(time.substring(3));
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
         int ans = (hours % 12) * 60 + mins + (am ? 0 : 720);
         return ans;
     }

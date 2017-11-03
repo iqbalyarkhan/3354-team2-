@@ -94,7 +94,12 @@ public class Event implements Comparable<Event> {
     }
 
     public int compareTo(Event other){
-        return date.compareTo(other.getDate());
+        if (date.compareTo(other.getDate()) != 0){
+            return date.compareTo(other.getDate());
+        }
+        else{
+            return other.getStart() - start;
+        }
     }
 
     public String toString(){

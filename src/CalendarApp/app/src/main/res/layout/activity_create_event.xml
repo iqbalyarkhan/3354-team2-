@@ -36,6 +36,7 @@
         android:ems="10"
         android:inputType="text"
         android:textSize="14dp"
+        android:hint="Required"
         app:layout_constraintBottom_toBottomOf="@+id/tvEventName"
         app:layout_constraintStart_toEndOf="@+id/tvEventName"
         app:layout_constraintTop_toTopOf="@+id/tvEventName" />
@@ -164,8 +165,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:ems="10"
+        android:ems="5"
         android:inputType="time"
+        android:hint="Required"
         app:layout_constraintBottom_toBottomOf="@+id/tvEventStart"
         app:layout_constraintStart_toEndOf="@+id/tvEventStart"
         app:layout_constraintTop_toTopOf="@+id/tvEventStart" />
@@ -197,8 +199,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:ems="10"
+        android:ems="5"
         android:inputType="time"
+        android:hint="Required"
         app:layout_constraintBottom_toBottomOf="@+id/tvEventEnd"
         app:layout_constraintStart_toEndOf="@+id/tvEventEnd"
         app:layout_constraintTop_toTopOf="@+id/tvEventEnd" />
