@@ -12,10 +12,12 @@
             android:title="@string/weekView" />
         <item
             android:id="@+id/day_view"
-            android:title="@string/dayView" />
+            android:title="@string/dayView"
+            />
         <item
             android:id="@+id/agenda_view"
-            android:title="@string/agenda" />
+            android:title="@string/agenda"
+            android:checked="true"/>
     </group>
 
 </menu>

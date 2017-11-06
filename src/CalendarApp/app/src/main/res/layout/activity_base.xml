@@ -8,8 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
+    <!-- our views here -->
+
+
     <include
-        layout="@layout/app_bar_drawer"
+        layout="@layout/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

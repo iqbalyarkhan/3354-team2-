@@ -9,28 +9,31 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 public class BaseView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private DrawerLayout mDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
-    @Override
-    public void setContentView(int layoutResID){
-        DrawerLayout fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base,null);
-    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -41,15 +44,16 @@ public class BaseView extends AppCompatActivity
         }
     }
 
-    public boolean useToolBar(){
-        return true;
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        // as you specify a parent activity_day in AndroidManifest.xml.
+        switch(item.getItemId()){
+            case R.id.day_view:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
+        }
 
 
         return super.onOptionsItemSelected(item);
@@ -62,7 +66,7 @@ public class BaseView extends AppCompatActivity
         int id = item.getItemId();
         Intent next = this.getIntent();
         if (id == R.id.month_view) {
-            // Handle the camera action
+
         } else if (id == R.id.week_view) {
 
         } else if (id == R.id.day_view) {
