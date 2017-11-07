@@ -1,8 +1,13 @@
 package team2.calendarapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -64,19 +69,19 @@ public class BaseView extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Intent next = this.getIntent();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        DayView day = new DayView();
         if (id == R.id.month_view) {
 
         } else if (id == R.id.week_view) {
 
         } else if (id == R.id.day_view) {
-            next = new Intent(getApplicationContext(),DayView.class);
+            transaction.replace(R.id.fragment_container,day);
         } else if (id == R.id.agenda_view) {
 
         }
-        startActivity(next);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        transaction.commit();
         return true;
     }
 }

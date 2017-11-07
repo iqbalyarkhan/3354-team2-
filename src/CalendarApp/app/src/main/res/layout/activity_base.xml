@@ -8,9 +8,11 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
-    <!-- our views here -->
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_container"
+        ></FrameLayout>
 
     <include
         layout="@layout/layout_toolbar"
