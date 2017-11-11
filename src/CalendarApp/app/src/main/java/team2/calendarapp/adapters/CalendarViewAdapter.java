@@ -118,7 +118,7 @@ public class CalendarViewAdapter extends PagerAdapter implements OnDayViewClickL
 
     }
 
-    public void setOnDateSelecteListener (OnDateSelectedListener l){
+    public void setOnDateSelectedListener (OnDateSelectedListener l){
 
         listener = l;
         if (listener != null){
@@ -128,6 +128,17 @@ public class CalendarViewAdapter extends PagerAdapter implements OnDayViewClickL
         }
 
     }
+
+
+    /*
+
+    Inside on view click, create a bundle that sends over a new intent
+    that is made up of Month and Day.
+
+    Bundle properies = (Month; Day)
+    Intent = new Intent();
+
+    * */
 
     @Override
     public void onDayViewClick(CalendarDayView view){

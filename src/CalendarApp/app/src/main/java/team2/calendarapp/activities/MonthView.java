@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+//import team2.calendarapp.R;
 import team2.calendarapp.R;
 
-public class MainActivity extends AppCompatActivity implements OnDateSelectedListener {
+import team2.calendarapp.interfaces.OnDateSelectedListener;
+import team2.calendarapp.objects.CalendarDate;
+import team2.calendarapp.views.CustomCalendarView;
+
+public class MonthView extends AppCompatActivity implements OnDateSelectedListener {
 
     //Defining private views for each element
     private CustomCalendarView customCalendar;

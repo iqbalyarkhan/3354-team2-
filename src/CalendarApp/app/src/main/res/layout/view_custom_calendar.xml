@@ -16,8 +16,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/oval_black_background_solid_selector"
-            android:src="@drawable/ic_keyboard_arrow_left_white_24dp"/>
+            android:background="@drawable/oval_black_background_solid_selector"/>
+            //android:src="@drawable/ic_keyboard_arrow_left_white_24dp"/>
 
         <TextView
             android:id="@+id/activity_main_pager_text_month"
@@ -38,8 +38,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/oval_black_background_solid_selector"
-            android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
+            android:background="@drawable/oval_black_background_solid_selector"/>
+            //android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
 
     </RelativeLayout>
 
