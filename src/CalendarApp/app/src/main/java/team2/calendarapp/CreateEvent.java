@@ -1,10 +1,13 @@
 package team2.calendarapp;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,31 +17,32 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Date;
 
-public class CreateEvent extends AppCompatActivity {
+public class CreateEvent extends Fragment {
     EditText etEventName, etEventDescription, etEventLocation, etEventStart, etEventEnd, etEventMonth, etEventDay, etEventYear;
     Spinner sEventCategory;
     boolean startAM = true, endAM = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
+        View root = inflater.inflate(R.layout.activity_create_event, container, false);
 
-        etEventName = findViewById(R.id.etEventName);
-        etEventDescription = findViewById(R.id.etEventDescription);
-        etEventLocation = findViewById(R.id.etEventLocation);
-        etEventStart = findViewById(R.id.etEventStart);
-        etEventEnd = findViewById(R.id.etEventEnd);
-        sEventCategory = findViewById(R.id.sEventCategory);
-        etEventMonth = findViewById(R.id.etEventMonth);
-        etEventDay = findViewById(R.id.etEventDay);
-        etEventYear = findViewById(R.id.etEventYear);
+        etEventName = root.findViewById(R.id.etEventName);
+        etEventDescription = root.findViewById(R.id.etEventDescription);
+        etEventLocation = root.findViewById(R.id.etEventLocation);
+        etEventStart = root.findViewById(R.id.etEventStart);
+        etEventEnd = root.findViewById(R.id.etEventEnd);
+        sEventCategory = root.findViewById(R.id.sEventCategory);
+        etEventMonth = root.findViewById(R.id.etEventMonth);
+        etEventDay = root.findViewById(R.id.etEventDay);
+        etEventYear = root.findViewById(R.id.etEventYear);
 
         setUpSpinner();
+        return root;
     }
 
     private void setUpSpinner(){
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Arrays.asList(Event.getCategories()));
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, Arrays.asList(Event.getCategories()));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sEventCategory.setAdapter(dataAdapter);
     }
@@ -80,7 +84,7 @@ public class CreateEvent extends AppCompatActivity {
     }
 
     private void makeToast(String message){
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -105,10 +109,10 @@ public class CreateEvent extends AppCompatActivity {
     }
 
     protected void createCategory(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Title");
 
-        final EditText input = new EditText(this);
+        final EditText input = new EditText(getActivity());
         builder.setView(input);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
