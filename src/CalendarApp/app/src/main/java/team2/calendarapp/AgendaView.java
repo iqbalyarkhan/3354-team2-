@@ -34,7 +34,7 @@ public class AgendaView extends Fragment {
         // creating new AgendaEventsAdapter and applying that adapter to agendaListView
         AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEventsList);
         agendaListView.setAdapter(agendaEventsListAdapter);
-        return root
+        return root;
     }
     
 
