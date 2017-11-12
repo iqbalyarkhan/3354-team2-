@@ -80,6 +80,8 @@ public class BaseView extends AppCompatActivity
             DayView day = new DayView();
             transaction.replace(R.id.fragment_container,day);
         } else if (id == R.id.agenda_view) {
+            AgendaView agendaView = new AgendaView();
+            transaction.replace(R.id.fragment_container,agendaView);
 
         }
         transaction.commit();
