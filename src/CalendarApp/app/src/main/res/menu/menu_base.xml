@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/month_view"
+            android:title="@string/monthView" />
+        <item
+            android:id="@+id/week_view"
+            android:title="@string/weekView" />
+        <item
+            android:id="@+id/day_view"
+            android:title="@string/dayView"
+            />
+        <item
+            android:id="@+id/agenda_view"
+            android:title="@string/agenda"
+            android:checked="true"/>
+    </group>
+
+</menu>
