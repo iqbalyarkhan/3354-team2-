@@ -53,7 +53,7 @@ public class BaseView extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity_day in AndroidManifest.xml.
+        // as you specify a parent fragment_day in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.day_view:
                 mDrawer.openDrawer(GravityCompat.START);
@@ -71,12 +71,13 @@ public class BaseView extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        DayView day = new DayView();
+
         if (id == R.id.month_view) {
 
         } else if (id == R.id.week_view) {
 
         } else if (id == R.id.day_view) {
+            DayView day = new DayView();
             transaction.replace(R.id.fragment_container,day);
         } else if (id == R.id.agenda_view) {
 

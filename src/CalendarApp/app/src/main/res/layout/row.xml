@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<team2.calendarapp.EventView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:background="@drawable/event_day_back"
-    android:gravity="center"/>
