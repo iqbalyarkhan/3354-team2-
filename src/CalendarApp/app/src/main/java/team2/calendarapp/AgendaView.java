@@ -1,19 +1,23 @@
 package team2.calendarapp;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class AgendaView extends AppCompatActivity {
+public class AgendaView extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agenda_view);
-        ListView agendaListView = (ListView)findViewById(R.id.agenda_list_view);
+        View root = inflater.inflate(R.layout.activity_agenda_view,container,false);
+        ListView agendaListView = root.findViewById(R.id.agenda_list_view);
         // create agendaEvent objects
         AgendaEvents firstEvent = new AgendaEvents("Learn android studio", "8:00 AM", "11:00 AM");
         AgendaEvents secondEvent = new AgendaEvents("Software engineering class", "11:30 AM", "12:45 PM");
@@ -28,8 +32,9 @@ public class AgendaView extends AppCompatActivity {
         agendaEventsList.add(fourthEvent);
         agendaEventsList.add(fifthEvent);
         // creating new AgendaEventsAdapter and applying that adapter to agendaListView
-        AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( this, agendaEventsList);
+        AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEventsList);
         agendaListView.setAdapter(agendaEventsListAdapter);
+        return root;
     }
 
 }
