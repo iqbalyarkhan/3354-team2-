@@ -72,7 +72,13 @@ public class BaseView extends AppCompatActivity
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
+        //Allows navigation to month view when appropriate
+        //option chosen from navigation bar
         if (id == R.id.month_view) {
+
+            MonthView monthView = new MonthView();
+            Intent intent = new Intent(this, MonthLayoutActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.week_view) {
 
