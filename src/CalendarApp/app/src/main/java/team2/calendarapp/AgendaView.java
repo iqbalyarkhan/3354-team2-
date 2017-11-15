@@ -15,6 +15,12 @@ public class AgendaView extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /**
+        @param inflater the LayoutInflater used to convert AgendaView xml layout into Agenda View objects
+        @param container the ViewGroup used for the inflate method that initializes the view root to be false
+        @param savedInstanceState bundle used for the onCreate method that is called when the AgendaView activity starts up 
+        @return root the view which is the modified view for the AgendaView containing calendar events in a list
+        */
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.activity_agenda_view,container,false);
         ListView agendaListView = root.findViewById(R.id.agenda_list_view);
