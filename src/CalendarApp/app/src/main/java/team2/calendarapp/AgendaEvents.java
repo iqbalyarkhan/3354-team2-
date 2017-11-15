@@ -1,7 +1,8 @@
 package team2.calendarapp;
-
-
-
+/** 
+AgendaEvents is for events used for demonstrating the Agenda View 
+returns and sets Agenda Events attributes such as eventName, endTime and  startTime
+*/ 
 public class AgendaEvents {
     private String eventName;
     private String startTime;
