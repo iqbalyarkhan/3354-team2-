@@ -28,10 +28,7 @@
                     android:layout_width="@dimen/time_width"
                     android:layout_height="match_parent"
                     />
-                <include layout="@layout/layout_separator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp" />
+
 
 
 

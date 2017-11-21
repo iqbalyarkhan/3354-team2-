@@ -45,7 +45,18 @@ public class BaseView extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            int fragments = getSupportFragmentManager().getBackStackEntryCount();
+            if(fragments == 1){
+                finish();
+            }
+            else{
+                if(getFragmentManager().getBackStackEntryCount() > 1){
+                    getFragmentManager().popBackStack();
+                }
+                else{
+                    super.onBackPressed();
+                }
+            }
         }
     }
 
@@ -81,6 +92,8 @@ public class BaseView extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.week_view) {
+            WeekView week = new WeekView();
+            transaction.replace(R.id.fragment_container,week);
 
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
