@@ -26,13 +26,13 @@ public class DayView extends Fragment {
         eventContainer = root.findViewById(R.id.event_container);
         mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mToolbar.setTitle("DayView");
-        drawDays();
+        //drawDays();
 
 
         return root;
     }
 
-    private void drawDays(){
+    /*private void drawDays(){
         HourView hourView;
         dayContainer.removeAllViews();
         for(int i = 0; i < 24; i++){
@@ -40,7 +40,7 @@ public class DayView extends Fragment {
             hourView.setTime(String.format("%1$2s:00",i));
             dayContainer.addView(hourView);
         }
-    }
+    }*/
     private void drawEvents(){
         eventContainer.removeAllViews();
         EventView event;
