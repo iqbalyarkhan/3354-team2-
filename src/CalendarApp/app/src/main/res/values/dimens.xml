@@ -9,7 +9,9 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="event_title">16sp</dimen>
     <dimen name="event_description">12sp</dimen>
-    <dimen name="separator">60dp</dimen>
+    <dimen name="separator">59dp</dimen>
+    <dimen name="hour_height">60dp</dimen>
     <dimen name="time_width">40dp</dimen>
+    <dimen name="hour_textsize">12sp</dimen>
 
 </resources>

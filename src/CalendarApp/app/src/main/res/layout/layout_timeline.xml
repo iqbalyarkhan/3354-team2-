@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="3dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/separator" />
+    <TextView
+        android:id="@+id/hour_1AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="1 AM"
+        />
+    <TextView
+        android:id="@+id/hour_2AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="2 AM"/>
+    <TextView
+        android:id="@+id/hour_3AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="3 AM"/>
+    <TextView
+        android:id="@+id/hour_4AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="4 AM"/>
+    <TextView
+        android:id="@+id/hour_5AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="5 AM"/>
+    <TextView
+        android:id="@+id/hour_6AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="6 AM"/>
+    <TextView
+        android:id="@+id/hour_7AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="7 AM"/>
+    <TextView
+        android:id="@+id/hour_8AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="8 AM"/>
+    <TextView
+        android:id="@+id/hour_9AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="9 AM"/>
+    <TextView
+        android:id="@+id/hour_10AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="10 AM"/>
+    <TextView
+        android:id="@+id/hour_11AM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="11 AM"/>
+    <TextView
+        android:id="@+id/hour_12PM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="12 PM"/>
+    <TextView
+        android:id="@+id/hour_1PM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="1 PM"
+        />
+    <TextView
+        android:id="@+id/hour_2PM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="2 PM"/>
+    <TextView
+        android:id="@+id/hour_3PM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="3 PM"/>
+    <TextView
+        android:id="@+id/hour_4PM"
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="4 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="5 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="6 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="7 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="8 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="9 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="10 PM"/>
+    <TextView
+        android:layout_width="@dimen/time_width"
+        android:layout_height="@dimen/hour_height"
+        android:textSize="@dimen/hour_textsize"
+        android:text="11 PM"/>
+
+</LinearLayout>

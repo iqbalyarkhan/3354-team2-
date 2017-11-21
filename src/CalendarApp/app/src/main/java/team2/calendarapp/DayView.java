@@ -22,8 +22,6 @@ public class DayView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_day,container,false);
-        dayContainer = root.findViewById(R.id.day_container);
-        eventContainer = root.findViewById(R.id.event_container);
         mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mToolbar.setTitle("DayView");
         //drawDays();

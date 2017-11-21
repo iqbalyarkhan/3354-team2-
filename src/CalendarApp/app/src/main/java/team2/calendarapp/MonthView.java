@@ -30,7 +30,7 @@ public class MonthView extends AppCompatActivity {
         String date = receive.getStringExtra("date");
         currentDate.setText(date);*/
         DayView dayView = new DayView();
-        Intent dayIntent = new Intent(dayView.getContext(), DayView.class );
+        Intent dayIntent = new Intent(this, DayView.class );
         startActivityForResult(dayIntent, 0);
 
     }

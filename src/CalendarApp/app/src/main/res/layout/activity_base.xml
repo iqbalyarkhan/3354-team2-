@@ -16,9 +16,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/fragment_container"
         android:layout_marginTop="?attr/actionBarSize">
-
-
-
     </FrameLayout>
 
 
