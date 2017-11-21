@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -67,11 +68,9 @@ public class BaseView extends AppCompatActivity
         // as you specify a parent fragment_day in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.day_view:
-                mDrawer.openDrawer(GravityCompat.START);
+                mDrawer.closeDrawer(GravityCompat.START);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -92,7 +91,6 @@ public class BaseView extends AppCompatActivity
             MonthView monthView = new MonthView();
             Intent intent = new Intent(this, MonthView.class);
             startActivity(intent);
-
         } else if (id == R.id.week_view) {
             WeekView week = new WeekView();
             transaction.replace(R.id.fragment_container,week);
@@ -103,8 +101,8 @@ public class BaseView extends AppCompatActivity
         } else if (id == R.id.agenda_view) {
             AgendaView agendaView = new AgendaView();
             transaction.replace(R.id.fragment_container,agendaView);
-
         }
+        mDrawer.closeDrawer(Gravity.START);
         transaction.commit();
         return true;
     }
