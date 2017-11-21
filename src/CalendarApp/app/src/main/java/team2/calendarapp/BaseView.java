@@ -87,8 +87,10 @@ public class BaseView extends AppCompatActivity
         //option chosen from navigation bar
         if (id == R.id.month_view) {
 
+            //Creates month view and starts activity to take user to the
+            //correct view
             MonthView monthView = new MonthView();
-            Intent intent = new Intent(this, MonthLayoutActivity.class);
+            Intent intent = new Intent(this, MonthView.class);
             startActivity(intent);
 
         } else if (id == R.id.week_view) {
