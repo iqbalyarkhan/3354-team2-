@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "491552748633",
+    "firebase_url": "https://team2-calendarapp.firebaseio.com",
+    "project_id": "team2-calendarapp",
+    "storage_bucket": "team2-calendarapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491552748633:android:85af33345cf530e5",
+        "android_client_info": {
+          "package_name": "team2.calendarapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491552748633-kesibm3dt07fc60f86rfkcu7kgaq27n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQp_JPLnjrjFqkHALLcsA6pZ1MNMc4Ul4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
