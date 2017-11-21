@@ -318,7 +318,7 @@ public class MainCalendarView extends LinearLayout{
                 }
             }*/
 
-            // For styling: to style the current month: only user's currently selected month is in
+            // To style the current month: only user's currently selected month is in
             // black, other areas are greyed out.
             if (passedMonth == month){
 
@@ -362,7 +362,7 @@ public class MainCalendarView extends LinearLayout{
     }
 
     /**
-     * Displays the events created if the date has an event
+     * Displays current date's week range
      */
     public interface EventHandler
     {

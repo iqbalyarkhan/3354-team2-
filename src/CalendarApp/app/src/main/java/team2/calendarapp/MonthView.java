@@ -3,46 +3,11 @@ package team2.calendarapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-
-/*//Activity which is a month view
-public class MonthView extends AppCompatActivity {
-
-    //To hold the current date which will be highlighted
-    //in the month view
-    private TextView currentDate;
-
-
-    *//**
- * To initialize the month view activity
- * @param - the saved instance
- *//*
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        currentDate = (TextView) findViewById(R.id.date);
-
-        *//*Intent receive = getIntent();
-        String date = receive.getStringExtra("date");
-        currentDate.setText(date);*//*
-        DayView dayView = new DayView();
-        Intent dayIntent = new Intent(this, DayView.class );
-        startActivityForResult(dayIntent, 0);
-
-    }
-
-}*/
 
 public class MonthView extends AppCompatActivity {
 
@@ -61,34 +26,49 @@ public class MonthView extends AppCompatActivity {
         MainCalendarView cv = ((MainCalendarView)findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
 
-        //On long press the date is displayed as a toast
-        //must change to day view on long click
+        //On long press the date range is displayed as a toast.
         cv.setEventHandler(new MainCalendarView.EventHandler() {
             @Override
             public void onDayLongPress(Date date) {
                 //Toast.makeText(MonthView.this, "No events for today", Toast.LENGTH_SHORT).show();
-
-                //Gets the current date and extracts information to be passed to the day view
-                Calendar currDate = Calendar.getInstance();
-                currDate.setTime(date);
-                String sMonth = Integer.toString(currDate.get(Calendar.MONTH) + 1);
-                String sDayNumber = Integer.toString(currDate.get(Calendar.DAY_OF_MONTH));
-                String sDayName = Integer.toString(currDate.get(Calendar.DAY_OF_WEEK));
-                String sYear = Integer.toString(currDate.get(Calendar.YEAR));
-
-                String currentDate = sMonth +  "/" + sDayNumber + "/" + sYear;
-                Toast.makeText(MonthView.this,currentDate,Toast.LENGTH_LONG).show();
-
-                //Bundle to transfer date information to DayView
-                Bundle dateInformation = new Bundle();
-                dateInformation.putString("dateInformation", currentDate);
-                DayView dayView = new DayView();
-                dayView.setArguments(dateInformation);
+                //Gets current week dates in string format
+                String currWeekDates = getWeekDates(date);
+                //System.out.println(currWeekDates);
+                Toast.makeText(MonthView.this, currWeekDates, Toast.LENGTH_SHORT).show();
 
 
             }
         });
     }
 
+    /**
+     * Method to extract current week's start and end dates
+     * @param date - the current date selected by the user
+     * @return - String that holds current weeks start and end date in the format:
+     *      "MM-DD till MM-DD"
+     */
+    public String getWeekDates(Date date){
+
+        //Sets the date to what the user has clicked
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        //Gets the start date of the week
+        Calendar first = (Calendar) cal.clone();
+        first.add(Calendar.DAY_OF_WEEK,
+                first.getFirstDayOfWeek() - first.get(Calendar.DAY_OF_WEEK));
+
+        //Adds six days to start date to get the end date
+        Calendar last = (Calendar) first.clone();
+        last.add(Calendar.DAY_OF_YEAR, 6);
+
+        //Combines the two and returns the date range
+        SimpleDateFormat df = new SimpleDateFormat("MM-dd");
+        String start = df.format((first.getTime()));
+        String end = df.format(last.getTime());
+        String currWeekDates = start + " till " + end;
+        return currWeekDates;
+
+    }
 }
 
