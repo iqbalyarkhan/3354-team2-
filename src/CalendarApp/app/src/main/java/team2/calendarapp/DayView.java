@@ -24,21 +24,10 @@ public class DayView extends Fragment {
         View root = inflater.inflate(R.layout.fragment_day,container,false);
         mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mToolbar.setTitle("DayView");
-        //drawDays();
 
 
         return root;
     }
-
-    /*private void drawDays(){
-        HourView hourView;
-        dayContainer.removeAllViews();
-        for(int i = 0; i < 24; i++){
-            hourView = new HourView(getActivity());
-            hourView.setTime(String.format("%1$2s:00",i));
-            dayContainer.addView(hourView);
-        }
-    }*/
     private void drawEvents(){
         eventContainer.removeAllViews();
         EventView event;
