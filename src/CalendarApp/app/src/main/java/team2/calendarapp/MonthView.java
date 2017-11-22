@@ -2,28 +2,30 @@ package team2.calendarapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-public class MonthView extends BaseView {
-
+public class MonthView extends Fragment {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_main,mContainer);
-        Intent receive = getIntent();
+        View root = inflater.inflate(R.layout.activity_main,container,false);
 
         //To handle events
         HashSet<Date> events = new HashSet<>();
         events.add(new Date());
 
         //Updates the calendar view with relevant events
-        MainCalendarView cv = ((MainCalendarView)findViewById(R.id.calendar_view));
+        MainCalendarView cv = ((MainCalendarView)root.findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
 
         //On long press the date range is displayed as a toast.
@@ -34,11 +36,12 @@ public class MonthView extends BaseView {
                 //Gets current week dates in string format
                 String currWeekDates = getWeekDates(date);
                 //System.out.println(currWeekDates);
-                Toast.makeText(MonthView.this, currWeekDates, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
 
 
             }
         });
+        return root;
     }
 
     /**

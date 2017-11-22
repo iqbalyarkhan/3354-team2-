@@ -1,21 +1,23 @@
 package team2.calendarapp;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -39,29 +41,9 @@ public class BaseView extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView())).addToBackStack("fragBack").commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            int fragments = getSupportFragmentManager().getBackStackEntryCount();
-            if(fragments == 1){
-                finish();
-            }
-            else{
-                if(getFragmentManager().getBackStackEntryCount() > 1){
-                    getFragmentManager().popBackStack();
-                }
-                else{
-                    super.onBackPressed();
-                }
-            }
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -81,25 +63,26 @@ public class BaseView extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
         //Allows navigation to month view when appropriate
         //option chosen from navigation bar
-        mContainer.removeAllViews();
+        if(manager.getBackStackEntryCount() > 1){
+            manager.popBackStack();
+        }
         if (id == R.id.week_view) {
             WeekView week = new WeekView();
-            transaction.replace(R.id.content_container,week);
+            transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
 
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
-            transaction.replace(R.id.content_container,day);
+            transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();
         } else if (id == R.id.agenda_view) {
             AgendaView agendaView = new AgendaView();
-            transaction.replace(R.id.content_container,agendaView);
+            transaction.replace(R.id.content_container,agendaView).addToBackStack("fragBack").commit();
         }
         mDrawer.closeDrawer(Gravity.START);
-        transaction.commit();
         return true;
     }
 }

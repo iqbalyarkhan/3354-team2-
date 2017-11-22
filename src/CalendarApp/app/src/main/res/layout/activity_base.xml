@@ -24,4 +24,5 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_base" />
 
+
 </android.support.v4.widget.DrawerLayout>
