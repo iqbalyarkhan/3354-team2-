@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-public class MonthView extends AppCompatActivity {
+public class MonthView extends BaseView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        getLayoutInflater().inflate(R.layout.activity_main,mContainer);
         Intent receive = getIntent();
 
         //To handle events
@@ -70,5 +70,6 @@ public class MonthView extends AppCompatActivity {
         return currWeekDates;
 
     }
+
 }
 

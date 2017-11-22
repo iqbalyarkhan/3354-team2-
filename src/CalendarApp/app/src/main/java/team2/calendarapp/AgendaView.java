@@ -1,12 +1,10 @@
 package team2.calendarapp;
 
 import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ public class AgendaView extends Fragment {
         @return root the view which is the modified view for the AgendaView containing calendar events in a list
         */
         super.onCreate(savedInstanceState);
-        View root = inflater.inflate(R.layout.activity_agenda_view,container,false);
+        View root = inflater.inflate(R.layout.fragment_agenda,container,false);
         ListView agendaListView = root.findViewById(R.id.agenda_list_view);
         // create agendaEvent objects
         AgendaEvents firstEvent = new AgendaEvents("Learn android studio", "8:00 AM", "11:00 AM");

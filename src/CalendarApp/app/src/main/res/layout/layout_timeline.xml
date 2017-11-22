@@ -11,7 +11,7 @@
         android:layout_width="@dimen/time_width"
         android:layout_height="@dimen/hour_height"
         android:textSize="@dimen/hour_textsize"
-        android:text="12 AM"
+
         />
     <TextView
         android:id="@+id/hour_1AM"

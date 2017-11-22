@@ -8,10 +8,18 @@
     <View
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
         android:layout_alignTop="@id/week_bar"
         android:layout_alignBottom="@id/week_bar"
         android:id="@+id/test"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_below="@id/week_bar"
+        android:layout_alignEnd="@id/week_bar"
+        android:layout_alignStart="@id/week_bar"
+
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

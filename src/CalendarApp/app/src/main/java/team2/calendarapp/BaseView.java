@@ -17,17 +17,19 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class BaseView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout mDrawer;
+    protected DrawerLayout mDrawer;
+    protected FrameLayout mContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        mContainer = findViewById(R.id.content_container);
         mDrawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -84,23 +86,17 @@ public class BaseView extends AppCompatActivity
 
         //Allows navigation to month view when appropriate
         //option chosen from navigation bar
-        if (id == R.id.month_view) {
-
-            //Creates month view and starts activity to take user to the
-            //correct view
-            MonthView monthView = new MonthView();
-            Intent intent = new Intent(this, MonthView.class);
-            startActivity(intent);
-        } else if (id == R.id.week_view) {
+        mContainer.removeAllViews();
+        if (id == R.id.week_view) {
             WeekView week = new WeekView();
-            transaction.replace(R.id.fragment_container,week);
+            transaction.replace(R.id.content_container,week);
 
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
-            transaction.replace(R.id.fragment_container,day);
+            transaction.replace(R.id.content_container,day);
         } else if (id == R.id.agenda_view) {
             AgendaView agendaView = new AgendaView();
-            transaction.replace(R.id.fragment_container,agendaView);
+            transaction.replace(R.id.content_container,agendaView);
         }
         mDrawer.closeDrawer(Gravity.START);
         transaction.commit();

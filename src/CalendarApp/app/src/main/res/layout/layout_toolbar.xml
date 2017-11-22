@@ -20,6 +20,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_container"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="horizontal">
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
