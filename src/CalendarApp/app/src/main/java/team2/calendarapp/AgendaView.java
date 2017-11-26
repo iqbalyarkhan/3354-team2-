@@ -10,7 +10,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class AgendaView extends Fragment {
-
+/**
+AgendaView is the view for displaying calendar events as an agenda list.
+The AgendaView view displays events in a list and shows event name, event start time, and event end time
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**
@@ -35,7 +38,7 @@ public class AgendaView extends Fragment {
         agendaEventsList.add(thirdEvent);
         agendaEventsList.add(fourthEvent);
         agendaEventsList.add(fifthEvent);
-        // creating new AgendaEventsAdapter and applying that adapter to agendaListView
+        // creating new AgendaEventsAdapter (the custom view for the agenda events list) and applying that adapter to agendaListView
         AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEventsList);
         agendaListView.setAdapter(agendaEventsListAdapter);
         return root;
