@@ -1,29 +1,29 @@
 package team2.calendarapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 
 /**
  * Created by Daryl on 11/1/2017.
  */
 
-public class Event implements Comparable<Event> {
+public class Event implements Comparable<Event>, Serializable {
     private String name, description, location;
-    private Date date;
-    private int start, end, category;
+    private Calendar startDate, endDate;
+    private int category;
     private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
 
     public Event(){}
 
-    public Event(String newName, String newDescription, String newLocation, Date newDate, int newStart, int newEnd, int newCategory){
+    public Event(String newName, String newDescription, String newLocation, Calendar newStartDate, Calendar newEndDate, int newCategory){
         name = newName;
         description = newDescription;
         location = newLocation;
-        date = newDate;
-        start = newStart;
-        end = newEnd;
+        startDate = newStartDate;
+        endDate = newEndDate;
         category = newCategory;
     }
 
@@ -51,28 +51,20 @@ public class Event implements Comparable<Event> {
         return location;
     }
 
-    public void setDate(Date newDate){
-        date = newDate;
+    public void setStartDate(Calendar newDate){
+        startDate = newDate;
     }
 
-    public Date getDate(){
-        return date;
+    public Calendar getStartDate(){
+        return startDate;
     }
 
-    public void setStartTime(int newStart){
-        start = newStart;
+    public void setEndDate(Calendar newDate){
+        endDate = newDate;
     }
 
-    public int getStart(){
-        return start;
-    }
-
-    public void setEnd(int newEnd){
-        end = newEnd;
-    }
-
-    public int getEnd(){
-        return end;
+    public Calendar getEndDate(){
+        return endDate;
     }
 
     public void setCategory(int newCategory){
@@ -94,17 +86,10 @@ public class Event implements Comparable<Event> {
     }
 
     public int compareTo(Event other){
-        if (date.compareTo(other.getDate()) != 0){
-            return date.compareTo(other.getDate());
-        }
-        else{
-            return other.getStart() - start;
-        }
+        return startDate.compareTo(other.startDate);
     }
 
     public String toString() {
-        return (name + "\n" + start);
+        return (name + "\n" + startDate.toString());
     }
-
-
 }

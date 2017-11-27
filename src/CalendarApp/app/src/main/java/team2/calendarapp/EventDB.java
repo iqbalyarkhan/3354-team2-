@@ -19,4 +19,8 @@ public class EventDB {
         Collections.sort(events);
         return worked;
     }
+
+    public static boolean delete(Event event){
+        return events.remove(event);
+    }
 }

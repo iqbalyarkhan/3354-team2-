@@ -13,6 +13,7 @@
         android:text="Event Page"
         android:textSize="25dp"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="75dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -172,14 +173,14 @@
         app:layout_constraintStart_toEndOf="@+id/tvEventStart"
         app:layout_constraintTop_toTopOf="@+id/tvEventStart" />
 
-    <Button
-        android:id="@+id/bStartAM"
+    <ToggleButton
+        android:id="@+id/tbStartAM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="AM"
-        android:onClick="startAM"
+        android:textOn="AM"
+        android:textOff="PM"
         app:layout_constraintStart_toEndOf="@+id/etEventStart"
         app:layout_constraintTop_toTopOf="@+id/etEventStart"
         app:layout_constraintBottom_toBottomOf="@+id/etEventStart" />
@@ -206,14 +207,14 @@
         app:layout_constraintStart_toEndOf="@+id/tvEventEnd"
         app:layout_constraintTop_toTopOf="@+id/tvEventEnd" />
 
-    <Button
-        android:id="@+id/bEndAM"
+    <ToggleButton
+        android:id="@+id/tbEndAM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="AM"
-        android:onClick="endAM"
+        android:textOn="AM"
+        android:textOff="PM"
         app:layout_constraintStart_toEndOf="@+id/etEventEnd"
         app:layout_constraintTop_toTopOf="@+id/etEventEnd"
         app:layout_constraintBottom_toBottomOf="@+id/etEventEnd" />
@@ -243,5 +244,29 @@
         app:layout_constraintBottom_toBottomOf="@+id/sEventCategory"
         app:layout_constraintStart_toEndOf="@+id/sEventCategory"
         app:layout_constraintTop_toTopOf="@+id/sEventCategory" />
+
+    <Button
+        android:id="@+id/bCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="cancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/bSaveEvent"
+        app:layout_constraintEnd_toStartOf="@+id/bSaveEvent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="delete"
+        android:text="Delete Event"
+        app:layout_constraintBottom_toBottomOf="@+id/bSaveEvent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bSaveEvent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -36,7 +36,7 @@ public class DayView extends Fragment {
         HourView hourView;
         dayContainer.removeAllViews();
         for(int i = 0; i < 24; i++){
-            hourView = new HourView(getContext());
+            hourView = new HourView(getActivity());
             hourView.setTime(String.format("%1$2s:00",i));
             dayContainer.addView(hourView);
         }
