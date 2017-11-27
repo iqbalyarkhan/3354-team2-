@@ -25,19 +25,8 @@ The AgendaView view displays events in a list and shows event name, event start 
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_agenda,container,false);
         ListView agendaListView = root.findViewById(R.id.agenda_list_view);
-        // create agendaEvent objects
-        AgendaEvents firstEvent = new AgendaEvents("Learn android studio", "8:00 AM", "11:00 AM");
-        AgendaEvents secondEvent = new AgendaEvents("Software engineering class", "11:30 AM", "12:45 PM");
-        AgendaEvents thirdEvent = new AgendaEvents("Program android studio ", "1:00 PM", "2:00 PM");
-        AgendaEvents fourthEvent = new AgendaEvents("Java programming", "2:00 PM", "3:00 PM");
-        AgendaEvents fifthEvent = new AgendaEvents("Learn android", "5:00 PM", "11:00 PM");
-    ArrayList<AgendaEvents> agendaEventsList = new ArrayList();
-        // add AgendaEvents to AgendaEventList
-        agendaEventsList.add(firstEvent);
-        agendaEventsList.add(secondEvent);
-        agendaEventsList.add(thirdEvent);
-        agendaEventsList.add(fourthEvent);
-        agendaEventsList.add(fifthEvent);
+        // getting calendar events list
+        Event [] agendaEventsList = EventDB.getEvents();
         // creating new AgendaEventsAdapter (the custom view for the agenda events list) and applying that adapter to agendaListView
         AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEventsList);
         agendaListView.setAdapter(agendaEventsListAdapter);

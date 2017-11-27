@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * be displayed in the AgendaView
  */
 
-public class AgendaEventsAdapter extends ArrayAdapter<AgendaEvents>{
+public class AgendaEventsAdapter extends ArrayAdapter<Event>{
     // agendaEventsAdapter default constructor
-    public AgendaEventsAdapter (Context context, ArrayList<AgendaEvents> agendaEventsArrayList){
+    public AgendaEventsAdapter (Context context, Event[] agendaEventsArrayList){
         super(context,0,agendaEventsArrayList);
     }
 
@@ -29,14 +29,14 @@ public class AgendaEventsAdapter extends ArrayAdapter<AgendaEvents>{
      * @return convertView which is modified custom view that has text of AgendaEvents
      */
     public View getView(int position, View convertView, ViewGroup parent){
-        AgendaEvents agendaEvent = getItem(position);
+       Event agendaEvent = getItem(position);
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_view_layout, parent, false);
         }
         TextView eventName = (TextView)convertView.findViewById(R.id.eventNameDisplay);
         TextView eventTime = convertView.findViewById(R.id.eventTimeDisplay);
-        eventName.setText(agendaEvent.getEventName());
-        eventTime.setText(agendaEvent.getStartTime() + " - "+ agendaEvent.getEndTime());
+        eventName.setText(agendaEvent.getName());
+        eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
 
         return convertView;
     }
