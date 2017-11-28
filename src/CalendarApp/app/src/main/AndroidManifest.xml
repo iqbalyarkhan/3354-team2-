@@ -18,7 +18,7 @@
 
         <activity android:name=".MonthView"></activity>
         <activity android:name=".MonthLayoutActivity"></activity>
-        
+
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.Firebase.MESSAGING_EVENT"/>
