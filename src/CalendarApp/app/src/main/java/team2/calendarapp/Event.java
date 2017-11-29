@@ -9,14 +9,19 @@ import java.util.Date;
  * Created by Daryl on 11/1/2017.
  */
 
+/**
+ * The Event class creates and stores attributes for a calendar event
+ */
 public class Event implements Comparable<Event> {
     private String name, description, location;
     private Date date;
     private int start, end, category;
     private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
 
+    // default constructor for event
     public Event(){}
 
+    // Constructor for Event
     public Event(String newName, String newDescription, String newLocation, Date newDate, int newStart, int newEnd, int newCategory){
         name = newName;
         description = newDescription;
@@ -93,7 +98,13 @@ public class Event implements Comparable<Event> {
         return categories.toArray(new String[]{""});
     }
 
+    // comparing the Event date and start time
     public int compareTo(Event other){
+        /**
+         * Compares the event date and startTime with another event
+         * @param other the other event to be compared
+         * @return compared date which is the difference of the event's start time
+         */
         if (date.compareTo(other.getDate()) != 0){
             return date.compareTo(other.getDate());
         }
