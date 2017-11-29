@@ -8,6 +8,16 @@ import java.util.Collections;
  */
 
 public class EventDB {
+    //Singleton design pattern
+    private static EventDB self;
+    // hide the default constructor
+    private EventDB(){ }
+    // create instance of EventDB only if we don't have an EventDB already
+    public static EventDB Instance(){
+        if (self == null)
+            self = new EventDB();
+        return self;
+    }
     private static ArrayList<Event> events = new ArrayList<>();
 
     public static Event[] getEvents(){
