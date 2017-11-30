@@ -1,10 +1,12 @@
-
+package team2.calendarapp;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -26,8 +28,21 @@ public class EventDatabase extends SQLiteOpenHelper {
 
     // default constructor
     public EventDatabase(Context context) {
-        super(context, dbName, null,1);
+        super(new ContextWrapper(context) {
+            @Override public SQLiteDatabase openOrCreateDatabase(String name,
+                                                                 int mode, SQLiteDatabase.CursorFactory factory) {
+
+                // allow database directory to be specified
+                File dir = new File(/data/data/<team2.calendarapp>/databases/<dbName>);
+                if(!dir.exists()) {
+                    dir.mkdirs();
+                }
+                return SQLiteDatabase.openDatabase(/data/data/<team2.calendarapp>/databases/<dbName>, null,
+                        SQLiteDatabase.CREATE_IF_NECESSARY);
+            }
+        }, dbName, null, 1);
     }
+
 
     public static String getColID() {
         return colID;
