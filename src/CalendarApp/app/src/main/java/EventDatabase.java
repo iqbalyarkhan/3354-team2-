@@ -1,6 +1,7 @@
-package team2.calendarapp;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -144,6 +145,22 @@ public class EventDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         db.delete(calendarEventsTable,colID+"=?", new String [] {String.valueOf(eventToDelete.getID())});
         db.close();
+    }
+
+    /**
+     *
+     * @param eventName the name of the event to find the eventID
+     * @return the eventID which is the event's unique identifier
+     */
+    public int GetEventID(String eventName)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor c=db.query(calendarEventsTable, new String[]{colID+" as _id",colID},
+                colName+"=?", new String[]{eventName}, null, null, null);
+        //Cursor c=db.rawQuery("SELECT "+colDeptID+" as _id FROM "+deptTable+"
+        //WHERE "+colDeptName+"=?", new String []{Dept});
+        c.moveToFirst();
+        return c.getInt(c.getColumnIndex("_id"));
     }
 
     }
