@@ -1,5 +1,7 @@
 package team2.calendarapp;
 
+import android.graphics.Color;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +16,7 @@ public class Event implements Comparable<Event>, Serializable {
     private String name, description, location;
     private Calendar startDate, endDate;
     private int category;
-    private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
+    private static ArrayList<Category> categories = new ArrayList<>(Arrays.asList(new Category[]{new Category("None", Color.WHITE)}));
 
     public Event(){}
 
@@ -75,14 +77,18 @@ public class Event implements Comparable<Event>, Serializable {
         return category;
     }
 
-    public static boolean addCategory(String newCategory){
-        boolean worked = categories.add(newCategory);
-        Collections.sort(categories, new StringComparator());
+    public static boolean addCategory(String name, int color){
+        boolean worked = categories.add(new Category(name, color));
+        Collections.sort(categories, new CategoryComparator());
         return worked;
     }
 
-    public static String[] getCategories(){
-        return categories.toArray(new String[]{""});
+    public static Category[] getCategories(){
+        return categories.toArray(new Category[]{new Category("", 0)});
+    }
+
+    public static void setCategories(Category[] categoryList){
+        categories = new ArrayList<>(Arrays.asList(categoryList));
     }
 
     public int compareTo(Event other){

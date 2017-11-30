@@ -17,6 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class BaseView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawer;
@@ -24,6 +31,7 @@ public class BaseView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        loadCalendar();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,6 +44,12 @@ public class BaseView extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        CreateEvent day = new CreateEvent();
+        transaction.replace(R.id.fragment_container,day);
+        transaction.commit();
     }
 
     @Override
@@ -83,5 +97,40 @@ public class BaseView extends AppCompatActivity
         }
         transaction.commit();
         return true;
+    }
+
+    public void saveCalendar(){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("events.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(EventDB.getEvents());
+            out.close();
+            fileOut.close();
+
+            fileOut = new FileOutputStream("categories.txt");
+            out = new ObjectOutputStream(fileOut);
+            out.writeObject(Event.getCategories());
+            out.close();
+            fileOut.close();
+        }
+        catch(IOException e){}
+    }
+
+    public void loadCalendar(){
+        try{
+            FileInputStream fileIn = new FileInputStream("events.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            EventDB.loadEventList((Event[]) in.readObject());
+            in.close();
+            fileIn.close();
+
+            fileIn = new FileInputStream("events.txt");
+            in = new ObjectInputStream(fileIn);
+            Event.setCategories((Category[]) in.readObject());
+            in.close();
+            fileIn.close();
+        }
+        catch(IOException e){}
+        catch(ClassNotFoundException e){}
     }
 }

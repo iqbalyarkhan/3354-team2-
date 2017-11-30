@@ -1,13 +1,15 @@
 package team2.calendarapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
  * Created by Daryl on 11/2/2017.
  */
 
-public class EventDB {
+public class EventDB implements Serializable {
     private static ArrayList<Event> events = new ArrayList<>();
 
     public static Event[] getEvents(){
@@ -18,6 +20,10 @@ public class EventDB {
         boolean worked = events.add(toAdd);
         Collections.sort(events);
         return worked;
+    }
+
+    public static void loadEventList(Event[] eventList){
+        events = new ArrayList<>(Arrays.asList(eventList));
     }
 
     public static boolean delete(Event event){

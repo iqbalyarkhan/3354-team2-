@@ -3,6 +3,7 @@ package team2.calendarapp;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -66,7 +68,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
 
     //setUpSpinner populates the category spinner with all the available categories
     private void setUpSpinner(){
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, Arrays.asList(Event.getCategories()));
+        ArrayAdapter<Category> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, Arrays.asList(Event.getCategories()));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sEventCategory.setAdapter(dataAdapter);
     }
@@ -171,16 +173,26 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
 
     //createCategory creates an AlertDialog that allows the user to create a new category for their events
     protected void createCategory() {
+        final LinearLayout layout = new LinearLayout(getActivity());
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());   //Create the AlertDialog
-        builder.setTitle("Title");
+        builder.setTitle("New Category");
 
         final EditText input = new EditText(getActivity());     //Create the EditText that they will use to input the new Category
-        builder.setView(input);
+        final Spinner color = new Spinner(getActivity());
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"Green", "Red", "Blue", "Yellow", "Magenta", "Aqua"});
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        color.setAdapter(dataAdapter);
+
+        layout.addView(input);
+        layout.addView(color);
+        builder.setView(layout);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {        //If they press OK, add the categories to the list of them
-                Event.addCategory(input.getText().toString());
+                Event.addCategory(input.getText().toString(), Color.parseColor(((String)color.getSelectedItem())));
                 setUpSpinner();                                             //Then refresh the list
             }
         });
