@@ -15,14 +15,15 @@ import java.util.Date;
 public class Event implements Comparable<Event> {
     private String name, description, location;
     private Date date;
-    private int start, end, category;
+    private int ID, start, end, category;
     private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
 
     // default constructor for event
     public Event(){}
 
     // Constructor for Event
-    public Event(String newName, String newDescription, String newLocation, Date newDate, int newStart, int newEnd, int newCategory){
+    public Event(int newID,String newName, String newDescription, String newLocation, Date newDate, int newStart, int newEnd, int newCategory){
+        ID = newID;
         name = newName;
         description = newDescription;
         location = newLocation;
@@ -32,6 +33,13 @@ public class Event implements Comparable<Event> {
         category = newCategory;
     }
 
+    public void setEventID(int newID){
+        ID = newID;
+    }
+
+    public int getID(){
+        return ID;
+    }
     public void setName(String newName){
         name = newName;
     }
