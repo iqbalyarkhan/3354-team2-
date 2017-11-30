@@ -14,8 +14,8 @@ import java.util.Date;
  */
 
 public class EventDatabase extends SQLiteOpenHelper {
-
     static final String dbName="eventDB";
+    // database field names
     static final String calendarEventsTable="CalendarEvents";
     static final String colID="EventID";
     static final String colName="EventName";
@@ -26,24 +26,34 @@ public class EventDatabase extends SQLiteOpenHelper {
     static final String colEnd="EndTime";
     static final String colCategory="Category";
 
-    // default constructor
-    public EventDatabase(Context context) {
-        super(new ContextWrapper(context) {
-            @Override public SQLiteDatabase openOrCreateDatabase(String name,
-                                                                 int mode, SQLiteDatabase.CursorFactory factory) {
+    // making database a singleton so there is only one instance of the database for the app
+    private static EventDatabase sInstance;
 
-                // allow database directory to be specified
-                File dir = new File(/data/data/<team2.calendarapp>/databases/<dbName>);
-                if(!dir.exists()) {
-                    dir.mkdirs();
-                }
-                return SQLiteDatabase.openDatabase(/data/data/<team2.calendarapp>/databases/<dbName>, null,
-                        SQLiteDatabase.CREATE_IF_NECESSARY);
-            }
-        }, dbName, null, 1);
+    /**
+     * This gets an instance of the database helper
+     * @param context the context for the event database helper used to set to app context
+     * @return sInstance the instance of the event database helper
+     */
+    public static EventDatabase getInstance (Context context){
+        if (sInstance == null) {
+            // get Application context to prevent leaking an Activity's content
+            sInstance = new EventDatabase(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
+    /**
+     * make constructor private to prevent direct instantiation of the database
+     * @param context
+     */
+    private EventDatabase(Context context) {
+        super(context, dbName, null, 1);
+        //specify database directory
+        File database = new File (dbName);
     }
 
 
+    //getters and setters
     public static String getColID() {
         return colID;
     }
@@ -83,12 +93,14 @@ public class EventDatabase extends SQLiteOpenHelper {
     public static String getCalendarEventsTable() {
         return calendarEventsTable;
     }
+
     // creating table when SQLite Database is created
     public void onCreate (SQLiteDatabase EventDatabase) {
         EventDatabase.execSQL("CREATE TABLE " + calendarEventsTable + " (" + colID + " INTEGER PRIMARY KEY , " +
                         colName + " TEXT)"+ colDescription + " TEXT)"+ colLocation + " TEXT)"+
                 colStart + " TEXT)" + colEnd + " TEXT)" + colDate + " TEXT)" + colCategory+ " TEXT)");
     }
+
     // if version is upgraded, drop the old calendar events table
 
     /**
@@ -172,8 +184,8 @@ public class EventDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c=db.query(calendarEventsTable, new String[]{colID+" as _id",colID},
                 colName+"=?", new String[]{eventName}, null, null, null);
-        //Cursor c=db.rawQuery("SELECT "+colDeptID+" as _id FROM "+deptTable+"
-        //WHERE "+colDeptName+"=?", new String []{Dept});
+        //Cursor c=db.rawQuery("SELECT "+colID+" as _id FROM "+calendarEventsTable+"
+        //WHERE "+colName+"=?", new String []{Event});
         c.moveToFirst();
         return c.getInt(c.getColumnIndex("_id"));
     }

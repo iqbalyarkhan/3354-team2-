@@ -1,5 +1,7 @@
 package team2.calendarapp;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,12 +28,11 @@ public class EventDB {
     /** 
     * adds new Event to the sorted events list
     * @param toAdd the Event to be added to the calendar events list
-    * @return worked a boolean that indicates whether the event was successfully added 
+    * @return worked a boolean that indicates whether the event was successfully added
     */
     
     public static boolean addEvent(Event toAdd){
         boolean worked = events.add(toAdd);
-       // EventDatabase.addRecord(toAdd);
         Collections.sort(events);
         return worked;
     }
