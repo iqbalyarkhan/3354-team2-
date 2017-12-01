@@ -7,18 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 
 /**
  * Created by Daryl on 11/1/2017.
  */
 
-/**
- * The Event class creates and stores attributes for a calendar event
- */
-public class Event {
+public class Event implements Comparable<Event>, Serializable {
     private String name, description, location;
-    private Calendar date,start,end;
+    private Calendar startDate, endDate;
     private int category;
     private static ArrayList<Category> categories = new ArrayList<>(Arrays.asList(new Category[]{new Category("None", Color.WHITE)}));
 
@@ -30,8 +26,8 @@ public class Event {
         name = newName;
         description = newDescription;
         location = newLocation;
-        start = newStart;
-        end = newEnd;
+        startDate = newStart;
+        endDate = newEnd;
         category = newCategory;
     }
 
@@ -59,20 +55,20 @@ public class Event {
         return location;
     }
 
-    public void setStart(Calendar newStart){
-        start = newStart;
+    public void setStartDate(Calendar newDate){
+        startDate = newDate;
     }
 
-    public Calendar getStart(){
-        return start;
+    public Calendar getStartDate(){
+        return startDate;
     }
 
-    public void setEnd(Calendar newEnd){
-        end = newEnd;
+    public void setEndDate(Calendar newDate){
+        endDate = newDate;
     }
 
-    public Calendar getEnd(){
-        return end;
+    public Calendar getEndDate(){
+        return endDate;
     }
 
     public void setCategory(int newCategory){
@@ -83,8 +79,13 @@ public class Event {
         return category;
     }
 
-    public static boolean addCategory(String newCategory, int newColor){
-        boolean worked = categories.add(new Category(newCategory, newColor));
+    public static boolean addCategory(String name, int color){
+        for (Category c : categories){
+            if (name.equals(c.getName())){
+                return false;
+            }
+        }
+        boolean worked = categories.add(new Category(name, color));
         Collections.sort(categories);
         return worked;
     }
@@ -93,18 +94,20 @@ public class Event {
         return categories.toArray(new Category[]{new Category("", 0)});
     }
 
-    public int compareTo(Event other){
-        /**
-         * Compares the event date and startTime with another event
-         * @param other the other event to be compared
-         * @return compared date which is the difference of the event's start time
-         */
+    public static void setCategories(Category[] categoryList){
+        categories = new ArrayList<>(Arrays.asList(categoryList));
+    }
 
+    // comparing the Event date and start time
+    public int compareTo(Event other){
+        return startDate.compareTo(other.startDate);
     }
 
     public String toString() {
-        return (name + "\n" + start);
+        String string = name + ";" + startDate.get(Calendar.MONTH) + "/" + startDate.get(Calendar.DAY_OF_MONTH) + "/" + startDate.get(Calendar.YEAR);
+        string += " " + startDate.get(Calendar.HOUR) + ":" + startDate.get(Calendar.MINUTE) + "-";
+        string += endDate.get(Calendar.HOUR) + ":" + endDate.get(Calendar.MINUTE) + ";";
+        string += description + ";" + location + ";" + category;
+        return string;
     }
-
-
 }

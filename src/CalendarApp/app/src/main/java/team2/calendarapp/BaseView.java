@@ -50,6 +50,8 @@ public class BaseView extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView())).addToBackStack("fragBack").commit();
     }
 
 
@@ -119,9 +121,9 @@ public class BaseView extends AppCompatActivity
             in.close();
             fileIn.close();
 
-            fileIn = new FileInputStream("events.txt");
+            fileIn = new FileInputStream("categories.txt");
             in = new ObjectInputStream(fileIn);
-            Event.setCategory((Category[]) in.readObject());
+            Event.setCategories((Category[]) in.readObject());
             in.close();
             fileIn.close();
         }
