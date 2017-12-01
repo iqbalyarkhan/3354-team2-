@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Daryl on 11/29/2017.
  */
 
-public class Category implements Serializable {
+public class Category implements Serializable, Comparable<Category> {
     private String name;
     private int color;
 
@@ -35,5 +35,19 @@ public class Category implements Serializable {
 
     public String toString(){
         return name;
+    }
+
+    public int compareTo(Category other){
+        String otherName;
+        otherName = other.getName().toLowerCase();
+        if (name.equals("none")){
+            return -1;
+        }
+        else if (otherName.equals("none")){
+            return 1;
+        }
+        else{
+            return name.compareTo(otherName);
+        }
     }
 }

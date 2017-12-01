@@ -78,8 +78,13 @@ public class Event implements Comparable<Event>, Serializable {
     }
 
     public static boolean addCategory(String name, int color){
+        for (Category c : categories){
+            if (name.equals(c.getName())){
+                return false;
+            }
+        }
         boolean worked = categories.add(new Category(name, color));
-        Collections.sort(categories, new CategoryComparator());
+        Collections.sort(categories);
         return worked;
     }
 
@@ -96,6 +101,10 @@ public class Event implements Comparable<Event>, Serializable {
     }
 
     public String toString() {
-        return (name + "\n" + startDate.toString());
+        String string = name + ";" + startDate.get(Calendar.MONTH) + "/" + startDate.get(Calendar.DAY_OF_MONTH) + "/" + startDate.get(Calendar.YEAR);
+        string += " " + startDate.get(Calendar.HOUR) + ":" + startDate.get(Calendar.MINUTE) + "-";
+        string += endDate.get(Calendar.HOUR) + ":" + endDate.get(Calendar.MINUTE) + ";";
+        string += description + ";" + location + ";" + category;
+        return string;
     }
 }

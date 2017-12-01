@@ -58,11 +58,15 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
 
         setUpSpinner();
 
-        if (savedInstanceState != null && savedInstanceState.containsKey("Event")) {
-            toEdit = (Event) savedInstanceState.getSerializable("Event");
+        Bundle info = getArguments();
+        if (info != null && info.containsKey("Event")) {
+            System.out.println("hello we have event");
+            toEdit = (Event) info.getSerializable("Event");
+            System.out.println("hellohi " + toEdit);
             edit = true;
             populateFields();
         }
+        System.out.println("hello no event");
         return root;
     }
 
@@ -77,19 +81,15 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         etEventName.setText(toEdit.getName());
 
         Calendar date = toEdit.getStartDate();
-        etEventMonth.setText(date.get(Calendar.MONTH));
-        etEventDay.setText(date.get(Calendar.DAY_OF_MONTH));
-        etEventYear.setText(date.get(Calendar.YEAR));
+        etEventMonth.setText("" + date.get(Calendar.MONTH));
+        etEventDay.setText("" + date.get(Calendar.DAY_OF_MONTH));
+        etEventYear.setText("" + date.get(Calendar.YEAR));
 
         String eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
         etEventStart.setText(eventTime);
         tbStartAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
 
         date = toEdit.getEndDate();
-        etEventMonth.setText(date.get(Calendar.MONTH));
-        etEventDay.setText(date.get(Calendar.DAY_OF_MONTH));
-        etEventYear.setText(date.get(Calendar.YEAR));
-
         eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
         etEventEnd.setText(eventTime);
         tbEndAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
@@ -125,11 +125,35 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     Calendar startDate = Calendar.getInstance(), endDate = Calendar.getInstance();
                     startDate.set(year, month, day, start / 60, start % 60); //Initialize the date object. year, month, and day are already correct, so we just pass them in. Start is converted to hours and minutes after midnight rather than just minutes.
                     endDate.set(year, month, day, end / 60, end % 60); //Same as above, but for when the event ends
-                    Event event = new Event(name, description, location, startDate, endDate, category);
+                    final Event event = new Event(name, description, location, startDate, endDate, category);
                     if (edit){
                         EventDB.delete(toEdit);
                     }
-                    EventDB.addEvent(event);
+                    Event collision = EventDB.isCollision(event);
+                    if (collision != null){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());   //Create the AlertDialog
+                        builder.setTitle("Collision");
+                        builder.setMessage("There is a collision between this event and " + collision.getName() +"\nDo you want to continue?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {        //If they press OK, add the categories to the list of them
+                                EventDB.addEvent(event);                                            //Then refresh the list
+                                System.out.println("hello " + EventDB.asString());
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {        //If they press cancel, end the AlertDialog
+                                dialog.cancel();
+                            }
+                        });
+
+                        builder.show();
+                    }
+                    else {
+                        EventDB.addEvent(event);
+                        makeToast(EventDB.asString());
+                    }
                     getActivity().getFragmentManager().beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
                 }
                 catch (IllegalArgumentException e){
@@ -146,7 +170,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
 
     //makeToast is used to make a Toast
     private void makeToast(String message){
-        Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
         toast.show();
     }
 
@@ -167,7 +191,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         else{
             throw new IllegalArgumentException();
         }
-        int ans = (hours % 12) * 60 + mins + (am ? 720 : 0);
+        int ans = (hours % 12) * 60 + mins + (am ? 0 : 720);
         return ans;
     }
 
@@ -192,8 +216,12 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {        //If they press OK, add the categories to the list of them
-                Event.addCategory(input.getText().toString(), Color.parseColor(((String)color.getSelectedItem())));
-                setUpSpinner();                                             //Then refresh the list
+                if (Event.addCategory(input.getText().toString(), Color.parseColor(((String)color.getSelectedItem())))) {
+                    setUpSpinner();                                             //Then refresh the list
+                }
+                else{
+                    makeToast("That category name is already taken");
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
