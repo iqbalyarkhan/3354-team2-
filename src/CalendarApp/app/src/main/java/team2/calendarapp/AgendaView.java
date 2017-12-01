@@ -15,7 +15,7 @@ public class AgendaView extends Fragment {
 AgendaView is the view for displaying calendar events as an agenda list.
 The AgendaView view displays events in a list and shows event name, event start time, and event end time
 */
-
+    private EventDB db = EventDB.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**
@@ -29,7 +29,7 @@ The AgendaView view displays events in a list and shows event name, event start 
         ListView agendaListView = root.findViewById(R.id.agenda_list_view);
       
         // getting calendar events list
-        Event [] agendaEvents = EventDB.getEvents();
+        Event [] agendaEvents = db.getEvents();
         
         // creating new AgendaEventsAdapter (the custom view for the agenda events list) and applying that adapter to agendaListView
         AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEvents);

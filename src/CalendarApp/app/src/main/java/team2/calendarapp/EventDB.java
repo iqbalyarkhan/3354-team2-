@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Collections;
 
 /**
-<<<<<<< HEAD
  * Created by Daryl on 11/2/2017.
  */
 

@@ -35,8 +35,11 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
         }
         TextView eventName = (TextView)convertView.findViewById(R.id.eventNameDisplay);
         TextView eventTime = convertView.findViewById(R.id.eventTimeDisplay);
-        eventName.setText(agendaEvent.getName());
-        eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
+        if(agendaEvent != null){
+            eventName.setText(agendaEvent.getName());
+            eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
+        }
+
 
         return convertView;
     }

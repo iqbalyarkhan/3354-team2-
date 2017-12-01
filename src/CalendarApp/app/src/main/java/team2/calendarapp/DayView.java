@@ -1,5 +1,6 @@
 package team2.calendarapp;
 
+import android.graphics.Rect;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ public class DayView extends Fragment {
     private FrameLayout eventContainer;
     private LinearLayout dayContainer;
     private ActionBar mToolbar;
+    private EventDB db = EventDB.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +34,11 @@ public class DayView extends Fragment {
     private void drawEvents(){
         eventContainer.removeAllViews();
         EventView event;
-        for(int i = 0; i < EventDB.getEvents().length; i++){
+        for(int i = 0; i < db.getEvents().length; i++){
             event = new EventView(getActivity());
-            event.setEvent(EventDB.getEvents()[0]);
+            event.setEvent(db.getEvents()[0]);
             eventContainer.addView(event);
         }
     }
-
+    
 }
