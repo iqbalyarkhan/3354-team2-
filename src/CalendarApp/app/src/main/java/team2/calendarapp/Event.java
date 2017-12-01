@@ -55,19 +55,19 @@ public class Event implements Comparable<Event>, Serializable {
         return location;
     }
 
-    public void setStartDate(Calendar newDate){
+    public void setStart(Calendar newDate){
         startDate = newDate;
     }
 
-    public Calendar getStartDate(){
+    public Calendar getStart(){
         return startDate;
     }
 
-    public void setEndDate(Calendar newDate){
+    public void setEnd(Calendar newDate){
         endDate = newDate;
     }
 
-    public Calendar getEndDate(){
+    public Calendar getEnd(){
         return endDate;
     }
 

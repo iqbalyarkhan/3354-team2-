@@ -28,6 +28,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     ToggleButton tbStartAM, tbEndAM;
     boolean edit = false;
     Event toEdit;
+    EventDB database = EventDB.getInstance();
 
     //The onCreate method just initializes all the views and sets up the Activity for everything else
     @Override
@@ -127,9 +128,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     endDate.set(year, month, day, end / 60, end % 60); //Same as above, but for when the event ends
                     final Event event = new Event(name, description, location, startDate, endDate, category);
                     if (edit){
-                        EventDB.delete(toEdit);
+                        database.delete(toEdit);
                     }
-                    Event collision = EventDB.isCollision(event);
+                    Event collision = database.isCollision(event);
                     if (collision != null){
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());   //Create the AlertDialog
                         builder.setTitle("Collision");
@@ -137,8 +138,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {        //If they press OK, add the categories to the list of them
-                                EventDB.addEvent(event);                                            //Then refresh the list
-                                System.out.println("hello " + EventDB.asString());
+                                database.addEvent(event);                                            //Then refresh the list
+                                System.out.println("hello " + database.asString());
                             }
                         });
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -151,8 +152,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                         builder.show();
                     }
                     else {
-                        EventDB.addEvent(event);
-                        makeToast(EventDB.asString());
+                        database.addEvent(event);
                     }
                     getActivity().getFragmentManager().beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
                 }

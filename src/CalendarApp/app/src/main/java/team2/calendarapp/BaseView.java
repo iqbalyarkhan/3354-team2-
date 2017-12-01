@@ -29,10 +29,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
 
-public class BaseView extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected DrawerLayout mDrawer;
     protected FrameLayout mContainer;
+    private EventDB database = EventDB.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +100,7 @@ public class BaseView extends AppCompatActivity
         try {
             FileOutputStream fileOut = new FileOutputStream("events.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(EventDB.getEvents());
+            out.writeObject(database.getEvents());
             out.close();
             fileOut.close();
 
@@ -117,7 +117,7 @@ public class BaseView extends AppCompatActivity
         try{
             FileInputStream fileIn = new FileInputStream("events.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            EventDB.loadEventList((Event[]) in.readObject());
+            database.loadEventList((Event[]) in.readObject());
             in.close();
             fileIn.close();
 

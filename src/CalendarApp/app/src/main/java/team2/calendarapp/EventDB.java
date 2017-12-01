@@ -14,12 +14,21 @@ import java.util.Collections;
  */
 
 public class EventDB implements Serializable {
-/* The EventDB stores the calendar events for the user and stores a sorted list of the calendar events
-*/
-    private static ArrayList<Event> events = new ArrayList<>();
+// The EventDB stores the calendar events for the user and stores a sorted list of the calendar events
+    private static EventDB self;
+    private ArrayList<Event> events = new ArrayList<>();
+
+    private EventDB(){};
+
+    public static EventDB getInstance(){
+        if (self == null){
+            self = new EventDB();
+        }
+        return self;
+    }
 
     // @return events.toArray(new Event[]{new Event()}) the sorted list of calendar events 
-    public static Event[] getEvents(){
+    public Event[] getEvents(){
         return events.toArray(new Event[]{new Event()});
     }
     /** 
@@ -28,34 +37,34 @@ public class EventDB implements Serializable {
     * @return worked a boolean that indicates whether the event was successfully added
     */
     
-    public static boolean addEvent(Event toAdd){
+    public boolean addEvent(Event toAdd){
         boolean worked = events.add(toAdd);
         Collections.sort(events);
         return worked;
     }
 
-    public static void loadEventList(Event[] eventList){
+    public void loadEventList(Event[] eventList){
         events = new ArrayList<>(Arrays.asList(eventList));
     }
 
-    public static Event isCollision(Event event){
-        Calendar startDate = event.getStartDate(), endDate = event.getEndDate();
+    public Event isCollision(Event event){
+        Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
-            if (startDate.after(i.getStartDate()) && startDate.before(i.getEndDate())){
+            if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
                 return i;
             }
-            if (endDate.after(i.getStartDate()) && endDate.before(i.getEndDate())){
+            if (endDate.after(i.getStart()) && endDate.before(i.getEnd())){
                 return i;
             }
         }
         return null;
     }
 
-    public static boolean delete(Event event){
+    public boolean delete(Event event){
         return events.remove(event);
     }
 
-    public static String asString(){
+    public String asString(){
         String string = "";
         for (Event e : events){
             string += e.toString() + "   :    ";
