@@ -1,5 +1,8 @@
 package team2.calendarapp;
 
+import android.graphics.Color;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -13,34 +16,25 @@ import java.util.Date;
 /**
  * The Event class creates and stores attributes for a calendar event
  */
-public class Event implements Comparable<Event> {
+public class Event {
     private String name, description, location;
     private Calendar date,start,end;
-    private int ID,category;
-    private static ArrayList<String> categories = new ArrayList<>(Arrays.asList(new String[]{"None"}));
+    private int category;
+    private static ArrayList<Category> categories = new ArrayList<>(Arrays.asList(new Category[]{new Category("None", Color.WHITE)}));
 
     // default constructor for event
     public Event(){}
 
     // Constructor for Event
-    public Event(int newID,String newName, String newDescription, String newLocation, Calendar newDate, Calendar newStart, Calendar newEnd, int newCategory){
-        ID = newID;
+    public Event(String newName, String newDescription, String newLocation, Calendar newStart, Calendar newEnd, int newCategory){
         name = newName;
         description = newDescription;
         location = newLocation;
-        date = newDate;
         start = newStart;
         end = newEnd;
         category = newCategory;
     }
 
-    public void setEventID(int newID){
-        ID = newID;
-    }
-
-    public int getID(){
-        return ID;
-    }
     public void setName(String newName){
         name = newName;
     }
@@ -65,15 +59,7 @@ public class Event implements Comparable<Event> {
         return location;
     }
 
-    public void setDate(Calendar newDate){
-        date = newDate;
-    }
-
-    public Calendar getDate(){
-        return date;
-    }
-
-    public void setStartTime(Calendar newStart){
+    public void setStart(Calendar newStart){
         start = newStart;
     }
 
@@ -97,30 +83,29 @@ public class Event implements Comparable<Event> {
         return category;
     }
 
-    public static boolean addCategory(String newCategory){
-        boolean worked = categories.add(newCategory);
+    public static boolean addCategory(String newCategory, int newColor){
+        boolean worked = categories.add(new Category(newCategory, newColor));
         Collections.sort(categories);
         return worked;
     }
 
-    public static String[] getCategories(){
-        return categories.toArray(new String[]{""});
+    public static Category[] getCategories(){
+        return categories.toArray(new Category[]{new Category("", 0)});
     }
-    //TODO: Maybe fix
-    // comparing the Event date and start time
+/*
     public int compareTo(Event other){
         /**
          * Compares the event date and startTime with another event
          * @param other the other event to be compared
          * @return compared date which is the difference of the event's start time
-         */
+         *
         if (date.compareTo(other.getDate()) != 0){
             return date.compareTo(other.getDate());
         }
         else{
-            return other.getStart() - start;
+            return l;
         }
-    }
+    }*/
 
     public String toString() {
         return (name + "\n" + start);

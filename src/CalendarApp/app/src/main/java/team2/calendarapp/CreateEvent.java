@@ -80,7 +80,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     private void populateFields(){
         etEventName.setText(toEdit.getName());
 
-        Calendar date = toEdit.getStartDate();
+        Calendar date = toEdit.getStart();
         etEventMonth.setText("" + date.get(Calendar.MONTH));
         etEventDay.setText("" + date.get(Calendar.DAY_OF_MONTH));
         etEventYear.setText("" + date.get(Calendar.YEAR));
@@ -89,7 +89,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         etEventStart.setText(eventTime);
         tbStartAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
 
-        date = toEdit.getEndDate();
+        date = toEdit.getEnd();
         eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
         etEventEnd.setText(eventTime);
         tbEndAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
