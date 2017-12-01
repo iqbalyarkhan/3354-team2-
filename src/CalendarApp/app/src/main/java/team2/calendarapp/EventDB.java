@@ -1,26 +1,21 @@
 package team2.calendarapp;
 
 import java.io.Serializable;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 
 /**
+<<<<<<< HEAD
  * Created by Daryl on 11/2/2017.
  */
 
-public class EventDB {
-    //Singleton design pattern
-    private static EventDB self;
-    // hide the default constructor
-    private EventDB(){ }
-    // create instance of EventDB only if we don't have an EventDB already
-    public static EventDB Instance(){
-        if (self == null)
-            self = new EventDB();
-        return self;
-    }
+public class EventDB implements Serializable {
+/* The EventDB stores the calendar events for the user and stores a sorted list of the calendar events
+*/
     private static ArrayList<Event> events = new ArrayList<>();
 
     // @return events.toArray(new Event[]{new Event()}) the sorted list of calendar events 
@@ -39,18 +34,17 @@ public class EventDB {
         return worked;
     }
 
-
     public static void loadEventList(Event[] eventList){
         events = new ArrayList<>(Arrays.asList(eventList));
     }
 
     public static Event isCollision(Event event){
-        Calendar startDate = event.getStart(), endDate = event.getEnd();
+        Calendar startDate = event.getStartDate(), endDate = event.getEndDate();
         for (Event i : events){
-            if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
+            if (startDate.after(i.getStartDate()) && startDate.before(i.getEndDate())){
                 return i;
             }
-            if (endDate.after(i.getStart()) && endDate.before(i.getEnd())){
+            if (endDate.after(i.getStartDate()) && endDate.before(i.getEndDate())){
                 return i;
             }
         }
@@ -68,5 +62,4 @@ public class EventDB {
         }
         return string;
     }
-
 }

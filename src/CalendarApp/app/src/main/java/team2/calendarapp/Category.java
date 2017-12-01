@@ -40,14 +40,14 @@ public class Category implements Serializable, Comparable<Category> {
     public int compareTo(Category other){
         String otherName;
         otherName = other.getName().toLowerCase();
-        if (name.equals("none")){
+        if (name.toLowerCase().equals("none")){
             return -1;
         }
         else if (otherName.equals("none")){
             return 1;
         }
         else{
-            return name.compareTo(otherName);
+            return name.toLowerCase().compareTo(otherName);
         }
     }
 }
