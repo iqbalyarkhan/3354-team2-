@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 public class AgendaView extends Fragment {
 /**
@@ -38,9 +39,13 @@ DateFormat format = new SimpleDateFormat("dd MM year");
         EventDatabase.getInstance(getContext()).addRecord(1,"Test event ","this is a test","loc",1,2, d,"user" );
 
         // getting calendar events list
-        String [] [] agendaEvents = EventDatabase.getInstance(getContext()).GetRecords();
+        Event [] agendaEvents = EventDB.getEvents();
+     //  ArrayList agendaEvents = EventDatabase.getInstance(getContext()).GetRecords(1);
 
-
+//Updates the calendar view with relevant events
+        HashSet<Date> events = new HashSet<>();
+        MainCalendarView cv = ((MainCalendarView)root.findViewById(R.id.calendar_view));
+        cv.updateCalendar(events);
         // creating new AgendaEventsAdapter (the custom view for the agenda events list) and applying that adapter to agendaListView
         AgendaEventsAdapter agendaEventsListAdapter = new AgendaEventsAdapter( getActivity(), agendaEvents);
         agendaListView.setAdapter(agendaEventsListAdapter);

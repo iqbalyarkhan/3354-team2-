@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class AgendaEventsAdapter extends ArrayAdapter<Event>{
     // agendaEventsAdapter default constructor
-    public AgendaEventsAdapter (Context context, String [] agendaEventsArrayList){
+    public AgendaEventsAdapter (Context context, Event[] agendaEventsArrayList){
         super(context,0,agendaEventsArrayList);
     }
 

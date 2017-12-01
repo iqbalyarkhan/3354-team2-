@@ -185,22 +185,21 @@ public class EventDatabase extends SQLiteOpenHelper {
      * gets all of the calendar events in the database and puts them into an array list
      * @return calendarEvents which is the array that has all calendar events
      */
-    public String [] [] GetRecords()
+    public ArrayList GetRecords(int eventID)
     {
-        String [] [] calendarEvents = null;
+        ArrayList calendarEvents = null;
         int index = 0; // index is used to help traverse to the next rows in the database
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor result= db.rawQuery( "select * from calendarEventsTable", null );
-        result.moveToFirst();
+        Cursor result= db.rawQuery( "select * from calendarEventsTable where id =" + eventID, null );
         while (result.moveToNext()){
-            calendarEvents[index][0] = result.getString(0);
-            calendarEvents[index][1] = result.getString(1);
-            calendarEvents[index][2] = result.getString(2);
-            calendarEvents[index][3] = result.getString(3);
-            calendarEvents[index][4] = result.getString(4);
-            calendarEvents[index][5] = result.getString(5);
-            calendarEvents[index][6] = result.getString(6);
-            calendarEvents[index][7] = result.getString(7);
+            calendarEvents.add(result.getString(0));
+            calendarEvents.add(result.getString(1));
+            calendarEvents.add(result.getString(2));
+            calendarEvents.add(result.getString(3));
+            calendarEvents.add(result.getString(4));
+            calendarEvents.add(result.getString(5));
+            calendarEvents.add(result.getString(6));
+            calendarEvents.add(result.getString(7));
         }
         return calendarEvents;
     }
