@@ -7,13 +7,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by anmol on 11/29/2017.
  */
 
 public class EventDatabase extends SQLiteOpenHelper {
+    SQLiteDatabase mydatabase = SQLiteDatabase.openOrCreateDatabase(dbName,null);
     static final String dbName="eventDB";
     // database field names
     static final String calendarEventsTable="CalendarEvents";
@@ -96,8 +100,8 @@ public class EventDatabase extends SQLiteOpenHelper {
 
     // creating table when SQLite Database is created
     public void onCreate (SQLiteDatabase EventDatabase) {
-        EventDatabase.execSQL("CREATE TABLE " + calendarEventsTable + " (" + colID + " INTEGER PRIMARY KEY , " +
-                        colName + " TEXT)"+ colDescription + " TEXT)"+ colLocation + " TEXT)"+
+        EventDatabase.execSQL("CREATE TABLE " + calendarEventsTable + " (" + colID + " INTEGER PRIMARY KEY ," +
+                        colName + "TEXT)" + colDescription + " TEXT)" + colLocation + " TEXT)"+
                 colStart + " TEXT)" + colEnd + " TEXT)" + colDate + " TEXT)" + colCategory+ " TEXT)");
     }
 
@@ -137,7 +141,6 @@ public class EventDatabase extends SQLiteOpenHelper {
         cv.put(colEnd, eventEndTime);
         cv.put(colDate, eventDate.toString());
         cv.put(colCategory, eventCategory);
-
         db.insert(calendarEventsTable, colID, cv);
         db.close();
     }
@@ -168,26 +171,38 @@ public class EventDatabase extends SQLiteOpenHelper {
      * @param eventToDelete the event object to be deleted
      */
     public void deleteRecord (Event eventToDelete)
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(calendarEventsTable,colID+"=?", new String [] {String.valueOf(eventToDelete.getID())});
+    { try {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(calendarEventsTable, colID + "=?", new String[]{String.valueOf(eventToDelete.getID())});
         db.close();
+    }
+    catch (Exception e){
+        System.out.println(e.getMessage());
+    }
     }
 
     /**
-     *
-     * @param eventName the name of the event to find the eventID
-     * @return the eventID which is the event's unique identifier
+     * gets all of the calendar events in the database and puts them into an array list
+     * @return calendarEvents which is the array that has all calendar events
      */
-    public int GetEventID(String eventName)
+    public String [] [] GetRecords()
     {
+        String [] [] calendarEvents = null;
+        int index = 0; // index is used to help traverse to the next rows in the database
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor c=db.query(calendarEventsTable, new String[]{colID+" as _id",colID},
-                colName+"=?", new String[]{eventName}, null, null, null);
-        //Cursor c=db.rawQuery("SELECT "+colID+" as _id FROM "+calendarEventsTable+"
-        //WHERE "+colName+"=?", new String []{Event});
-        c.moveToFirst();
-        return c.getInt(c.getColumnIndex("_id"));
+        Cursor result= db.rawQuery( "select * from calendarEventsTable", null );
+        result.moveToFirst();
+        while (result.moveToNext()){
+            calendarEvents[index][0] = result.getString(0);
+            calendarEvents[index][1] = result.getString(1);
+            calendarEvents[index][2] = result.getString(2);
+            calendarEvents[index][3] = result.getString(3);
+            calendarEvents[index][4] = result.getString(4);
+            calendarEvents[index][5] = result.getString(5);
+            calendarEvents[index][6] = result.getString(6);
+            calendarEvents[index][7] = result.getString(7);
+        }
+        return calendarEvents;
     }
 
     }
