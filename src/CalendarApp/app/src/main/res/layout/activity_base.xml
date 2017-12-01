@@ -11,15 +11,8 @@
     layout="@layout/layout_toolbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_container"
-        android:layout_marginTop="?attr/actionBarSize">
 
 
-
-    </FrameLayout>
 
 
 
@@ -30,5 +23,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_base" />
+
 
 </android.support.v4.widget.DrawerLayout>

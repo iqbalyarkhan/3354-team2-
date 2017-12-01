@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+    <View
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/week_bar"
+        android:layout_alignBottom="@id/week_bar"
+        android:id="@+id/test"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_below="@id/week_bar"
+        android:layout_alignEnd="@id/week_bar"
+        android:layout_alignStart="@id/week_bar"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/week_bar"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@id/test">
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/sunday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/monday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/tuesday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/wednesday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/thursday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/friday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <team2.calendarapp.WeekBarDay
+            android:id="@+id/saturday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

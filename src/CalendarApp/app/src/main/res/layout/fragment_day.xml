@@ -4,36 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ScrollView
+    android:layout_height="match_parent"
+    android:layout_marginStart="3dp">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/day_container"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="horizontal">
+                <include layout="@layout/layout_timeline"
+                    android:layout_width="@dimen/time_width"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/event_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -47,3 +46,4 @@
         app:srcCompat="@android:drawable/ic_input_add"
         android:focusable="true"/>
 </android.support.constraint.ConstraintLayout>
+

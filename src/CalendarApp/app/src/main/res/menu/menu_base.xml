@@ -5,9 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/month_view"
-            android:title="@string/monthView" />
-        <item
             android:id="@+id/week_view"
             android:title="@string/weekView" />
         <item

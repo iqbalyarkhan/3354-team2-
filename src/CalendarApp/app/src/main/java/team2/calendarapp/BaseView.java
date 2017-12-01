@@ -1,21 +1,25 @@
 package team2.calendarapp;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,7 +31,8 @@ import java.util.Calendar;
 
 public class BaseView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout mDrawer;
+    protected DrawerLayout mDrawer;
+    protected FrameLayout mContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +40,7 @@ public class BaseView extends AppCompatActivity
         loadCalendar();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        mContainer = findViewById(R.id.content_container);
         mDrawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,6 +50,7 @@ public class BaseView extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+<<<<<<< HEAD
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -60,17 +66,11 @@ public class BaseView extends AppCompatActivity
         day.setArguments(args);
         transaction.replace(R.id.fragment_container,day);
         transaction.commit();
+=======
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView())).addToBackStack("fragBack").commit();
+>>>>>>> aa66e394ef0a3683bf741e58b4d4a8f5502628b6
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -79,11 +79,9 @@ public class BaseView extends AppCompatActivity
         // as you specify a parent fragment_day in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.day_view:
-                mDrawer.openDrawer(GravityCompat.START);
+                mDrawer.closeDrawer(GravityCompat.START);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -92,20 +90,26 @@ public class BaseView extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        if (id == R.id.month_view) {
-
-        } else if (id == R.id.week_view) {
+        //Allows navigation to month view when appropriate
+        //option chosen from navigation bar
+        if(manager.getBackStackEntryCount() > 1){
+            manager.popBackStack();
+        }
+        if (id == R.id.week_view) {
+            WeekView week = new WeekView();
+            transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
 
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
-            transaction.replace(R.id.fragment_container,day);
+            transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();
         } else if (id == R.id.agenda_view) {
-
+            AgendaView agendaView = new AgendaView();
+            transaction.replace(R.id.content_container,agendaView).addToBackStack("fragBack").commit();
         }
-        transaction.commit();
+        mDrawer.closeDrawer(Gravity.START);
         return true;
     }
 

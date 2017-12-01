@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/week_day_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="31"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/week_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/week_day_number"
+        android:layout_below="@+id/week_day_number"
+        android:text="Sun"
+        android:textAlignment="center"
+        android:textSize="12dp" />
+</RelativeLayout>
