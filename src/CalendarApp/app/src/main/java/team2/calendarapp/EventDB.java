@@ -45,12 +45,12 @@ public class EventDB {
     }
 
     public static Event isCollision(Event event){
-        Calendar startDate = event.getStartDate(), endDate = event.getEndDate();
+        Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
-            if (startDate.after(i.getStartDate()) && startDate.before(i.getEndDate())){
+            if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
                 return i;
             }
-            if (endDate.after(i.getStartDate()) && endDate.before(i.getEndDate())){
+            if (endDate.after(i.getStart()) && endDate.before(i.getEnd())){
                 return i;
             }
         }

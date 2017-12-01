@@ -50,25 +50,6 @@ public class BaseView extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-<<<<<<< HEAD
-
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        CreateEvent day = new CreateEvent();
-        Calendar start = Calendar.getInstance();
-        start.set(1998, 1, 1, 10, 0);
-        Calendar end = Calendar.getInstance();
-        end.set(1998, 1, 1, 15, 0);
-        Event event = new Event("Name", "description", "location", start, end, 0);
-        EventDB.addEvent(event);
-        Bundle args = new Bundle();
-        args.putSerializable("Event", event);
-        day.setArguments(args);
-        transaction.replace(R.id.fragment_container,day);
-        transaction.commit();
-=======
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView())).addToBackStack("fragBack").commit();
->>>>>>> aa66e394ef0a3683bf741e58b4d4a8f5502628b6
     }
 
 
@@ -140,7 +121,7 @@ public class BaseView extends AppCompatActivity
 
             fileIn = new FileInputStream("events.txt");
             in = new ObjectInputStream(fileIn);
-            Event.setCategories((Category[]) in.readObject());
+            Event.setCategory((Category[]) in.readObject());
             in.close();
             fileIn.close();
         }

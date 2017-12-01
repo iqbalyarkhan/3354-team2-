@@ -92,20 +92,15 @@ public class Event {
     public static Category[] getCategories(){
         return categories.toArray(new Category[]{new Category("", 0)});
     }
-/*
+
     public int compareTo(Event other){
         /**
          * Compares the event date and startTime with another event
          * @param other the other event to be compared
          * @return compared date which is the difference of the event's start time
-         *
-        if (date.compareTo(other.getDate()) != 0){
-            return date.compareTo(other.getDate());
-        }
-        else{
-            return l;
-        }
-    }*/
+         */
+
+    }
 
     public String toString() {
         return (name + "\n" + start);
