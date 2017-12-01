@@ -20,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/week_day_number"
         android:layout_below="@+id/week_day_number"
-        android:text="Sun"
         android:textAlignment="center"
         android:textSize="12dp" />
 </RelativeLayout>

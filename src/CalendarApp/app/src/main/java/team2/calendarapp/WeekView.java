@@ -29,17 +29,11 @@ public class WeekView extends Fragment {
     private void addControls(View root){
         View weekBar = root.findViewById(R.id.week_bar);
         week.add((WeekBarDay) weekBar.findViewById(R.id.sunday));
-        week.get(0).setDayOfTheWeek("Sun");
         week.add((WeekBarDay) weekBar.findViewById(R.id.monday));
-        week.get(0).setDayOfTheWeek("Mon");
         week.add((WeekBarDay) weekBar.findViewById(R.id.tuesday));
-        week.get(0).setDayOfTheWeek("Tue");
         week.add((WeekBarDay) weekBar.findViewById(R.id.wednesday));
-        week.get(0).setDayOfTheWeek("Wed");
         week.add((WeekBarDay) weekBar.findViewById(R.id.thursday));
-        week.get(0).setDayOfTheWeek("Thu");
         week.add((WeekBarDay) weekBar.findViewById(R.id.friday));
-        week.get(0).setDayOfTheWeek("Fri");
         week.add((WeekBarDay) weekBar.findViewById(R.id.saturday));
     }
     private void setRange(String number){

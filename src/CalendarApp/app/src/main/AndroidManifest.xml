@@ -10,15 +10,8 @@
         <activity android:name=".BaseView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-<<<<<<< HEAD
-=======
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--activity android:name=".MonthLayoutActivity"></activity-->
->>>>>>> aa66e394ef0a3683bf741e58b4d4a8f5502628b6
-
     </application>
 
 </manifest>

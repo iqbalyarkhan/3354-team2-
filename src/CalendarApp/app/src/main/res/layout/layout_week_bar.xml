@@ -30,37 +30,44 @@
             android:id="@+id/sunday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Sun"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/monday"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Mon"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/tuesday"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Tue"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/wednesday"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Wed"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Thu"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/friday"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Fri"/>
         <team2.calendarapp.WeekBarDay
             android:id="@+id/saturday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:text="Sat"
             />
     </LinearLayout>
 
