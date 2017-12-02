@@ -1,7 +1,7 @@
 package team2.calendarapp;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -146,7 +146,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     else {
                         database.addEvent(event);
                     }
-                    getActivity().getFragmentManager().beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
+                    getActivity().getFragmentManager().popBackStack();//.beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
                 }
                 catch (IllegalArgumentException e){
                     makeToast("Please enter a valid start/end time");
@@ -226,11 +226,11 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     }
 
     protected void cancel(){
-        getActivity().getFragmentManager().beginTransaction().remove(this).commit();
+        getActivity().getFragmentManager().popBackStack();//beginTransaction().remove(this).commit();
     }
 
     protected void delete(){
-        getActivity().getFragmentManager().beginTransaction().remove(this).commit();
+        getActivity().getFragmentManager().popBackStack();//.beginTransaction().remove(this).commit();
     }
 
     //When a button is pressed, this method gets called. It then calls the approriate method based on which button was pressec

@@ -2,6 +2,8 @@ package team2.calendarapp;
 
 import android.graphics.Rect;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
@@ -19,7 +21,7 @@ import android.widget.Toolbar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class DayView extends Fragment implements View.OnClickListener {
+public class DayView extends Fragment {
 
     private FrameLayout eventContainer;
 
@@ -36,15 +38,19 @@ public class DayView extends Fragment implements View.OnClickListener {
         eventContainer = root.findViewById(R.id.event_container);
         addButton = getActivity().findViewById(R.id.floatingActionButton);
         if(addButton != null)
-            addButton.setOnClickListener(this);
+            addButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
+                public void onClick(View v){
+                    CreateEvent newEvent = new CreateEvent();
+
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_container,newEvent,"createEvent").commit();
+                }
+            });
         Bundle bundle = this.getArguments();
 
         return root;
     }
 
-    public void onClick(View v){
-        getActivity().getFragmentManager().beginTransaction().add(R.id.drawer_layout,new CreateEvent()).addToBackStack(null).commit();
-    }
 
     private void drawEvents(){
         eventContainer.removeAllViews();
