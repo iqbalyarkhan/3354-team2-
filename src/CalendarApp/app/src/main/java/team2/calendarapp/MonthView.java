@@ -66,7 +66,7 @@ public class MonthView extends Fragment {
         last.add(Calendar.DAY_OF_YEAR, 6);
 
         //Combines the two and returns the date range
-        SimpleDateFormat df = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("MM-dd-YYYY");
         String start = df.format((first.getTime()));
         String end = df.format(last.getTime());
         String currWeekDates = start + " till " + end;

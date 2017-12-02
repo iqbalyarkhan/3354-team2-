@@ -32,8 +32,10 @@
                 <FrameLayout
                     android:id="@+id/event_container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@id/timeline"/>
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/timeline"
+                    android:layout_alignTop="@id/timeline"
+                    android:layout_toEndOf="@id/timeline"/>
 
 
 

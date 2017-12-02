@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class Category implements Serializable, Comparable<Category> {
     private String name;
     private int color;
-
     public Category(String newName, int newColor){
         name = newName;
         color = newColor;

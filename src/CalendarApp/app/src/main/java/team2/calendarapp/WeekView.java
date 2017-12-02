@@ -22,7 +22,6 @@ public class WeekView extends Fragment {
         View root = inflater.inflate(R.layout.fragment_week, container, false);
         week = new ArrayList<WeekBarDay>();
         addControls(root);
-        setRange("5");
         return root;
     }
 
@@ -36,11 +35,10 @@ public class WeekView extends Fragment {
         week.add((WeekBarDay) weekBar.findViewById(R.id.friday));
         week.add((WeekBarDay) weekBar.findViewById(R.id.saturday));
     }
-    private void setRange(String number){
+    /*private void getRange(String number){
         int day;
         try{
             day = Integer.parseInt(number);
-
         }catch (Exception e){
             return;
         }
@@ -50,5 +48,9 @@ public class WeekView extends Fragment {
         for(int i = low; i < high; i++){
             week.get(i).setDayNumber(Integer.toString(i));
         }
+    } */
+
+    private void drawEvents(EventDB db){
+        
     }
 }
