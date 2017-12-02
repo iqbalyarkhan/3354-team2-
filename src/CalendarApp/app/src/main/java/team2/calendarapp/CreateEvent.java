@@ -67,6 +67,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
             edit = true;
             populateFields();
         }
+        else if (info != null && info.containsKey("Date")){
+            populateDate((Calendar) info.getSerializable("Date"));
+        }
         System.out.println("hello no event");
         return root;
     }
@@ -98,6 +101,12 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         etEventLocation.setText(toEdit.getLocation());
         etEventDescription.setText(toEdit.getDescription());
         sEventCategory.setSelection(toEdit.getCategory());
+    }
+
+    private void populateDate(Calendar date){
+        etEventMonth.setText("" + date.get(Calendar.MONTH));
+        etEventDay.setText("" + date.get(Calendar.DAY_OF_MONTH));
+        etEventYear.setText("" + date.get(Calendar.YEAR));
     }
 
     //saveEvent grabs all the information from the relevant fields and saves them in an event object. Then it pushes that object to the EventDB
@@ -132,24 +141,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     }
                     Event collision = database.isCollision(event);
                     if (collision != null){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());   //Create the AlertDialog
-                        builder.setTitle("Collision");
-                        builder.setMessage("There is a collision between this event and " + collision.getName() +"\nDo you want to continue?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {        //If they press OK, add the categories to the list of them
-                                database.addEvent(event);                                            //Then refresh the list
-                                System.out.println("hello " + database.asString());
-                            }
-                        });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {        //If they press cancel, end the AlertDialog
-                                dialog.cancel();
-                            }
-                        });
-
-                        builder.show();
+                        makeToast("There is another event happening at the same time");
                     }
                     else {
                         database.addEvent(event);
@@ -164,7 +156,6 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         }
         catch(NumberFormatException e){
             makeToast("Please enter a valid date");
-            return;
         }
     }
 

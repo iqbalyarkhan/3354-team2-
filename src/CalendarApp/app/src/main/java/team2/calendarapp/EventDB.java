@@ -63,6 +63,27 @@ public class EventDB implements Serializable {
         return events.remove(event);
     }
 
+    public Event[] getEventsInRange(Calendar date){
+        return getEventsInRange(date, date);
+    }
+
+    public Event[] getEventsInRange(Calendar start, Calendar end){
+        ArrayList<Event> eventsInRange = new ArrayList<>();
+        end.add(Calendar.HOUR, 24);
+        Calendar eventDate;
+
+        for (Event e : events){
+            eventDate = e.getStart();
+            if (eventDate.after(end)){
+                break;
+            }
+            if (eventDate.after(start) || eventDate.equals(start)){
+                eventsInRange.add(e);
+            }
+        }
+        return eventsInRange.toArray(new Event[]{new Event()});
+    }
+
     public String asString(){
         String string = "";
         for (Event e : events){
