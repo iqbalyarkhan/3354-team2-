@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
+import java.util.Date;
 
 public class BaseView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected DrawerLayout mDrawer;
@@ -51,7 +52,7 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView())).addToBackStack("fragBack").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
     }
 
 
@@ -78,13 +79,14 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
         //Allows navigation to month view when appropriate
         //option chosen from navigation bar
-        if(manager.getBackStackEntryCount() > 1){
+        if(manager.getBackStackEntryCount() > 0){
             manager.popBackStack();
         }
+        MonthView month = (MonthView) manager.findFragmentByTag("Month");
         if (id == R.id.week_view) {
             WeekView week = new WeekView();
+            week.setArguments(month.getWeekDates(new Date()));
             transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
-
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
             transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();

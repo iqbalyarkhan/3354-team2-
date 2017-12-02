@@ -35,7 +35,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/week_event_continaer">
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -43,7 +44,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/sun"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -51,7 +53,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/mon"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -60,7 +63,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tue"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -68,7 +72,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/wed"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -76,7 +81,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/thu"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -84,7 +90,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/fri"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
@@ -92,7 +99,8 @@
                         <include layout="@layout/layout_separator"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/sat"/>
                     </LinearLayout>
 
                 </LinearLayout>

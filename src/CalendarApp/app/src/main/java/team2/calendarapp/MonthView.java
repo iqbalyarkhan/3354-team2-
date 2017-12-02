@@ -34,9 +34,9 @@ public class MonthView extends Fragment {
             public void onDayLongPress(Date date) {
                 //Toast.makeText(MonthView.this, "No events for today", Toast.LENGTH_SHORT).show();
                 //Gets current week dates in string format
-                String currWeekDates = getWeekDates(date);
+                //String currWeekDates = getWeekDates(date);
                 //System.out.println(currWeekDates);
-                Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
 
 
             }
@@ -50,7 +50,7 @@ public class MonthView extends Fragment {
      * @return - String that holds current weeks start and end date in the format:
      *      "MM-DD till MM-DD"
      */
-    public String getWeekDates(Date date){
+    public Bundle getWeekDates(Date date){
 
         //Sets the date to what the user has clicked
         Calendar cal = Calendar.getInstance();
@@ -69,8 +69,9 @@ public class MonthView extends Fragment {
         SimpleDateFormat df = new SimpleDateFormat("MM-dd-YYYY");
         String start = df.format((first.getTime()));
         String end = df.format(last.getTime());
-        String currWeekDates = start + " till " + end;
-        return currWeekDates;
+        Bundle bundle = new Bundle();
+        bundle.putString("dateRange",start + "/" + end);
+        return bundle;
 
     }
 

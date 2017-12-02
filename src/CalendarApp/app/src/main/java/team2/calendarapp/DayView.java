@@ -37,7 +37,8 @@ public class DayView extends Fragment implements View.OnClickListener {
         addButton = getActivity().findViewById(R.id.floatingActionButton);
         if(addButton != null)
             addButton.setOnClickListener(this);
-        drawEvents();
+        Bundle bundle = this.getArguments();
+
         return root;
     }
 
@@ -50,6 +51,8 @@ public class DayView extends Fragment implements View.OnClickListener {
         Event[] arr = EventDB.getInstance().getEventsInRange(Calendar.getInstance());
         EventView event;
         for (Event e: arr){
+            if(e == null)
+                return;
             event = new EventView(getActivity());
             event.setEvent(e);
             eventContainer.addView(event);
