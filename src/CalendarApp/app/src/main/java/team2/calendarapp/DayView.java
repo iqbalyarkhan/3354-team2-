@@ -1,6 +1,7 @@
 package team2.calendarapp;
 
 import android.graphics.Rect;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,7 +25,7 @@ import java.util.GregorianCalendar;
 public class DayView extends Fragment {
 
     private FrameLayout eventContainer;
-
+    private ConstraintLayout dayContainer;
     private FloatingActionButton addButton;
     private EventDB db = EventDB.getInstance();
 
@@ -36,16 +37,15 @@ public class DayView extends Fragment {
         if(mToolbar != null)
             mToolbar.setTitle("DayView");
         eventContainer = root.findViewById(R.id.event_container);
-        addButton = getActivity().findViewById(R.id.floatingActionButton);
-        if(addButton != null)
-            addButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
-                public void onClick(View v){
-                    CreateEvent newEvent = new CreateEvent();
-
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_container,newEvent,"createEvent").commit();
-                }
-            });
+        addButton = root.findViewById(R.id.floatingActionButton);
+        dayContainer = root.findViewById(R.id.day_container);
+        addButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
+            public void onClick(View v){
+                dayContainer.removeAllViews();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.day_container,new CreateEvent(),"createEvent").commit();
+            }
+        });
         Bundle bundle = this.getArguments();
 
         return root;
