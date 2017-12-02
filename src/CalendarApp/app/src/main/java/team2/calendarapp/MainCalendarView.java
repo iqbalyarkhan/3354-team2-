@@ -37,7 +37,8 @@ public class MainCalendarView extends LinearLayout{
 
     //to handle events
     //TODO: Check with Daryl to see if we need this
-    private MainCalendarView.EventHandler eventHandler = null;
+    private MainCalendarView.WeekHandler weekHandler = null;
+    private MainCalendarView.DayHandler dayHandler = null;
 
     //Components of the view
     /**
@@ -167,11 +168,21 @@ public class MainCalendarView extends LinearLayout{
             public boolean onItemLongClick(AdapterView<?> view, View cell, int position, long id)
             {
                 //Handles long press
-                if (eventHandler == null)
+                if (weekHandler == null)
                     return false;
 
-                eventHandler.onDayLongPress((Date)view.getItemAtPosition(position));
+                weekHandler.onDayLongPress((Date)view.getItemAtPosition(position));
                 return true;
+            }
+        });
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            //@Override
+            public void onItemClick(AdapterView<?> view, View cell, int selectedDate, long id) {
+
+                dayHandler.onDayPress((Date)view.getItemAtPosition(selectedDate));
+
             }
         });
     }
@@ -354,19 +365,37 @@ public class MainCalendarView extends LinearLayout{
     }
 
     /**
-     * Event handler to be passed scheduled events
+     * Week Handler to handle user's selected week dates for week view
      */
-    public void setEventHandler(MainCalendarView.EventHandler eventHandler)
+    public void setWeekHandler(MainCalendarView.WeekHandler weeksHandle)
     {
-        this.eventHandler = eventHandler;
+        this.weekHandler = weeksHandle;
+    }
+
+    /**
+     *
+     * @param daysHandle - the handle to user's currently selected date
+     */
+    public void setDayHandler (MainCalendarView.DayHandler daysHandle){
+
+        this.dayHandler = daysHandle;
+
     }
 
     /**
      * Displays current date's week range
      */
-    public interface EventHandler
+    public interface WeekHandler
     {
         void onDayLongPress(Date date);
+    }
+
+    /**
+     * Displays current date selected by the user
+     */
+    public interface DayHandler
+    {
+        void onDayPress(Date date);
     }
 
 }

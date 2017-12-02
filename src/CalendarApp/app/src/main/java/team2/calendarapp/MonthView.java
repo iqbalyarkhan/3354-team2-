@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.concurrent.CancellationException;
 
 public class MonthView extends Fragment {
     @Override
@@ -29,7 +30,7 @@ public class MonthView extends Fragment {
         cv.updateCalendar(events);
 
         //On long press the date range is displayed as a toast.
-        cv.setEventHandler(new MainCalendarView.EventHandler() {
+        cv.setWeekHandler(new MainCalendarView.WeekHandler() {
             @Override
             public void onDayLongPress(Date date) {
                 //Toast.makeText(MonthView.this, "No events for today", Toast.LENGTH_SHORT).show();
@@ -37,10 +38,40 @@ public class MonthView extends Fragment {
                 //String currWeekDates = getWeekDates(date);
                 //System.out.println(currWeekDates);
                 //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
+                //Bundle to pass to week view that holds the current week dates
+                Bundle weekDates= getWeekDates(date);
+            }
 
+            /*@Override
+            public void onDayPress(Date date) {
+
+                Calendar todaysDate = Calendar.getInstance();
+                todaysDate.setTime(date);
+                int day = todaysDate.get(Calendar.DAY_OF_WEEK);
+                int month = todaysDate.get(Calendar.MONTH);
+                int year = todaysDate.get(Calendar.YEAR);
+                //System.out.println("Today is: " + day + "/" + month + "/" + year);
+
+            }*/
+        });
+
+        //To handle current day selected: Returns a bundle of current date
+        //based on the day clicked on by the user
+        cv.setDayHandler(new MainCalendarView.DayHandler() {
+            @Override
+            public void onDayPress(Date date) {
+
+                Calendar currDate = Calendar.getInstance();
+                currDate.setTime(date);
+                int day = currDate.get(Calendar.DAY_OF_MONTH);
+                int month = currDate.get(Calendar.MONTH) + 1;
+                int year = currDate.get(Calendar.YEAR);
+                Bundle dateSelected = new Bundle();
+                dateSelected.putString("dateSelected",month + "/" + day + "/" + year);
 
             }
         });
+
         return root;
     }
 
