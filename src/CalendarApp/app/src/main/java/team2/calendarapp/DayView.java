@@ -58,10 +58,10 @@ public class DayView extends Fragment {
         cal.setTimeInMillis(b.getLong("day"));
         Event[] arr = EventDB.getInstance().getEventsInRange(cal);
         EventView eventView;
-        Log.d("length", arr.length + "");
+        System.out.println(arr.length);
         for (Event e: arr){
             if(e == null)
-                return;
+                continue;
             eventView = new EventView(getActivity());
             eventView.setEvent(e);
             setClick(eventView,e);
