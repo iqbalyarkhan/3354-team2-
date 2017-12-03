@@ -43,9 +43,8 @@ public class DayView extends Fragment {
         dayContainer = root.findViewById(R.id.day_container);
         addButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
             public void onClick(View v){
-                dayContainer.removeAllViews();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.day_container,new CreateEvent(),"createEvent").commit();
+                .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
             }
         });
         drawEvents(this.getArguments());
@@ -55,22 +54,33 @@ public class DayView extends Fragment {
 
     private void drawEvents(Bundle b){
         eventContainer.removeAllViews();
-        String day = b.getString("day");
         Calendar cal = Calendar.getInstance();
-        try{
-            cal.setTime(new SimpleDateFormat("mm-dd-yyyy").parse(day));
-        }catch(java.text.ParseException e){
-
-        }
+        cal.setTimeInMillis(b.getLong("day"));
         Event[] arr = EventDB.getInstance().getEventsInRange(cal);
-        EventView event;
+        EventView eventView;
         Log.d("length", arr.length + "");
         for (Event e: arr){
             if(e == null)
                 return;
-            event = new EventView(getActivity());
-            event.setEvent(e);
-            eventContainer.addView(event);
+            eventView = new EventView(getActivity());
+            eventView.setEvent(e);
+            setClick(eventView,e);
+            eventContainer.addView(eventView);
         }
+    }
+
+    private void setClick(EventView e, final Event event){
+
+        e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dayContainer.removeAllViews();
+                CreateEvent ce = new CreateEvent();
+                Bundle b= new Bundle();
+                b.putSerializable("Event",event);
+                ce.setArguments(b);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.day_container,ce,"editEvent").commit();
+            }
+        });
     }
 }

@@ -17,7 +17,7 @@ public class EventDB implements Serializable {
     private static EventDB self;
     private ArrayList<Event> events = new ArrayList<>();
 
-    private EventDB(){}
+    private EventDB(){};
 
     public static EventDB getInstance(){
         if (self == null){
@@ -28,11 +28,6 @@ public class EventDB implements Serializable {
 
     // @return events.toArray(new Event[]{new Event()}) the sorted list of calendar events 
     public Event[] getEvents(){
-        for (int i = 0;i < events.size();i++){
-            if (events.get(i) == null){
-                    events.remove(i);
-            }
-        }
         return events.toArray(new Event[]{new Event()});
     }
     /** 
