@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DayView extends Fragment {
@@ -46,16 +48,23 @@ public class DayView extends Fragment {
                 .replace(R.id.day_container,new CreateEvent(),"createEvent").commit();
             }
         });
-        Bundle bundle = this.getArguments();
-
+        drawEvents(this.getArguments());
         return root;
     }
 
 
-    private void drawEvents(){
+    private void drawEvents(Bundle b){
         eventContainer.removeAllViews();
-        Event[] arr = EventDB.getInstance().getEventsInRange(Calendar.getInstance());
+        String day = b.getString("day");
+        Calendar cal = Calendar.getInstance();
+        try{
+            cal.setTime(new SimpleDateFormat("mm-dd-yyyy").parse(day));
+        }catch(java.text.ParseException e){
+
+        }
+        Event[] arr = EventDB.getInstance().getEventsInRange(cal);
         EventView event;
+        Log.d("length", arr.length + "");
         for (Event e: arr){
             if(e == null)
                 return;

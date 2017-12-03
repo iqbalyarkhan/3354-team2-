@@ -76,7 +76,7 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
+        Bundle b = new Bundle();
         //Allows navigation to month view when appropriate
         //option chosen from navigation bar
         if(manager.getBackStackEntryCount() > 0){
@@ -89,6 +89,8 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
             transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
+            b.putString("day","12-02-17");//"day",Calendar.getInstance().toString());
+            day.setArguments(b);
             transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();
         } else if (id == R.id.agenda_view) {
             AgendaView agendaView = new AgendaView();
@@ -132,4 +134,5 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         catch(IOException e){}
         catch(ClassNotFoundException e){}
     }
+
 }
