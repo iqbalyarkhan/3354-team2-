@@ -119,25 +119,27 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         String location = etEventLocation.getText().toString();
         int category = sEventCategory.getSelectedItemPosition();
         try {
-            int month = Integer.parseInt(etEventMonth.getText().toString());    //Try to parse integers from these fields. If we can't, they are incorrect
-            int day = Integer.parseInt(etEventDay.getText().toString());
+            int month = Integer.parseInt(etEventMonth.getText().toString()) - 1;    //Try to parse integers from these fields. If we can't, they are incorrect
+            int day = Integer.parseInt(etEventDay.getText().toString()) - 1;
             int year = Integer.parseInt(etEventYear.getText().toString());
 
             if (name.equals("")){
                 makeToast("Please enter an event name");
-                return;
             }
             else if (month > 12 || month < 1 || day > 31 || day < 1){           //If the date fields are outside of a valid range, it is incorrect
                 makeToast("Please enter a valid date");
-                return;
             }
             else {
                 try {
                     int start = parseTime(etEventStart.getText().toString(), tbStartAM.isChecked());  //parseTime gets the number of minutes this time is after midnight
                     int end = parseTime(etEventEnd.getText().toString(), tbEndAM.isChecked());
                     Calendar startDate = Calendar.getInstance(), endDate = Calendar.getInstance();
-                    startDate.set(year, month - 1, day, start / 60, start % 60); //Initialize the date object. year, month, and day are already correct, so we just pass them in. Start is converted to hours and minutes after midnight rather than just minutes.
-                    endDate.set(year, month - 1, day, end / 60, end % 60); //Same as above, but for when the event ends
+                    startDate.set(year, month, day, start / 60, start % 60); //Initialize the date object. year, month, and day are already correct, so we just pass them in. Start is converted to hours and minutes after midnight rather than just minutes.
+                    if (startDate.get(Calendar.MONTH) != month){
+                        makeToast("Please enter a valid date");
+                        return;
+                    }
+                    endDate.set(year, month, day, end / 60, end % 60); //Same as above, but for when the event ends
                     final Event event = new Event(name, description, location, startDate, endDate, category);
                     if (edit){
                         database.delete(toEdit);

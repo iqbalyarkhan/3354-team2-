@@ -91,7 +91,7 @@ public class Event implements Comparable<Event>, Serializable {
     }
 
     public static Category[] getCategories(){
-        return categories.toArray(new Category[]{new Category("", 0)});
+        return categories.toArray(new Category[0]);
     }
 
     public static void setCategories(Category[] categoryList){
@@ -112,5 +112,27 @@ public class Event implements Comparable<Event>, Serializable {
         string += endDate.get(Calendar.HOUR) + ":" + endDate.get(Calendar.MINUTE) + ";";
         string += description + ";" + location + ";" + category;
         return string;
+    }
+
+    public boolean equals(Event other){
+        if (!name.equals(other.name)){
+            return false;
+        }
+        if (!description.equals(other.description)){
+            return false;
+        }
+        if (!location.equals(other.location)){
+            return false;
+        }
+        if (!startDate.equals(other.startDate)){
+            return false;
+        }
+        if (!endDate.equals(other.endDate)){
+            return false;
+        }
+        if (category != other.category){
+            return false;
+        }
+        return true;
     }
 }
