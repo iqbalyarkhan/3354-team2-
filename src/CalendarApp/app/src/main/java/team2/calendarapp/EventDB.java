@@ -28,7 +28,12 @@ public class EventDB implements Serializable {
 
     // @return events.toArray(new Event[]{new Event()}) the sorted list of calendar events 
     public Event[] getEvents(){
-        return events.toArray(new Event[]{new Event()});
+        for (int i = 0;i < events.size();i++){
+            if (events.get(i) == null){
+                events.remove(i);
+            }
+        }
+        return events.toArray(new Event[0]);
     }
     /** 
     * adds new Event to the sorted events list
@@ -49,6 +54,9 @@ public class EventDB implements Serializable {
     public Event isCollision(Event event){
         Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
+            if (i == null){
+                continue;
+            }
             if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
                 return i;
             }
@@ -64,15 +72,18 @@ public class EventDB implements Serializable {
     }
 
     public Event[] getEventsInRange(Calendar date){
-        return getEventsInRange(date, date);
+        return getEventsInRange(date, (Calendar) date.clone());
     }
 
     public Event[] getEventsInRange(Calendar start, Calendar end){
         ArrayList<Event> eventsInRange = new ArrayList<>();
-        end.add(Calendar.HOUR, 24);
+        start.add(Calendar.HOUR, -24);
         Calendar eventDate;
 
         for (Event e : events){
+            if (e == null){
+                continue;
+            }
             eventDate = e.getStart();
             if (eventDate.after(end)){
                 break;
@@ -81,7 +92,7 @@ public class EventDB implements Serializable {
                 eventsInRange.add(e);
             }
         }
-        return eventsInRange.toArray(new Event[]{new Event()});
+        return eventsInRange.toArray(new Event[0]);
     }
 
     public String toString(){
