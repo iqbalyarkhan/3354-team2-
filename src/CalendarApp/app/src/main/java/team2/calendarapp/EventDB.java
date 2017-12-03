@@ -1,7 +1,6 @@
 package team2.calendarapp;
 
 import java.io.Serializable;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,47 +16,53 @@ public class EventDB implements Serializable {
     private static EventDB self;
     private ArrayList<Event> events = new ArrayList<>();
 
-    private EventDB(){};
-
+    //Returns the one and only instance of EventDB
+    //@return: An instance of EventDB
     public static EventDB getInstance(){
-        if (self == null){
+        if (self == null){      //Only create a new instance if we have to.
             self = new EventDB();
         }
         return self;
     }
 
-    // @return events.toArray(new Event[]{new Event()}) the sorted list of calendar events 
+    //returns the list of Events in Array form, removing null objects
+    // @return: the sorted list of calendar events
     public Event[] getEvents(){
-        for (int i = 0;i < events.size();i++){
+        for (int i = 0;i < events.size();i++){      //Remove any null values
             if (events.get(i) == null){
                 events.remove(i);
             }
         }
         return events.toArray(new Event[0]);
     }
+
     /** 
     * adds new Event to the sorted events list
     * @param toAdd the Event to be added to the calendar events list
     * @return worked a boolean that indicates whether the event was successfully added
     */
-    
     public boolean addEvent(Event toAdd){
         boolean worked = events.add(toAdd);
         Collections.sort(events);
         return worked;
     }
 
+    //Loads an EventList from the given array
+    //@param eventList: the list of events to be loaded. This should be sorted.
     public void loadEventList(Event[] eventList){
         events = new ArrayList<>(Arrays.asList(eventList));
     }
 
+    //Used to determine if the proposed Event will collide with any in the database
+    //@param Event: the proposed Event to be checked
+    //@return: the Event that the proposed Event will collide with. Null if there is no such Event.
     public Event isCollision(Event event){
         Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
-            if (i == null){
+            if (i == null){     //Skip if there is a null Event
                 continue;
             }
-            if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
+            if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){     //If the start of end time collides, the whole event collides
                 return i;
             }
             if (endDate.after(i.getStart()) && endDate.before(i.getEnd())){
@@ -67,34 +72,47 @@ public class EventDB implements Serializable {
         return null;
     }
 
+    //deletes a given Event from the database
+    //@param event: the Event to be deleted
+    //@return: whether or not the deletion was successful
     public boolean delete(Event event){
         return events.remove(event);
     }
 
+    //returns all the events on a given day
+    //@param date: the date to get all the events of
+    //@return: an array of Events that happen on the given day
     public Event[] getEventsInRange(Calendar date){
         return getEventsInRange(date, (Calendar) date.clone());
     }
 
+    //returns all the events in a given range
+    //@param start: the first day to start getting Events from
+    //@param end: the last day to get Events from
+    //@return: an array of Events that happened in the given range
     public Event[] getEventsInRange(Calendar start, Calendar end){
         ArrayList<Event> eventsInRange = new ArrayList<>();
-        start.add(Calendar.HOUR, -24);
+        start.add(Calendar.HOUR, -24);      //When neither an hour nor minute is given, the Calendar defaults to the end of the day. Because we want the beginnin, we subtract 24 hours.
         Calendar eventDate;
 
         for (Event e : events){
-            if (e == null){
+            if (e == null){     //Don't consider any null Events
                 continue;
             }
+
             eventDate = e.getStart();
-            if (eventDate.after(end)){
+            if (eventDate.after(end)){      //If the Event is past the end of the range, we've gone too far and can break out
                 break;
             }
-            if (eventDate.after(start) || eventDate.equals(start)){
+            if (eventDate.after(start)){        //We know this won't select anything after the end of the range because we would have broken out if that was the case.
                 eventsInRange.add(e);
             }
         }
-        return eventsInRange.toArray(new Event[0]);
+        return eventsInRange.toArray(new Event[0]);     //Return the ArrayList as an array
     }
 
+    //converts the EventDB object to a String
+    //@return: a representation of the EventDB as a string
     public String toString(){
         String string = "";
         for (Event e : events){

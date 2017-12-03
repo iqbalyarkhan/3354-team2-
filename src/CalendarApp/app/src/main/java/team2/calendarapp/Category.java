@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Category implements Serializable, Comparable<Category> {
     private String name;
     private int color;
+
     public Category(String newName, int newColor){
         name = newName;
         color = newColor;
@@ -36,17 +37,19 @@ public class Category implements Serializable, Comparable<Category> {
         return name;
     }
 
+    //compareTo functions the same way as any other compareTo function
+    //@param other: The other category that will be compared to this
+    //@return: a negative integer if this is less than that, a positive integer if this is greater than that, 0 if they are equal
     public int compareTo(Category other){
-        String otherName;
-        otherName = other.getName().toLowerCase();
-        if (name.toLowerCase().equals("none")){
+        String otherName = other.getName().toLowerCase(), thisName = name.toLowerCase();      //Make them lowercase because we don't want case to interfere in this comparison
+        if (thisName.equals("none")){     //None is put first because that should be the default category
             return -1;
         }
         else if (otherName.equals("none")){
             return 1;
         }
-        else{
-            return name.toLowerCase().compareTo(otherName);
+        else{       //Other than none, they should be ordered alphabetically
+            return thisName.compareTo(otherName);
         }
     }
 }
