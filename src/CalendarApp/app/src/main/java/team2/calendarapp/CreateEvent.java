@@ -147,10 +147,11 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                         makeToast("There is another event happening at the same time");
                     }
                     else {
-                        database.addEvent(event);
-                        System.out.println("hellohi " + database.toString());
+                        database.addEvent(event); //TODO: PROBLEM STARTS HERE
+                        //System.out.println("hellohi " + database.toString());
+                        getActivity().getSupportFragmentManager().popBackStack();    //Remove this fragment and return to whatever was there before
                     }
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
+
                 }
                 catch (IllegalArgumentException e){
                     makeToast("Please enter a valid start/end time");
@@ -230,11 +231,11 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     }
 
     protected void cancel(){
-        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     protected void delete(){
-        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     //When a button is pressed, this method gets called. It then calls the appropriate method based on which button was pressed

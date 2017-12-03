@@ -86,19 +86,20 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Bundle b = new Bundle();
-        //Allows navigation to month view when appropriate
+        //Allows navigation to different views
         //option chosen from navigation bar
         if(manager.getBackStackEntryCount() > 0){
             manager.popBackStack();
         }
-        MonthView month = (MonthView) manager.findFragmentByTag("Month");
+        //MonthView month = (MonthView) manager.findFragmentByTag("Month");
         if (id == R.id.week_view) {
             WeekView week = new WeekView();
-            week.setArguments(month.getWeekDates(new Date()));
+            b.putLong("week",Calendar.getInstance().getTimeInMillis());
+            week.setArguments(b);
             transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
-            b.putString("day","12-02-17");//"day",Calendar.getInstance().toString());
+            b.putLong("day",Calendar.getInstance().getTimeInMillis());//"day",Calendar.getInstance().toString());
             day.setArguments(b);
             transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();
         } else if (id == R.id.agenda_view) {

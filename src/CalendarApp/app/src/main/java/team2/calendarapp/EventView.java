@@ -17,7 +17,7 @@ import java.util.Calendar;
  * Created by Andrew on 10/31/2017.
  */
 
-public class EventView extends LinearLayout {
+public class EventView extends LinearLayout implements View.OnClickListener {
     private TextView title;
     private TextView eventDescription;
     private LinearLayout container;
@@ -39,6 +39,7 @@ public class EventView extends LinearLayout {
         title = findViewById(R.id.event_title);
         eventDescription = findViewById(R.id.event_description);
         container = findViewById(R.id.event_container_individual);
+
     }
     public void setEvent(Event event){
         title.setText(event.getName());
@@ -54,4 +55,9 @@ public class EventView extends LinearLayout {
         params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, end - start ,getResources().getDisplayMetrics()));
         setLayoutParams(params);
     }
+    @Override
+    public void onClick(View v){
+        //do nothing
+    }
+
 }

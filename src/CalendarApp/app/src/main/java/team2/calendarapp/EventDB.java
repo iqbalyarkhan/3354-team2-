@@ -38,7 +38,7 @@ public class EventDB implements Serializable {
     
     public boolean addEvent(Event toAdd){
         boolean worked = events.add(toAdd);
-        Collections.sort(events);
+        Collections.sort(events); //TODO: PROBLEM CAN BE FOUND IN COMPARE TO, PLEASE TEST USING ADD BUTTON TO TROUBLESHOOT
         return worked;
     }
 
@@ -49,6 +49,9 @@ public class EventDB implements Serializable {
     public Event isCollision(Event event){
         Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
+            if(i==null){
+                continue;
+            }
             if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
                 return i;
             }
@@ -73,6 +76,8 @@ public class EventDB implements Serializable {
         Calendar eventDate;
 
         for (Event e : events){
+            if (e == null)
+                continue;
             eventDate = e.getStart();
             if (eventDate.after(end)){
                 break;
@@ -80,8 +85,10 @@ public class EventDB implements Serializable {
             if (eventDate.after(start) || eventDate.equals(start)){
                 eventsInRange.add(e);
             }
+
         }
-        return eventsInRange.toArray(new Event[]{new Event()});
+
+        return eventsInRange.toArray(new Event[eventsInRange.size()]);
     }
 
     public String toString(){
