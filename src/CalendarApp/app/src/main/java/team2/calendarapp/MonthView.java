@@ -1,25 +1,39 @@
 package team2.calendarapp;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.concurrent.CancellationException;
+
+
 
 public class MonthView extends Fragment {
+
+    private MainCalendarView.WeekHandler weekHandler = null;
+    private MainCalendarView.DayHandler dayHandler = null;
+    private Date currentDate = null;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
-        View root = inflater.inflate(R.layout.activity_main,container,false);
+        View root = inflater.inflate(R.layout.fragment_month,container,false);
+
+        /*final LinearLayout monthContainer;
+        monthContainer = root.findViewById(R.id.month_container);*/
 
         //To handle events
         HashSet<Date> events = new HashSet<>();
@@ -40,19 +54,13 @@ public class MonthView extends Fragment {
                 //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
                 //Bundle to pass to week view that holds the current week dates
                 Bundle weekDates= getWeekDates(date);
+
+                //Returns current date based on user's click
+                currentDate = date;
+
+
+
             }
-
-            /*@Override
-            public void onDayPress(Date date) {
-
-                Calendar todaysDate = Calendar.getInstance();
-                todaysDate.setTime(date);
-                int day = todaysDate.get(Calendar.DAY_OF_WEEK);
-                int month = todaysDate.get(Calendar.MONTH);
-                int year = todaysDate.get(Calendar.YEAR);
-                //System.out.println("Today is: " + day + "/" + month + "/" + year);
-
-            }*/
         });
 
         //To handle current day selected: Returns a bundle of current date
@@ -61,6 +69,9 @@ public class MonthView extends Fragment {
             @Override
             public void onDayPress(Date date) {
 
+                //Returns current date based on user's click
+                currentDate = date;
+
                 Calendar currDate = Calendar.getInstance();
                 currDate.setTime(date);
                 int day = currDate.get(Calendar.DAY_OF_MONTH);
@@ -68,11 +79,22 @@ public class MonthView extends Fragment {
                 int year = currDate.get(Calendar.YEAR);
                 Bundle dateSelected = new Bundle();
                 dateSelected.putString("dateSelected",month + "/" + day + "/" + year);
+                DayView dayView = new DayView();
 
             }
         });
 
         return root;
+    }
+
+    /**
+     * Getter Method to return the class variable currentDate
+     * @return - the current date based on user's selected date
+     */
+    public Date getCurrentDate(){
+
+        return currentDate;
+
     }
 
     /**

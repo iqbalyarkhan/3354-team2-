@@ -1,9 +1,13 @@
 package team2.calendarapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +38,8 @@ public class MainCalendarView extends LinearLayout{
 
     // To hold current date: Only to compare selected date with current date
     private Calendar currentDate = Calendar.getInstance();
+
+    private ConstraintLayout monthContainer = null;
 
     //to handle events
     //TODO: Check with Daryl to see if we need this
@@ -77,6 +83,7 @@ public class MainCalendarView extends LinearLayout{
     {
         super(context, attrs, defStyleAttr);
         initControl(context, attrs);
+
     }
 
     /**
@@ -170,7 +177,6 @@ public class MainCalendarView extends LinearLayout{
                 //Handles long press
                 if (weekHandler == null)
                     return false;
-
                 weekHandler.onDayLongPress((Date)view.getItemAtPosition(position));
                 return true;
             }

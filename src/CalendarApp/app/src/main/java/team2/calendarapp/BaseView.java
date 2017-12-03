@@ -53,6 +53,7 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
+
     }
 
 
