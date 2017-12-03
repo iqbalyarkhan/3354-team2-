@@ -101,7 +101,7 @@ public class Event implements Comparable<Event>, Serializable {
     // comparing the Event date and start time
     public int compareTo(Event other){
         if(other == null){
-            return 0;
+            return 0 ;
         }
         return startDate.compareTo(other.startDate);
     }

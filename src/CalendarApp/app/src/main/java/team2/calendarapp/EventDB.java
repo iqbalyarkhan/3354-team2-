@@ -38,7 +38,7 @@ public class EventDB implements Serializable {
     
     public boolean addEvent(Event toAdd){
         boolean worked = events.add(toAdd);
-        Collections.sort(events); //TODO: PROBLEM CAN BE FOUND IN COMPARE TO, PLEASE TEST USING ADD BUTTON TO TROUBLESHOOT
+        //Collections.sort(events); //TODO: PROBLEM CAN BE FOUND IN COMPARE TO, PLEASE TEST USING ADD BUTTON TO TROUBLESHOOT
         return worked;
     }
 
@@ -49,7 +49,7 @@ public class EventDB implements Serializable {
     public Event isCollision(Event event){
         Calendar startDate = event.getStart(), endDate = event.getEnd();
         for (Event i : events){
-            if(i==null){
+            if(i == null){
                 continue;
             }
             if (startDate.after(i.getStart()) && startDate.before(i.getEnd())){
@@ -72,23 +72,32 @@ public class EventDB implements Serializable {
 
     public Event[] getEventsInRange(Calendar start, Calendar end){
         ArrayList<Event> eventsInRange = new ArrayList<>();
-        end.add(Calendar.HOUR, 24);
+        start.set(Calendar.HOUR_OF_DAY, 0);
+        start.set(Calendar.MINUTE, 0);
+        start.set(Calendar.SECOND, 0);
+        start.set(Calendar.MILLISECOND, 0);
+        Calendar newEnd = Calendar.getInstance();
+        newEnd.setTimeInMillis(end.getTimeInMillis());
+        newEnd.set(Calendar.HOUR_OF_DAY, 23);
+        newEnd.set(Calendar.MINUTE, 59);
+        newEnd.set(Calendar.SECOND, 59);
+        newEnd.set(Calendar.MILLISECOND, 0);
         Calendar eventDate;
+        System.out.println(start.toString() + "\n" + end.toString());
 
         for (Event e : events){
             if (e == null)
                 continue;
             eventDate = e.getStart();
-            if (eventDate.after(end)){
-                break;
+            if (eventDate.after(newEnd)){
+                continue;
             }
             if (eventDate.after(start) || eventDate.equals(start)){
                 eventsInRange.add(e);
             }
 
         }
-
-        return eventsInRange.toArray(new Event[eventsInRange.size()]);
+        return eventsInRange.toArray(new Event[]{new Event()});
     }
 
     public String toString(){

@@ -70,19 +70,27 @@ public class WeekView extends Fragment {
         EventDB eventDB = EventDB.getInstance();
         clearViews();
         EventView event;
-        if(b == null)
-            return;
-        String[] parts = b.getString("dateRange").split("/");
-        String first = parts[0];
-        String last = parts[1];
+        Long currentTime = b.getLong("day");
+
+
+
         Calendar start = Calendar.getInstance();
+        start.setTimeInMillis(currentTime);
+        start.set(Calendar.HOUR_OF_DAY, 0);
+        start.clear(Calendar.MINUTE);
+        start.clear(Calendar.SECOND);
+        start.clear(Calendar.MILLISECOND);
+        start.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+
+
         Calendar end = Calendar.getInstance();
-        try{
-            start.setTime(new SimpleDateFormat("mm-dd-yyyy").parse(first));
-            end.setTime(new SimpleDateFormat("mm-dd-yyyy").parse(last));
-        }catch(java.text.ParseException e){
-            return;
-        }
+        end.setTimeInMillis(currentTime);
+        end.set(Calendar.HOUR_OF_DAY, 0);
+        end.clear(Calendar.MINUTE);
+        end.clear(Calendar.SECOND);
+        end.clear(Calendar.MILLISECOND);
+        end.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+
 
         Event[] arr = eventDB.getEventsInRange(start,end);
         for(Event e : arr){
