@@ -84,7 +84,7 @@ public class EventDB implements Serializable {
         return eventsInRange.toArray(new Event[]{new Event()});
     }
 
-    public String asString(){
+    public String toString(){
         String string = "";
         for (Event e : events){
             string += e.toString() + "   :    ";

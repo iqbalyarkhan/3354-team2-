@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,6 +59,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         bCreateCategory.setOnClickListener(this);
 
         setUpSpinner();
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Bundle info = getArguments();
         if (info != null && info.containsKey("Event")) {
@@ -145,8 +148,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     }
                     else {
                         database.addEvent(event);
+                        System.out.println("hellohi " + database.toString());
                     }
-                    getActivity().getFragmentManager().popBackStack();//.beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();    //Remove this fragment and return to whatever was there before
                 }
                 catch (IllegalArgumentException e){
                     makeToast("Please enter a valid start/end time");
@@ -226,14 +230,14 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     }
 
     protected void cancel(){
-        getActivity().getFragmentManager().popBackStack();//beginTransaction().remove(this).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
     protected void delete(){
-        getActivity().getFragmentManager().popBackStack();//.beginTransaction().remove(this).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
-    //When a button is pressed, this method gets called. It then calls the approriate method based on which button was pressec
+    //When a button is pressed, this method gets called. It then calls the appropriate method based on which button was pressed
     public void onClick(View v){
         switch (v.getId()){
             case R.id.bSaveEvent: saveEvent();

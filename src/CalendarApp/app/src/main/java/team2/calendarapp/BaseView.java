@@ -1,6 +1,7 @@
 package team2.calendarapp;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,6 +56,12 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
 
+    }
+
+    public void onPause(){
+        super.onPause();
+        saveCalendar();
+        System.out.println("hellohi saved");
     }
 
 
@@ -103,37 +111,45 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
     public void saveCalendar(){
         try {
-            FileOutputStream fileOut = new FileOutputStream("events.txt");
+            FileOutputStream fileOut = openFileOutput("events.txt", Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(database.getEvents());
             out.close();
             fileOut.close();
 
-            fileOut = new FileOutputStream("categories.txt");
+            fileOut = openFileOutput("categories.txt", Context.MODE_PRIVATE);
             out = new ObjectOutputStream(fileOut);
             out.writeObject(Event.getCategories());
             out.close();
             fileOut.close();
         }
-        catch(IOException e){}
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void loadCalendar(){
         try{
-            FileInputStream fileIn = new FileInputStream("events.txt");
+            FileInputStream fileIn = openFileInput("events.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             database.loadEventList((Event[]) in.readObject());
             in.close();
             fileIn.close();
 
-            fileIn = new FileInputStream("categories.txt");
+            fileIn = openFileInput("categories.txt");
             in = new ObjectInputStream(fileIn);
             Event.setCategories((Category[]) in.readObject());
             in.close();
             fileIn.close();
         }
-        catch(IOException e){}
-        catch(ClassNotFoundException e){}
+        catch(IOException e){
+            System.out.println("hellohi failed read");
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("hellohi failed read");
+            e.printStackTrace();
+        }
     }
 
 }
