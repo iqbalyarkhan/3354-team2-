@@ -21,7 +21,7 @@ public class AddEventToEventDBTest {
     }
 
     @Test
-    public void testAddEventNullDate(){
+    public void testAddEventDefaultDate(){
         // set event start time and end time to 0000, 00, 00
         // This would make the event start and End time January 1, 1970, the default Calendar time
         Calendar calStart = new GregorianCalendar(0000, 00, 00);
@@ -41,14 +41,12 @@ public class AddEventToEventDBTest {
         assertTrue(tester.addEvent(newEvent));
     }
     @Test
-    public void testAddEventWithNoDuration(){
-        Calendar calStart = new GregorianCalendar(2017,12,03);
-        Calendar calEnd = new GregorianCalendar(2017,12,03);
-        // creating an event that has the same start and end time.
-        // should return true because you can have an event that starts and ends on the same day
-        Event newEvent = new Event(null,null,null,calStart, calEnd,0);
-         assertTrue(tester.addEvent(newEvent));
+    public void testAddNullEvent() {
+        // a null event should not be added to the database
+        Event newEvent = null;
+        assertFalse(tester.addEvent(newEvent));
     }
+
     @Test
     public void testAddNormalEvent(){
         // add a normal calendar event should return true
