@@ -1,6 +1,7 @@
 package team2.calendarapp;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class WeekView extends Fragment {
     private enum weekDays{SUN,MON,TUES,WED,THUR,FRI,SAT}
     private ArrayList<WeekBarDay> week;
     private ArrayList<FrameLayout> eventContainer;
+    private ConstraintLayout weekContainer;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class WeekView extends Fragment {
         eventContainer.add((FrameLayout)weekEventContainer.findViewById(R.id.thu).findViewById(R.id.week_day_event_container));
         eventContainer.add((FrameLayout)weekEventContainer.findViewById(R.id.fri).findViewById(R.id.week_day_event_container));
         eventContainer.add((FrameLayout)weekEventContainer.findViewById(R.id.sat).findViewById(R.id.week_day_event_container));
-
+        weekContainer = root.findViewById(R.id.week_container);
     }
     /*private void getRange(String number){
         int day;
@@ -69,8 +71,8 @@ public class WeekView extends Fragment {
     private void drawEvents(Bundle b){
         EventDB eventDB = EventDB.getInstance();
         clearViews();
-        EventView event;
-        Long currentTime = b.getLong("day");
+        EventView eventView;
+        Long currentTime = b.getLong("week");
 
 
 
@@ -95,9 +97,10 @@ public class WeekView extends Fragment {
         Event[] arr = eventDB.getEventsInRange(start,end);
         for(Event e : arr){
             if(e == null) return;
-            event = new EventView(getActivity());
-            event.setEvent(e);
-            eventContainer.get(e.getStart().get(Calendar.DAY_OF_WEEK) - 1).addView(event);
+            eventView = new EventView(getActivity());
+            eventView.setEvent(e);
+            setClick(eventView,e );
+            eventContainer.get(e.getStart().get(Calendar.DAY_OF_WEEK) - 1).addView(eventView);
         }
     }
 
@@ -105,5 +108,20 @@ public class WeekView extends Fragment {
         for(FrameLayout f : eventContainer){
             f.removeAllViews();
         }
+    }
+
+    private void setClick(EventView e, final Event event){
+
+        e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weekContainer.removeAllViews();
+                CreateEvent ce = new CreateEvent();
+                Bundle b= new Bundle();
+                b.putSerializable("Event",event);
+                ce.setArguments(b);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.day_container,ce,"editEvent").commit();
+            }
+        });
     }
 }

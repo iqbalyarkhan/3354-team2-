@@ -22,7 +22,7 @@ public class MonthView extends Fragment {
 
     private MainCalendarView.WeekHandler weekHandler = null;
     private MainCalendarView.DayHandler dayHandler = null;
-    private Date currentDate = null;
+    private Calendar currentDate = Calendar.getInstance();
 
     private EventDB db = EventDB.getInstance();
 
@@ -55,11 +55,14 @@ public class MonthView extends Fragment {
                 //System.out.println(currWeekDates);
                 //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
                 //Bundle to pass to week view that holds the current week dates
-                Bundle weekDates= getWeekDates(date);
+                Bundle b = new Bundle();
 
                 //Returns current date based on user's click
-                currentDate = date;
-
+                b.putLong("week",date.getTime());
+                WeekView week = new WeekView();
+                week.setArguments(b);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,week,"weekView").addToBackStack("fragBack").commit();
 
 
             }
@@ -71,17 +74,14 @@ public class MonthView extends Fragment {
             @Override
             public void onDayPress(Date date) {
 
-                //Returns current date based on user's click
-                currentDate = date;
+                Bundle b = new Bundle();
 
-                Calendar currDate = Calendar.getInstance();
-                currDate.setTime(date);
-                int day = currDate.get(Calendar.DAY_OF_MONTH);
-                int month = currDate.get(Calendar.MONTH) + 1;
-                int year = currDate.get(Calendar.YEAR);
-                Bundle dateSelected = new Bundle();
-                dateSelected.putString("dateSelected",month + "/" + day + "/" + year);
-                DayView dayView = new DayView();
+                //Returns current date based on user's click
+                b.putLong("day",date.getTime());
+                DayView day = new DayView();
+                day.setArguments(b);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,day,"dayView").addToBackStack("fragBack").commit();
 
             }
         });
@@ -93,7 +93,7 @@ public class MonthView extends Fragment {
      * Getter Method to return the class variable currentDate
      * @return - the current date based on user's selected date
      */
-    public Date getCurrentDate(){
+    public Calendar getCurrentDate(){
 
         return currentDate;
 

@@ -95,7 +95,6 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Bundle b = new Bundle();
-        b.putLong("day",Calendar.getInstance().getTimeInMillis());
         //Allows navigation to different views
         //option chosen from navigation bar
         if(manager.getBackStackEntryCount() > 0){
@@ -107,10 +106,12 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         // Determines what view is clicked, creates a new instance of that view, and then displays it
         if (id == R.id.week_view) {
             WeekView week = new WeekView();
+            b.putLong("week",Calendar.getInstance().getTimeInMillis());
             week.setArguments(b);
             transaction.replace(R.id.content_container,week).addToBackStack("fragBack").commit();
         } else if (id == R.id.day_view) {
             DayView day = new DayView();
+            b.putLong("day",Calendar.getInstance().getTimeInMillis());
             day.setArguments(b);
             transaction.replace(R.id.content_container,day).addToBackStack("fragBack").commit();
         } else if (id == R.id.agenda_view) {
