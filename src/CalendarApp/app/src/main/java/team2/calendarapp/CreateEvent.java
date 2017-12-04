@@ -89,16 +89,22 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         etEventName.setText(toEdit.getName());
 
         Calendar date = toEdit.getStart();
-        etEventMonth.setText("" + date.get(Calendar.MONTH));
+        etEventMonth.setText("" + (date.get(Calendar.MONTH) + 1));
         etEventDay.setText("" + date.get(Calendar.DAY_OF_MONTH));
         etEventYear.setText("" + date.get(Calendar.YEAR));
-
-        String eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
+        String eventTime;
+        if(date.get(Calendar.MINUTE) < 10)
+            eventTime = "" + date.get(Calendar.HOUR) + ":0" + date.get(Calendar.MINUTE);
+        else
+            eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
         etEventStart.setText(eventTime);
         tbStartAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
 
         date = toEdit.getEnd();
-        eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
+        if(date.get(Calendar.MINUTE) < 10)
+            eventTime = "" + date.get(Calendar.HOUR) + ":0" + date.get(Calendar.MINUTE);
+        else
+            eventTime = "" + date.get(Calendar.HOUR) + ":" + date.get(Calendar.MINUTE);
         etEventEnd.setText(eventTime);
         tbEndAM.setChecked(date.get(Calendar.AM_PM) == Calendar.AM);
 
@@ -109,7 +115,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
 
     //populateDate fills in the date fields with a value that was passed in.
     private void populateDate(Calendar date){
-        etEventMonth.setText("" + date.get(Calendar.MONTH));
+        etEventMonth.setText("" + date.get(Calendar.MONTH ));
         etEventDay.setText("" + date.get(Calendar.DAY_OF_MONTH));
         etEventYear.setText("" + date.get(Calendar.YEAR));
     }
