@@ -24,12 +24,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * The class to control day view layout and functionalities
+ */
+
 public class DayView extends Fragment {
 
     private FrameLayout eventContainer;
     private ConstraintLayout dayContainer;
     private FloatingActionButton addButton;
     private EventDB db = EventDB.getInstance();
+
+    /**
+     * Class to handle day view on creation
+     * @param inflater - Inflates the view on creation
+     * @param container - Holds the current day view
+     * @param savedInstanceState - saved instance of the application
+     * @return - Returns the day view with properly inflated elements
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,12 +64,16 @@ public class DayView extends Fragment {
     }
 
 
-    private void drawEvents(Bundle b){
+    /**
+     * Method to draw events based on the bundle of events passed
+     * @param bundle - Bundle that holds the event information
+     */
+    private void drawEvents(Bundle bundle){
         eventContainer.removeAllViews();
 
 
         Calendar start = Calendar.getInstance();
-        start.setTimeInMillis(b.getLong("day"));
+        start.setTimeInMillis(bundle.getLong("day"));
         start.set(Calendar.HOUR_OF_DAY, 0);
         start.clear(Calendar.MINUTE);
         start.clear(Calendar.SECOND);
@@ -65,7 +81,7 @@ public class DayView extends Fragment {
 
 
         Calendar end = Calendar.getInstance();
-        end.setTimeInMillis(b.getLong("day"));
+        end.setTimeInMillis(bundle.getLong("day"));
         end.set(Calendar.HOUR_OF_DAY, 23);
         end.set(Calendar.MINUTE, 59);
         end.set(Calendar.SECOND, 59);
@@ -84,9 +100,14 @@ public class DayView extends Fragment {
         }
     }
 
-    private void setClick(EventView e, final Event event){
+    /**
+     * Method to specify activities for day clicks
+     * @param eventView - The event view for current day
+     * @param event - The acutal event set for the current day
+     */
+    private void setClick(EventView eventView, final Event event){
 
-        e.setOnClickListener(new View.OnClickListener() {
+        eventView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dayContainer.removeAllViews();

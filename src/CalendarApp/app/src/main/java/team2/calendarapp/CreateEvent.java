@@ -32,6 +32,14 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     EventDB database = EventDB.getInstance();
 
     //The onCreate method just initializes all the views and sets up the Activity for everything else
+
+    /**
+     * Initializes all the views and sets up activity for all other capabilities.
+     * @param inflater - To inflate the current view
+     * @param container - container that holds current view's layout
+     * @param savedInstanceState - saved instance of the activity
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +85,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         return root;
     }
 
-    //setUpSpinner populates the category spinner with all the available categories
+    /**
+     * Populates the category spinner with all the available categories
+     */
     private void setUpSpinner(){
         ArrayAdapter<Category> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, Arrays.asList(Event.getCategories()));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
