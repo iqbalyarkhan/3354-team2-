@@ -129,7 +129,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
             if (name.equals("")){           //If name is blank, have them enter it again
                 makeToast("Please enter an event name");
             }
-            else if (month > 12 || month < 1 || day > 31 || day < 1){           //If the date fields are outside of a valid range, it is incorrect
+            else if( (13 <= month && month <= 0) && (32 <= day && day <=0) ){
+            //else if (month > 12 || month < 1 || day > 31 || day < 1){           //If the date fields are outside of a valid range, it is incorrect
                 makeToast("Please enter a valid date");
             }
             else {
