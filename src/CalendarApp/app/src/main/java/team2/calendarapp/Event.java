@@ -18,6 +18,7 @@ public class Event implements Comparable<Event>, Serializable {
     private int category;
     private static ArrayList<Category> categories = new ArrayList<>(Arrays.asList(new Category[]{new Category("None", Color.BLUE)}));
 
+    public Event(){}
      // Constructor for Event
     public Event(String newName, String newDescription, String newLocation, Calendar newStart, Calendar newEnd, int newCategory){
         name = newName;
