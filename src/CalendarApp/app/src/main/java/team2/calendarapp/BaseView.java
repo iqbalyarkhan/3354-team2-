@@ -31,7 +31,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+Base view reads, loads, and stores the user's calendar events from a file. This view also creates the calendar toolbar
+which allows the user to switch to different calendar views.
+*/
 public class BaseView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected DrawerLayout mDrawer;
     protected FrameLayout mContainer;
@@ -53,12 +56,14 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        
+        // calendar starts on MonthView
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
         Log.d("length", EventDB.getInstance().getEvents().length + "");
     }
 
     public void onPause(){
+        // Calls the saveCalendar() function to routinely save the calendar events to the EventDB
         super.onPause();
         saveCalendar();
         System.out.println("hellohi saved");
@@ -66,6 +71,7 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
 
     @Override
+    
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -80,6 +86,10 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+    /**
+    * onNavigationItemSelected determines what view is selected by the user using the toolbar and then switches to that view
+    * 
+    */
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -93,6 +103,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
             manager.popBackStack();
         }
         //MonthView month = (MonthView) manager.findFragmentByTag("Month");
+        
+        
+        // Determines what view is clicked, creates a new instance of that view, and then displays it
         if (id == R.id.week_view) {
             WeekView week = new WeekView();
             week.setArguments(b);
@@ -110,6 +123,11 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     public void saveCalendar(){
+        /**
+        * Reads the calendar events from the file and save the calendar events to the EventDB
+        * Also reads the event categories from categories.txt and saves the categories with the event
+        * @throws IOException if the files are not able to be read or opened 
+        */
         try {
             FileOutputStream fileOut = openFileOutput("events.txt", Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -127,7 +145,11 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
             e.printStackTrace();
         }
     }
-
+/**
+* loadCalendar loads the calendar events from events.txt and event categories from categories.txt by reading the files
+* @throws IOException if the files are not read successfully 
+* @throws ClassNotFoundException if the EventDB class is no longer found 
+*/
     public void loadCalendar(){
         try{
             FileInputStream fileIn = openFileInput("events.txt");
