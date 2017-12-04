@@ -47,6 +47,7 @@ public class DayView extends Fragment {
                 .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
             }
         });
+        EventDB.getInstance().addEvent(new Event("Test","Test","test",new GregorianCalendar(2017,12,03),new GregorianCalendar(2017,12,03),0));
         drawEvents(this.getArguments());
         return root;
     }

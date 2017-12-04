@@ -66,7 +66,6 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         // Calls the saveCalendar() function to routinely save the calendar events to the EventDB
         super.onPause();
         saveCalendar();
-        System.out.println("hellohi saved");
     }
 
 
