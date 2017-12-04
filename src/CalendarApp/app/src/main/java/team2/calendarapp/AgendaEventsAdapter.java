@@ -7,8 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * This class formats the custom layout by creating an AgendaEventsAdapter that sets the text to
@@ -38,10 +43,35 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
         TextView eventTime = convertView.findViewById(R.id.eventTimeDisplay);
         if(agendaEvent != null){
             eventName.setText(agendaEvent.getName());
-            eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
+            //eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
+
+            Calendar calendarStart  = (Calendar) agendaEvent.getStart();
+            Date start = calendarStart.getTime();
+            String startHours = Integer.toString(calendarStart.get(Calendar.HOUR));
+            String startMinutes = Integer.toString(calendarStart.get(Calendar.MINUTE));
+            String startMonth = Integer.toString(calendarStart.get(Calendar.MONTH) + 1);
+            String startDay = Integer.toString(calendarStart.get(Calendar.DAY_OF_MONTH));
+            String startYear = Integer.toString(calendarStart.get(Calendar.YEAR));
+
+            String startInfo = startMonth+"/"+startDay+"/"+startYear+" "+startHours+":"+startMinutes;
+
+
+            Calendar calendarEnd = (Calendar) agendaEvent.getEnd();
+            Date end = calendarEnd.getTime();
+            String endHours = Integer.toString(calendarEnd.get(Calendar.HOUR));
+            String endMinutes = Integer.toString(calendarEnd.get(Calendar.MINUTE));
+            String endMonth = Integer.toString(calendarEnd.get(Calendar.MONTH) + 1);
+            String endDay = Integer.toString(calendarEnd.get(Calendar.DAY_OF_MONTH));
+            String endYear = Integer.toString(calendarEnd.get(Calendar.YEAR));
+
+            String endInfo = endHours+":"+endMinutes;
+
+            eventTime.setText(startInfo+" - "+endInfo);
+
         }
 
 
         return convertView;
     }
+
 }
