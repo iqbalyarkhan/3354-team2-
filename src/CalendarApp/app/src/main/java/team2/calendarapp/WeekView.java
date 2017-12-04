@@ -30,6 +30,7 @@ public class WeekView extends Fragment {
         week = new ArrayList<WeekBarDay>();
         eventContainer = new ArrayList<FrameLayout>();
         addControls(root);
+        setDate(this.getArguments());
         drawEvents(this.getArguments());
         return root;
     }
@@ -53,20 +54,7 @@ public class WeekView extends Fragment {
         eventContainer.add((FrameLayout)weekEventContainer.findViewById(R.id.sat).findViewById(R.id.week_day_event_container));
         weekContainer = root.findViewById(R.id.week_container);
     }
-    /*private void getRange(String number){
-        int day;
-        try{
-            day = Integer.parseInt(number);
-        }catch (Exception e){
-            return;
-        }
-        int low = (day/7) * 7;
-        int high = (int) Math.ceil(day/7.0) * 7;
 
-        for(int i = low; i < high; i++){
-            week.get(i).setDayNumber(Integer.toString(i));
-        }
-    } */
 
     private void drawEvents(Bundle b){
         EventDB eventDB = EventDB.getInstance();
@@ -103,7 +91,15 @@ public class WeekView extends Fragment {
             eventContainer.get(e.getStart().get(Calendar.DAY_OF_WEEK) - 1).addView(eventView);
         }
     }
-
+    private void setDate(Bundle b){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(b.getLong("week"));
+        cal.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+        for(int i = 0; i < 7; i++){
+            week.get(i).setDayNumber(cal.get(Calendar.DATE) + "");
+            cal.add(Calendar.DAY_OF_WEEK,1);
+        }
+    }
     private void clearViews(){
         for(FrameLayout f : eventContainer){
             f.removeAllViews();
