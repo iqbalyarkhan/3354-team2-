@@ -36,15 +36,22 @@ public class EventDB implements Serializable {
         return events.toArray(new Event[0]);
     }
 
-    /** 
-    * adds new Event to the sorted events list
-    * @param toAdd the Event to be added to the calendar events list
-    * @return worked a boolean that indicates whether the event was successfully added
+    /**
+     * adds new Event to the sorted events list
+     * * @param toAdd the Event to be added to the calendar events list
+     * @return worked a boolean that indicates whether the event was successfully added
+     * @throws NullPointerException if ToAdd is a null event
     */
-    public boolean addEvent(Event toAdd){
-        boolean worked = events.add(toAdd);
-        Collections.sort(events);
-        return worked;
+    public boolean addEvent(Event toAdd) throws NullPointerException{
+        try {
+            boolean worked = events.add(toAdd);
+            Collections.sort(events);
+            return worked;
+        }
+        catch (NullPointerException e ){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     //Loads an EventList from the given array
