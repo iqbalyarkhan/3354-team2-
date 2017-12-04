@@ -332,7 +332,26 @@ public class MainCalendarView extends LinearLayout{
             start.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),0,0,0,0);
             end.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMaximum(Calendar.DAY_OF_MONTH),23,59,59);
             Event[] arr = EventDB.getInstance().getEventsInRange(start,end);
-            System.out.println(arr.length);
+            
+            //Goes through the events array and compares it to the dates in the grid to
+            //highlight days with events.
+            for (int i = 0; i < arr.length; i++){
+
+                Calendar currEvent = arr[i].getStart();
+
+                int eventDay = currEvent.get(Calendar.DAY_OF_MONTH);
+                int eventMonth = currEvent.get(Calendar.MONTH);
+                int eventYear = currEvent.get(Calendar.YEAR);
+
+                if (eventDay == dayNumber && eventMonth == month && eventYear == year){
+
+                    view.setBackgroundColor(Color.parseColor("#FFF9C4"));
+
+                }
+
+            }
+
+            /*System.out.println(arr.length);
             for (Event e : arr){
                 if(e == null){
                     continue;
@@ -343,7 +362,7 @@ public class MainCalendarView extends LinearLayout{
                 //view.setBackgroundResource(R.drawable.reminder);
                 //view.getBackground().setColorFilter(Color.parseColor("#ffce00"), PorterDuff.Mode.DARKEN);
                 view.setBackgroundColor(Color.parseColor("#E57373"));
-            }
+            }*/
 
 
             /*if (eventDays != null)
