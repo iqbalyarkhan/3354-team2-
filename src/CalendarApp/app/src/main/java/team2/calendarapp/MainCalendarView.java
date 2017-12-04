@@ -312,21 +312,33 @@ public class MainCalendarView extends LinearLayout{
             todayCal.set(Calendar.YEAR, this.year);
             todayCal.set(Calendar.MONTH, monthSelected);
             int passedMonth = todayCal.get(Calendar.MONTH);
+            int todayDay = todayCal.get(Calendar.DAY_OF_WEEK);
 
             //This represents the actual date (ie today's date)
             Date actualDate = new Date();
             Calendar actualCal = Calendar.getInstance();
             actualCal.setTime(actualDate);
 
-
             // inflate item if it does not exist yet
             if (view == null)
                 view = inflater.inflate(R.layout.control_calendar_day, parent, false);
 
-            // if this day has an event, display event image for relevant date
-            // and render on the month's page
+            Calendar weekend = Calendar.getInstance();
+            weekend.setTime(cells.get(position));
+
+            //Resets the background resource
             view.setBackgroundResource(0);
 
+
+            if ((weekend.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) || (weekend.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY)){
+
+                //System.out.println("Sunday");
+                //view.setBackgroundColor(Color.parseColor("#FFF9C4"));
+                view.setBackgroundColor(Color.parseColor("#EDE7F6"));
+
+            }
+
+            //To get events from the EventDB
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
             start.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMinimum(Calendar.MONTH),0,0,0);
@@ -345,40 +357,11 @@ public class MainCalendarView extends LinearLayout{
 
                 if (eventDay == dayNumber && eventMonth == month && eventYear == year){
 
-                    view.setBackgroundColor(Color.parseColor("#FFF9C4"));
+                    view.setBackgroundColor(Color.parseColor("#F44336"));
 
                 }
 
             }
-
-            /*System.out.println(arr.length);
-            for (Event e : arr){
-                if(e == null){
-                    continue;
-                }
-                //System.out.println("Events for this month: " + arr[i]);
-                int eventDate = cal.get(Calendar.DAY_OF_MONTH) + 1;
-
-                //view.setBackgroundResource(R.drawable.reminder);
-                //view.getBackground().setColorFilter(Color.parseColor("#ffce00"), PorterDuff.Mode.DARKEN);
-                view.setBackgroundColor(Color.parseColor("#E57373"));
-            }*/
-
-
-            /*if (eventDays != null)
-            {
-                for (Date eventDate : eventDays)
-                {
-                    if (eventDate.getDate() == day &&
-                            eventDate.getMonth() == month &&
-                            eventDate.getYear() == year)
-                    {
-                        // mark this day for event
-                        view.setBackgroundResource(R.drawable.reminder);
-                        break;
-                    }
-                }
-            }*/
 
             // To style the current month: only user's currently selected month is in
             // black, other areas are greyed out.
