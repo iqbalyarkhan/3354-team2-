@@ -31,10 +31,14 @@ public class AddEventToEventDBTest {
             assertTrue(tester.addEvent(newEvent));
         }
     @Test
-    public void testAddNullEvent() {
-       // nullEvent should return false, not be added to database
-        Event newEvent = null;
-        assertFalse(tester.addEvent(newEvent));
+    public void testAddNegativeEvent() {
+        Calendar calStart = new GregorianCalendar(1111,00,-1);
+        Calendar calEnd = new GregorianCalendar(1211,11,-2);
+        // creating an event that has negative days of the month
+        // Negative values count back from the end of the month,
+        // should return true
+        Event newEvent = new Event(null,null,null,calStart, calEnd,0);
+        assertTrue(tester.addEvent(newEvent));
     }
     @Test
     public void testAddEventWithNoDuration(){
