@@ -31,6 +31,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
+
+
 /**
 Base view reads, loads, and stores the user's calendar events from a file. This view also creates the calendar toolbar
 which allows the user to switch to different calendar views.
@@ -62,15 +64,21 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         Log.d("length", EventDB.getInstance().getEvents().length + "");
     }
 
+    /**
+     * Calls the saveCalendar() function to routinely save the calendar events to the EventDB
+     */
     public void onPause(){
-        // Calls the saveCalendar() function to routinely save the calendar events to the EventDB
         super.onPause();
         saveCalendar();
     }
 
 
+    /**
+     * Method to handle click on options menu.
+     * @param item - To hold the menu item being selected
+     * @return - returns true if view change was successful.
+     */
     @Override
-    
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -87,8 +95,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     /**
     * onNavigationItemSelected determines what view is selected by the user using the toolbar and then switches to that view
-    * 
+    * @param item - The item selected from the menu
     */
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -122,6 +131,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    /**
+     * Saves the calendar state
+     */
     public void saveCalendar(){
         /**
         * Reads the calendar events from the file and save the calendar events to the EventDB
