@@ -24,6 +24,8 @@ public class MonthView extends Fragment {
     private MainCalendarView.DayHandler dayHandler = null;
     private Date currentDate = null;
 
+    private EventDB db = EventDB.getInstance();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
