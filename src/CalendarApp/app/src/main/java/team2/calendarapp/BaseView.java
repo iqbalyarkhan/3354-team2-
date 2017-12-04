@@ -164,11 +164,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
             fileIn.close();
         }
         catch(IOException e){
-            System.out.println("hellohi failed read");
             e.printStackTrace();
         }
         catch(ClassNotFoundException e){
-            System.out.println("hellohi failed read");
             e.printStackTrace();
         }
     }

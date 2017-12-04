@@ -122,8 +122,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         int category = sEventCategory.getSelectedItemPosition();
 
         try {
-            int month = Integer.parseInt(etEventMonth.getText().toString()) - 1;    //Try to parse integers from these fields. If we can't, they are incorrect. One is subtracted because Calendar is 0-indexed
-            int day = Integer.parseInt(etEventDay.getText().toString()) - 1;
+            int month = Integer.parseInt(etEventMonth.getText().toString())-1;    //Try to parse integers from these fields. If we can't, they are incorrect. One is subtracted because Calendar is 0-indexed
+            int day = Integer.parseInt(etEventDay.getText().toString());
             int year = Integer.parseInt(etEventYear.getText().toString());
 
             if (name.equals("")){           //If name is blank, have them enter it again

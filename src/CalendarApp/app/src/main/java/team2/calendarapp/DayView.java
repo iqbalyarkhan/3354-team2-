@@ -47,6 +47,7 @@ public class DayView extends Fragment {
                 .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
             }
         });
+        drawEvents(this.getArguments());
         return root;
     }
 
@@ -71,6 +72,7 @@ public class DayView extends Fragment {
 
 
         Event[] arr = EventDB.getInstance().getEventsInRange(start,end);
+        System.out.println(arr.length);
         EventView eventView;
         for (Event e: arr){
             if(e == null)
