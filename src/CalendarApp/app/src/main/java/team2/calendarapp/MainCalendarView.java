@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -42,9 +44,10 @@ public class MainCalendarView extends LinearLayout{
     private ConstraintLayout monthContainer = null;
 
     //to handle events
-    //TODO: Check with Daryl to see if we need this
+    private EventDB db = EventDB.getInstance();
     private MainCalendarView.WeekHandler weekHandler = null;
     private MainCalendarView.DayHandler dayHandler = null;
+
 
     //Components of the view
     /**
@@ -152,6 +155,7 @@ public class MainCalendarView extends LinearLayout{
             {
                 currentDate.add(Calendar.MONTH, 1);
                 updateCalendar(null);
+                //eventHandler.setEvents();
             }
         });
 
@@ -164,6 +168,7 @@ public class MainCalendarView extends LinearLayout{
             {
                 currentDate.add(Calendar.MONTH, -1);
                 updateCalendar(null);
+                //eventHandler.setEvents();
             }
         });
 
@@ -265,6 +270,7 @@ public class MainCalendarView extends LinearLayout{
         //The cells from grid view of current display
         private ArrayList<Date> cells;
 
+
         /**
          * To inflate the current month view with correct dates and events
          * @param context - current context
@@ -274,7 +280,7 @@ public class MainCalendarView extends LinearLayout{
         public CalendarAdapter(Context context, ArrayList<Date> days, HashSet<Date> eventDays, int monthNumber, int year)
         {
             super(context, R.layout.control_calendar_day, days);
-            this.eventDays = eventDays;
+            //this.eventDays = eventDays;
             inflater = LayoutInflater.from(context);
             monthSelected = monthNumber;
             this.year = year;
@@ -319,8 +325,22 @@ public class MainCalendarView extends LinearLayout{
 
             // if this day has an event, display event image for relevant date
             // and render on the month's page
-            /*view.setBackgroundResource(0);
-            if (eventDays != null)
+            view.setBackgroundResource(0);
+            Event[] arr = EventDB.getInstance().getEventsInRange(cal);
+            for (int i = 0; i < arr.length; i++){
+
+                //System.out.println("Events for this month: " + arr[i]);
+                int eventDate = cal.get(Calendar.DAY_OF_MONTH) + 1;
+                System.out.println("Event date: " + eventDate);
+                //view.setBackgroundResource(R.drawable.reminder);
+                //view.getBackground().setColorFilter(Color.parseColor("#ffce00"), PorterDuff.Mode.DARKEN);
+                view.setBackgroundColor(Color.parseColor("#E57373"));
+
+
+            }
+
+
+            /*if (eventDays != null)
             {
                 for (Date eventDate : eventDays)
                 {
