@@ -47,19 +47,31 @@ public class DayView extends Fragment {
                 .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
             }
         });
-        EventDB.getInstance().addEvent(new Event("Test","Test","test",new GregorianCalendar(2017,12,03),new GregorianCalendar(2017,12,03),0));
-        drawEvents(this.getArguments());
         return root;
     }
 
 
     private void drawEvents(Bundle b){
         eventContainer.removeAllViews();
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(b.getLong("day"));
-        Event[] arr = EventDB.getInstance().getEventsInRange(cal);
+
+
+        Calendar start = Calendar.getInstance();
+        start.setTimeInMillis(b.getLong("day"));
+        start.set(Calendar.HOUR_OF_DAY, 0);
+        start.clear(Calendar.MINUTE);
+        start.clear(Calendar.SECOND);
+        start.clear(Calendar.MILLISECOND);
+
+
+        Calendar end = Calendar.getInstance();
+        end.setTimeInMillis(b.getLong("day"));
+        end.set(Calendar.HOUR_OF_DAY, 23);
+        end.set(Calendar.MINUTE, 59);
+        end.set(Calendar.SECOND, 59);
+
+
+        Event[] arr = EventDB.getInstance().getEventsInRange(start,end);
         EventView eventView;
-        System.out.println(arr.length);
         for (Event e: arr){
             if(e == null)
                 continue;
