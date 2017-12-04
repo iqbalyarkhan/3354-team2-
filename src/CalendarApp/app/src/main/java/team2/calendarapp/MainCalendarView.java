@@ -326,17 +326,23 @@ public class MainCalendarView extends LinearLayout{
             // if this day has an event, display event image for relevant date
             // and render on the month's page
             view.setBackgroundResource(0);
-            Event[] arr = EventDB.getInstance().getEventsInRange(cal);
-            for (int i = 0; i < arr.length; i++){
 
+            Calendar start = Calendar.getInstance();
+            Calendar end = Calendar.getInstance();
+            start.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),0,0,0,0);
+            end.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMaximum(Calendar.DAY_OF_MONTH),23,59,59);
+            Event[] arr = EventDB.getInstance().getEventsInRange(start,end);
+            System.out.println(arr.length);
+            for (Event e : arr){
+                if(e == null){
+                    continue;
+                }
                 //System.out.println("Events for this month: " + arr[i]);
                 int eventDate = cal.get(Calendar.DAY_OF_MONTH) + 1;
-                System.out.println("Event date: " + eventDate);
+
                 //view.setBackgroundResource(R.drawable.reminder);
                 //view.getBackground().setColorFilter(Color.parseColor("#ffce00"), PorterDuff.Mode.DARKEN);
                 view.setBackgroundColor(Color.parseColor("#E57373"));
-
-
             }
 
 

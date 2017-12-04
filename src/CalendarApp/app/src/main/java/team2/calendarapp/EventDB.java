@@ -91,7 +91,7 @@ public class EventDB implements Serializable {
     //@return: an array of Events that happen on the given day
     @Deprecated
     public Event[] getEventsInRange(Calendar date){
-        return getEventsInRange(date, (Calendar) date.clone()); //deprecated
+        return getEventsInRange(date, (Calendar) date.clone());
     }
 
     //returns all the events in a given range
@@ -100,13 +100,12 @@ public class EventDB implements Serializable {
     //@return: an array of Events that happened in the given range
     public Event[] getEventsInRange(Calendar start, Calendar end){
         ArrayList<Event> eventsInRange = new ArrayList<>();
+        //start.add(Calendar.HOUR, -24);      //When neither an hour nor minute is given, the Calendar defaults to the end of the day. Because we want the beginnin, we subtract 24 hours.
         Calendar eventDate;
-
         for (Event e : events){
             if (e == null){     //Don't consider any null Events
                 continue;
             }
-
             eventDate = e.getStart();
             if (eventDate.after(end)){      //If the Event is past the end of the range, we've gone too far and can break out
                 break;
