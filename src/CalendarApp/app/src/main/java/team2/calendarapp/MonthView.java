@@ -16,7 +16,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-
+/**
+ * Class monthview that deals with rendering, interacting
+ * and chaing the said view.
+ */
 
 public class MonthView extends Fragment {
 
@@ -26,7 +29,13 @@ public class MonthView extends Fragment {
 
     private EventDB db = EventDB.getInstance();
 
-
+    /**
+     * Mehtod to create the Month view
+     * @param inflater - Inflates current view
+     * @param container - contains the layout for month view
+     * @param savedInstanceState - saved instance for current view
+     * @return - returns the created month view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
