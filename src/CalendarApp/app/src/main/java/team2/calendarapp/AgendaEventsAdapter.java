@@ -20,7 +20,6 @@ import java.util.GregorianCalendar;
  * This class formats the custom layout by creating an AgendaEventsAdapter that sets the text to
  * be displayed in the AgendaView
  */
-
 public class AgendaEventsAdapter extends ArrayAdapter<Event>{
     // agendaEventsAdapter default constructor
     public AgendaEventsAdapter (Context context, Event[] agendaEventsArrayList){
@@ -44,46 +43,55 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
         TextView eventTime = convertView.findViewById(R.id.eventTimeDisplay);
         if(agendaEvent != null){
             eventName.setText(agendaEvent.getName());
-            //eventTime.setText(agendaEvent.getStart() + " - "+ agendaEvent.getEnd());
 
-            Calendar calendarStart  = (Calendar) agendaEvent.getStart();
-            Date start = calendarStart.getTime();
-            String startHours = Integer.toString(calendarStart.get(Calendar.HOUR));
-            String startMinutes = Integer.toString(calendarStart.get(Calendar.MINUTE));
-            String startMonth = Integer.toString(calendarStart.get(Calendar.MONTH) + 1);
-            String startDay = Integer.toString(calendarStart.get(Calendar.DAY_OF_MONTH));
-            String startYear = Integer.toString(calendarStart.get(Calendar.YEAR));
-
-            if (startMinutes.equals("0")){
-
-                startMinutes = "00";
-
-            }
-
-            String startInfo = startMonth+"/"+startDay+"/"+startYear+" "+startHours+":"+startMinutes;
-
-            Calendar calendarEnd = (Calendar) agendaEvent.getEnd();
-            Date end = calendarEnd.getTime();
-            String endHours = Integer.toString(calendarEnd.get(Calendar.HOUR));
-            String endMinutes = Integer.toString(calendarEnd.get(Calendar.MINUTE));
-            String endMonth = Integer.toString(calendarEnd.get(Calendar.MONTH) + 1);
-            String endDay = Integer.toString(calendarEnd.get(Calendar.DAY_OF_MONTH));
-            String endYear = Integer.toString(calendarEnd.get(Calendar.YEAR));
-
-            if (endMinutes.equals("0")){
-
-                endMinutes = "00";
-
-            }
-
-            String endInfo = endHours+":"+endMinutes;
-
-            String timeDisplay = startInfo+" - "+endInfo;
+           //Calendar start = agendaEvent.getStart();
+            String startInfo = getEventTimes(agendaEvent.getStart());
+            String endInfo = getEventTimes(agendaEvent.getEnd());
+            String startDate = getEventDate(agendaEvent.getStart());
+            String timeDisplay = startDate+"  "+startInfo+" - "+endInfo;
 
             eventTime.setText(timeDisplay);
 
         }
         return convertView;
+    }
+
+    /**
+     * Method to get start and end times for an event to be displayed in the agenda view
+     * @param currentEvent - The current event that is being analyzed
+     * @return - String with current event's times
+     */
+    public String getEventTimes(Calendar currentEvent){
+
+        //Calendar eventCalendar  = (Calendar) currentEvent.getStart();
+        String startHours = Integer.toString(currentEvent.get(Calendar.HOUR));
+        String startMinutes = Integer.toString(currentEvent.get(Calendar.MINUTE));
+
+        if (startMinutes.equals("0")){
+
+            startMinutes = "00";
+
+        }
+
+        String timeInfo = startHours+":"+startMinutes;
+        return timeInfo;
+
+    }
+
+    /**
+     * Method to get start date for an event to be displayed in the agenda view
+     * @param currentEvent - The event that is being analyzed
+     * @return -String with current event's start date
+     */
+    public String getEventDate(Calendar currentEvent){
+
+        String startMonth = Integer.toString(currentEvent.get(Calendar.MONTH) + 1);
+        String startDay = Integer.toString(currentEvent.get(Calendar.DAY_OF_MONTH));
+        String startYear = Integer.toString(currentEvent.get(Calendar.YEAR));
+
+        String dateInfo = startMonth+"/"+startDay+"/"+startYear;
+        return  dateInfo;
+
     }
 
 }
