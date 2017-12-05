@@ -1,5 +1,6 @@
 package team2.calendarapp;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -12,7 +13,11 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class GetEventsInRange {
-    EventDB database = EventDB.getInstance();
+    private EventDB database;
+    @Before
+    public void setUp() {
+        database = EventDB.getInstance();
+    }
 
     @Test
     public void testNoValues(){
