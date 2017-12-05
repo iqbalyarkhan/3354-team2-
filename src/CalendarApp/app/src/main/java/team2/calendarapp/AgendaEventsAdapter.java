@@ -1,6 +1,7 @@
 package team2.calendarapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,6 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
             eventTime.setText(startInfo+" - "+endInfo);
 
         }
-
-
         return convertView;
     }
 

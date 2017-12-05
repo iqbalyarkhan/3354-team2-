@@ -1,8 +1,11 @@
 package team2.calendarapp;
 
+import android.drm.DrmStore;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by Andrew on 11/21/2017.
@@ -33,6 +37,7 @@ public class WeekView extends Fragment {
     private ArrayList<FrameLayout> eventContainer;
     private ConstraintLayout weekContainer;
     private ImageButton addButton;
+    private ActionBar mToolbar;
 
     /**
      * Method to create the week view
@@ -47,7 +52,7 @@ public class WeekView extends Fragment {
         View root = inflater.inflate(R.layout.fragment_week, container, false);
         week = new ArrayList<WeekBarDay>();
         eventContainer = new ArrayList<FrameLayout>();
-
+        mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         addButton = getActivity().findViewById(R.id.addButton);
         addButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View v){
@@ -105,7 +110,7 @@ public class WeekView extends Fragment {
         start.clear(Calendar.SECOND);
         start.clear(Calendar.MILLISECOND);
         start.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
-
+        setTimeInToolbar(start);
 
         Calendar end = Calendar.getInstance();
         end.setTimeInMillis(currentTime);
@@ -126,6 +131,14 @@ public class WeekView extends Fragment {
         }
     }
 
+    /**
+     *
+     * @param cal the calendar instance that the title will be based off of
+     */
+    private void setTimeInToolbar(Calendar cal){
+        if(mToolbar != null)
+            mToolbar.setTitle(cal.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.ENGLISH) + " " + cal.get(Calendar.DAY_OF_MONTH) + ", " + cal.get(Calendar.YEAR));
+    }
 
     /**
      *To set the dates that correspond to current week
