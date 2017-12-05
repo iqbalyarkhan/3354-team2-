@@ -171,6 +171,11 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
                     }
 
                     Event event = new Event(name, description, location, startDate, endDate, category);
+                    if(startDate.after(endDate) || endDate.before(startDate)){
+                        makeToast("Please enter a valid start and end time");
+                        return;
+                    }
+
                     if (edit){      //If we are editing this event, delete the old one from the database
                         database.delete(toEdit);
                     }
