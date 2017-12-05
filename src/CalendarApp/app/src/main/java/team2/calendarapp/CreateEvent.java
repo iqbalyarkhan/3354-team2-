@@ -237,6 +237,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         builder.setTitle("New Category");
 
         final EditText input = new EditText(getActivity());     //Create the EditText that they will use to input the new Category
+        input.setId(R.id.NewCatgeoryInputId);
         final Spinner color = new Spinner(getActivity());       //Create the Spinner that will be used to select the color
         input.setEms(5);        //Make sure the EditText isn't too small
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"Green", "Red", "Blue", "Yellow", "Magenta", "Aqua"});      //Populate the Spinner with the Colors that can be selected.
