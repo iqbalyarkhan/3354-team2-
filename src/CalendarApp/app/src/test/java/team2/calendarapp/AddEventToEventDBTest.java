@@ -50,13 +50,7 @@ public class AddEventToEventDBTest {
         Event newEvent = new Event(null,null,null,calStart, calEnd,0);
         assertTrue(tester.addEvent(newEvent));
     }
-    @Test
-    public void testAddNullEvent() {
-        // a null event should not be added to the database
-        Event newEvent = null;
-        assertFalse(tester.addEvent(newEvent));
-    }
-
+ 
     @Test
     public void testAddEventWithDateRange(){
         // add a calendar event with a date range
