@@ -54,8 +54,13 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
             String startDay = Integer.toString(calendarStart.get(Calendar.DAY_OF_MONTH));
             String startYear = Integer.toString(calendarStart.get(Calendar.YEAR));
 
-            String startInfo = startMonth+"/"+startDay+"/"+startYear+" "+startHours+":"+startMinutes;
+            if (startMinutes.equals("0")){
 
+                startMinutes = "00";
+
+            }
+
+            String startInfo = startMonth+"/"+startDay+"/"+startYear+" "+startHours+":"+startMinutes;
 
             Calendar calendarEnd = (Calendar) agendaEvent.getEnd();
             Date end = calendarEnd.getTime();
@@ -65,9 +70,17 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
             String endDay = Integer.toString(calendarEnd.get(Calendar.DAY_OF_MONTH));
             String endYear = Integer.toString(calendarEnd.get(Calendar.YEAR));
 
+            if (endMinutes.equals("0")){
+
+                endMinutes = "00";
+
+            }
+
             String endInfo = endHours+":"+endMinutes;
 
-            eventTime.setText(startInfo+" - "+endInfo);
+            String timeDisplay = startInfo+" - "+endInfo;
+
+            eventTime.setText(timeDisplay);
 
         }
         return convertView;
