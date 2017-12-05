@@ -63,8 +63,17 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
      */
     public String getEventTimes(Calendar currentEvent){
 
-        //Calendar eventCalendar  = (Calendar) currentEvent.getStart();
+        int hour = currentEvent.get(Calendar.HOUR_OF_DAY);
+        String amOrPm = "AM";
+        if (hour >= 12){
+
+            amOrPm = "PM";
+
+
+        }
+
         String startHours = Integer.toString(currentEvent.get(Calendar.HOUR));
+
         String startMinutes = Integer.toString(currentEvent.get(Calendar.MINUTE));
 
         if (startMinutes.equals("0")){
@@ -73,7 +82,7 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
 
         }
 
-        String timeInfo = startHours+":"+startMinutes;
+        String timeInfo = startHours+":"+startMinutes+" "+amOrPm;
         return timeInfo;
 
     }
