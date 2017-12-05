@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,7 +33,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     boolean edit = false;
     Event toEdit;
     EventDB database = EventDB.getInstance();
-
+    private ActionBar mToolBar;
+    private ImageButton addButton;
     //The onCreate method just initializes all the views and sets up the Activity for everything else
 
     /**
@@ -43,7 +47,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View root = inflater.inflate(R.layout.activity_create_event, container, false);
+        View root = inflater.inflate(R.layout.fragment_create_event, container, false);
 
         etEventName = root.findViewById(R.id.etEventName);
         etEventDescription = root.findViewById(R.id.etEventDescription);
@@ -60,6 +64,10 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         tbStartAM = root.findViewById(R.id.tbStartAM);
         tbEndAM = root.findViewById(R.id.tbEndAM);
         bCreateCategory = root.findViewById(R.id.bCreateCategory);
+        mToolBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        addButton = getActivity().findViewById(R.id.addButton);
+        addButton.setVisibility(View.INVISIBLE);
+        addButton.setClickable(false);
 
         bSaveEvent.setOnClickListener(this);
         bCancel.setOnClickListener(this);
@@ -71,13 +79,16 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);       //Make sure the layout doesn't change when the keyboard is created.
 
         Bundle info = getArguments();
+        mToolBar.setTitle("Create Event");
         if (info != null && info.containsKey("Event")) {            //If the Bundle contains an event, we need to prepare this Activity for editing it.
             toEdit = (Event) info.getSerializable("Event");
             edit = true;
+            mToolBar.setTitle("Edit Event");
             populateFields();           //Fill in all the fields with dthe appropriate values
         }
         else if (info != null && info.containsKey("Date")){         //If a Calendar object was passed in, fill out the date fields to represent that
             populateDate((Calendar) info.getSerializable("Date"));
+
         }
         if (!edit){     //If we're not editing an event, there shouldn't be a delete button.
             bDelete.setVisibility(View.GONE);
@@ -255,6 +266,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
     //cancel gets rid of this Fragment without saving anything
     protected void cancel(){
         getActivity().getSupportFragmentManager().popBackStack();
+
     }
 
     //delete deletes the current Event being edited and gets rid of this Fragment
@@ -275,5 +287,18 @@ public class CreateEvent extends Fragment implements View.OnClickListener {
             case R.id.bCreateCategory: createCategory();
                                        break;
         }
+    }
+
+
+    private void resetAddButton(){
+        addButton.setVisibility(View.VISIBLE);
+        addButton.setClickable(true);
+    }
+
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        resetAddButton();
     }
 }

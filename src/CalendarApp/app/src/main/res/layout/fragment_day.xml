@@ -30,6 +30,13 @@
                     android:layout_width="@dimen/time_width"
                     android:layout_height="match_parent"
                     android:id="@+id/timeline"/>
+
+                <include
+                    layout="@layout/layout_separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/timeline" />
                 <FrameLayout
                     android:id="@+id/event_container"
                     android:layout_width="match_parent"
@@ -47,16 +54,5 @@
     </LinearLayout>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
 </android.support.constraint.ConstraintLayout>
 

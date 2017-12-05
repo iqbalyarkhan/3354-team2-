@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +32,7 @@ public class WeekView extends Fragment {
     private ArrayList<WeekBarDay> week;
     private ArrayList<FrameLayout> eventContainer;
     private ConstraintLayout weekContainer;
+    private ImageButton addButton;
 
     /**
      * Method to create the week view
@@ -45,6 +47,14 @@ public class WeekView extends Fragment {
         View root = inflater.inflate(R.layout.fragment_week, container, false);
         week = new ArrayList<WeekBarDay>();
         eventContainer = new ArrayList<FrameLayout>();
+
+        addButton = getActivity().findViewById(R.id.addButton);
+        addButton.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View v){
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
+            }
+        });
         addControls(root);
         setDate(this.getArguments());
         drawEvents(this.getArguments());
@@ -150,12 +160,11 @@ public class WeekView extends Fragment {
         eventView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                weekContainer.removeAllViews();
                 CreateEvent ce = new CreateEvent();
                 Bundle b= new Bundle();
                 b.putSerializable("Event",event);
                 ce.setArguments(b);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.day_container,ce,"editEvent").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_container,ce,"editEvent").addToBackStack("fragBack").commit();
             }
         });
     }

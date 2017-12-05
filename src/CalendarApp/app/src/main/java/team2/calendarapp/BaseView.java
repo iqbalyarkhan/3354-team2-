@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.io.File;
@@ -61,16 +62,17 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         
         // calendar starts on MonthView
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
-        Log.d("length", EventDB.getInstance().getEvents().length + "");
     }
 
     /**
      * Calls the saveCalendar() function to routinely save the calendar events to the EventDB
      */
+    @Override
     public void onPause(){
         super.onPause();
         saveCalendar();
     }
+
 
 
     /**
@@ -85,6 +87,12 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         // as you specify a parent fragment_day in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.day_view:
+                mDrawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.week_view:
+                mDrawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.agenda_view:
                 mDrawer.closeDrawer(GravityCompat.START);
                 return true;
         }

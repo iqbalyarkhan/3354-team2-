@@ -33,7 +33,6 @@
             calendarNS:dateFormat="MMMM yyyy"/>
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
 
 

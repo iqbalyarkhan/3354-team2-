@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ AgendaView is the view for displaying calendar events as an agenda list.
 The AgendaView view displays events in a list and shows event name, event start time, and event end time
 */
     private EventDB db = EventDB.getInstance();
+    private ImageButton addButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**
@@ -27,7 +29,13 @@ The AgendaView view displays events in a list and shows event name, event start 
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_agenda,container,false);
         ListView agendaListView = root.findViewById(R.id.agenda_list_view);
-      
+        addButton = getActivity().findViewById(R.id.addButton);
+        addButton.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View v){
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
+            }
+        });
         // getting calendar events list
         Event [] agendaEvents = db.getEvents();
         

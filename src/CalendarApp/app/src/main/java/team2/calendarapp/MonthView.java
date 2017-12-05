@@ -1,14 +1,19 @@
 package team2.calendarapp;
 
+
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.text.SimpleDateFormat;
@@ -26,8 +31,9 @@ public class MonthView extends Fragment {
     private MainCalendarView.WeekHandler weekHandler = null;
     private MainCalendarView.DayHandler dayHandler = null;
     private Calendar currentDate = Calendar.getInstance();
-
+    private ActionBar mToolbar;
     private EventDB db = EventDB.getInstance();
+    private ImageButton addButton;
 
     /**
      * Mehtod to create the Month view
@@ -53,7 +59,16 @@ public class MonthView extends Fragment {
         //Updates the calendar view with relevant events
         MainCalendarView cv = ((MainCalendarView)root.findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
-
+        addButton = getActivity().findViewById(R.id.addButton);
+        addButton.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View v){
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
+            }
+        });
+        if((mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar()) != null){
+            mToolbar.setTitle("Calendar");
+        }
         //On long press the date range is displayed as a toast.
         cv.setWeekHandler(new MainCalendarView.WeekHandler() {
             @Override
