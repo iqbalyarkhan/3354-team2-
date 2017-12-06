@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
  * be displayed in the AgendaView
  */
 public class AgendaEventsAdapter extends ArrayAdapter<Event>{
+
     // agendaEventsAdapter default constructor
     public AgendaEventsAdapter (Context context, Event[] agendaEventsArrayList){
         super(context,0,agendaEventsArrayList);
@@ -44,7 +45,6 @@ public class AgendaEventsAdapter extends ArrayAdapter<Event>{
         if(agendaEvent != null){
             eventName.setText(agendaEvent.getName());
 
-           //Calendar start = agendaEvent.getStart();
             String startInfo = getEventTimes(agendaEvent.getStart());
             String endInfo = getEventTimes(agendaEvent.getEnd());
             String startDate = getEventDate(agendaEvent.getStart());

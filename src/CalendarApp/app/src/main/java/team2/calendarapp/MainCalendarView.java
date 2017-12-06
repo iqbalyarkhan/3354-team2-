@@ -407,7 +407,7 @@ public class MainCalendarView extends LinearLayout{
     }
 
     /**
-     *
+     * Allows the view to interact with day view
      * @param daysHandle - the handle to user's currently selected date
      */
     public void setDayHandler (MainCalendarView.DayHandler daysHandle){

@@ -69,15 +69,10 @@ public class MonthView extends Fragment {
         if((mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar()) != null){
             mToolbar.setTitle("Calendar");
         }
-        //On long press the date range is displayed as a toast.
+        //On long press the date range is retrieved.
         cv.setWeekHandler(new MainCalendarView.WeekHandler() {
             @Override
             public void onDayLongPress(Date date) {
-                //Toast.makeText(MonthView.this, "No events for today", Toast.LENGTH_SHORT).show();
-                //Gets current week dates in string format
-                //String currWeekDates = getWeekDates(date);
-                //System.out.println(currWeekDates);
-                //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
                 //Bundle to pass to week view that holds the current week dates
                 Bundle b = new Bundle();
 
