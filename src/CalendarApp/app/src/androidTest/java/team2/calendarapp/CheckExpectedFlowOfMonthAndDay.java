@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
  * Created by Andrew on 12/4/2017.
  */
 @RunWith(AndroidJUnit4.class)
-public class UITestClass {
+public class CheckExpectedFlowOfMonthAndDay {
     @Rule
     public ActivityTestRule<BaseView> mDayView = new ActivityTestRule<>(BaseView.class);
 
