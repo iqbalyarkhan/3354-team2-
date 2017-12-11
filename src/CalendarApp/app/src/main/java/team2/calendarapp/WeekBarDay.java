@@ -13,6 +13,9 @@ import android.widget.TextView;
  * Created by Andrew on 11/21/2017.
  */
 
+/**
+ * Custom component found in the week view that shows day of the week
+ */
 public class WeekBarDay extends LinearLayoutCompat {
     private TextView dayNumber;
     private TextView dayOfTheWeek;
@@ -29,6 +32,12 @@ public class WeekBarDay extends LinearLayoutCompat {
         super(context, attrs, defStyle);
         init(context,attrs);
     }
+
+    /**
+     * Initiate controls
+     * @param context the context in which the component is running in
+     * @param attrs extra information that may be passed in
+     */
     public void init(Context context, AttributeSet attrs){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.layout_week_bar_day,this);
@@ -42,10 +51,18 @@ public class WeekBarDay extends LinearLayoutCompat {
         a.recycle();
     }
 
-
+    /**
+     * Sets the day number that correlates to the day of the week
+     * @param day the instance of the current week
+     */
     public void setDayNumber(String day) {
         this.dayNumber.setText(day);
     }
+
+    /**
+     * Sets the name of the day of the week
+     * @param day the instance of the current week
+     */
     public void setDayOfTheWeek(String day){
         this.dayOfTheWeek.setText(day);
     }

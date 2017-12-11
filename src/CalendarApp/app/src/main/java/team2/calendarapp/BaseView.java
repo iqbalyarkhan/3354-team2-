@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.io.File;
@@ -31,6 +32,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
+
+
 /**
 Base view reads, loads, and stores the user's calendar events from a file. This view also creates the calendar toolbar
 which allows the user to switch to different calendar views.
@@ -59,24 +62,37 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         
         // calendar starts on MonthView
         getSupportFragmentManager().beginTransaction().replace(R.id.content_container,(new MonthView()),"Month").commit();
-        Log.d("length", EventDB.getInstance().getEvents().length + "");
     }
 
+    /**
+     * Calls the saveCalendar() function to routinely save the calendar events to the EventDB
+     */
+    @Override
     public void onPause(){
-        // Calls the saveCalendar() function to routinely save the calendar events to the EventDB
         super.onPause();
         saveCalendar();
     }
 
 
+
+    /**
+     * Method to handle click on options menu.
+     * @param item - To hold the menu item being selected
+     * @return - returns true if view change was successful.
+     */
     @Override
-    
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent fragment_day in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.day_view:
+                mDrawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.week_view:
+                mDrawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.agenda_view:
                 mDrawer.closeDrawer(GravityCompat.START);
                 return true;
         }
@@ -87,8 +103,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     /**
     * onNavigationItemSelected determines what view is selected by the user using the toolbar and then switches to that view
-    * 
+    * @param item - The item selected from the menu
     */
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -122,6 +139,9 @@ public class BaseView extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    /**
+     * Saves the calendar state
+     */
     public void saveCalendar(){
         /**
         * Reads the calendar events from the file and save the calendar events to the EventDB

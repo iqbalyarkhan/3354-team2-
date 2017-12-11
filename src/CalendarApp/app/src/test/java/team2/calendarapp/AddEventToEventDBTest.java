@@ -41,15 +41,20 @@ public class AddEventToEventDBTest {
         assertTrue(tester.addEvent(newEvent));
     }
     @Test
-    public void testAddNullEvent() {
-        // a null event should not be added to the database
-        Event newEvent = null;
-        assertFalse(tester.addEvent(newEvent));
+    public void testAddEventOnSameDay() {
+        Calendar calStart = new GregorianCalendar(2017,12,6);
+        Calendar calEnd = new GregorianCalendar(2017,12,6);
+        // creating an event that starts and ends on the same day
+        // event should be valid since events can last only one day
+        // should return true
+        Event newEvent = new Event(null,null,null,calStart, calEnd,0);
+        assertTrue(tester.addEvent(newEvent));
     }
-
+ 
     @Test
-    public void testAddNormalEvent(){
-        // add a normal calendar event should return true
+    public void testAddEventWithDateRange(){
+        // add a calendar event with a date range
+        // should return true
         Calendar calStart = new GregorianCalendar(2017,12,03);
         Calendar calEnd = new GregorianCalendar(2017,12,06);
         Event newEvent = new Event("test android project", "use JUnit Framework","Home",

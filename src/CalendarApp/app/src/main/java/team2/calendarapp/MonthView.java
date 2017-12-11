@@ -1,14 +1,19 @@
 package team2.calendarapp;
 
+
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.text.SimpleDateFormat;
@@ -16,17 +21,27 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-
+/**
+ * Class monthview that deals with rendering, interacting
+ * and chaing the said view.
+ */
 
 public class MonthView extends Fragment {
 
     private MainCalendarView.WeekHandler weekHandler = null;
     private MainCalendarView.DayHandler dayHandler = null;
     private Calendar currentDate = Calendar.getInstance();
-
+    private ActionBar mToolbar;
     private EventDB db = EventDB.getInstance();
+    private ImageButton addButton;
 
-
+    /**
+     * Mehtod to create the Month view
+     * @param inflater - Inflates current view
+     * @param container - contains the layout for month view
+     * @param savedInstanceState - saved instance for current view
+     * @return - returns the created month view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -44,16 +59,20 @@ public class MonthView extends Fragment {
         //Updates the calendar view with relevant events
         MainCalendarView cv = ((MainCalendarView)root.findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
-
-        //On long press the date range is displayed as a toast.
+        addButton = getActivity().findViewById(R.id.addButton);
+        addButton.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View v){
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_container,new CreateEvent(),"createEvent").addToBackStack("fragBack").commit();
+            }
+        });
+        if((mToolbar = ((AppCompatActivity) getActivity()).getSupportActionBar()) != null){
+            mToolbar.setTitle("Calendar");
+        }
+        //On long press the date range is retrieved.
         cv.setWeekHandler(new MainCalendarView.WeekHandler() {
             @Override
             public void onDayLongPress(Date date) {
-                //Toast.makeText(MonthView.this, "No events for today", Toast.LENGTH_SHORT).show();
-                //Gets current week dates in string format
-                //String currWeekDates = getWeekDates(date);
-                //System.out.println(currWeekDates);
-                //Toast.makeText(getContext(), currWeekDates, Toast.LENGTH_SHORT).show();
                 //Bundle to pass to week view that holds the current week dates
                 Bundle b = new Bundle();
 

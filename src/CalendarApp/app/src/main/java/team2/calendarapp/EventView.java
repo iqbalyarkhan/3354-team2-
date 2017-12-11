@@ -21,6 +21,7 @@ public class EventView extends LinearLayout implements View.OnClickListener {
     private TextView title;
     private TextView eventDescription;
     private LinearLayout container;
+
     public EventView(Context context){
         super(context);
         initControls(context);

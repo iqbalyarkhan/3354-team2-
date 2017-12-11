@@ -17,7 +17,7 @@ public class EventDB implements Serializable {
     private ArrayList<Event> events = new ArrayList<>();
 
     //Returns the one and only instance of EventDB
-    //@return: An instance of EventDB
+    //@return self: An instance of EventDB
     public static EventDB getInstance(){
         if (self == null){      //Only create a new instance if we have to.
             self = new EventDB();
@@ -61,7 +61,7 @@ public class EventDB implements Serializable {
     }
 
     //Used to determine if the proposed Event will collide with any in the database
-    //@param Event: the proposed Event to be checked
+    //@param event: the proposed Event to be checked
     //@return: the Event that the proposed Event will collide with. Null if there is no such Event.
     public Event isCollision(Event event){
         Calendar startDate = event.getStart(), endDate = event.getEnd();

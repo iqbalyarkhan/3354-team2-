@@ -12,122 +12,122 @@
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
         <View
             android:layout_marginTop="@dimen/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/separators" />
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
