@@ -100,7 +100,7 @@ public class EventDB implements Serializable {
     //@return: an array of Events that happened in the given range
     public Event[] getEventsInRange(Calendar start, Calendar end){
         ArrayList<Event> eventsInRange = new ArrayList<>();
-        //start.add(Calendar.HOUR, -24);      //When neither an hour nor minute is given, the Calendar defaults to the end of the day. Because we want the beginnin, we subtract 24 hours.
+        start.add(Calendar.HOUR, -24);      //When neither an hour nor minute is given, the Calendar defaults to the end of the day. Because we want the beginnin, we subtract 24 hours.
         Calendar eventDate;
         for (Event e : events){
             if (e == null){     //Don't consider any null Events

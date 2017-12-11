@@ -58,17 +58,10 @@ public class DayView extends Fragment {
 
         Calendar start = Calendar.getInstance();
         start.setTimeInMillis(b.getLong("day"));
-        start.set(Calendar.HOUR_OF_DAY, 0);
-        start.clear(Calendar.MINUTE);
-        start.clear(Calendar.SECOND);
-        start.clear(Calendar.MILLISECOND);
 
 
         Calendar end = Calendar.getInstance();
         end.setTimeInMillis(b.getLong("day"));
-        end.set(Calendar.HOUR_OF_DAY, 23);
-        end.set(Calendar.MINUTE, 59);
-        end.set(Calendar.SECOND, 59);
 
 
         Event[] arr = EventDB.getInstance().getEventsInRange(start,end);

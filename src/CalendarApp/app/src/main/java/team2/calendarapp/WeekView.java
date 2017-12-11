@@ -78,19 +78,10 @@ public class WeekView extends Fragment {
 
         Calendar start = Calendar.getInstance();
         start.setTimeInMillis(currentTime);
-        start.set(Calendar.HOUR_OF_DAY, 0);
-        start.clear(Calendar.MINUTE);
-        start.clear(Calendar.SECOND);
-        start.clear(Calendar.MILLISECOND);
         start.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
 
 
         Calendar end = Calendar.getInstance();
-        end.setTimeInMillis(currentTime);
-        end.set(Calendar.HOUR_OF_DAY, 0);
-        end.clear(Calendar.MINUTE);
-        end.clear(Calendar.SECOND);
-        end.clear(Calendar.MILLISECOND);
         end.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
 
 

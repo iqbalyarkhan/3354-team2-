@@ -329,8 +329,8 @@ public class MainCalendarView extends LinearLayout{
 
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
-            start.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMinimum(Calendar.MONTH),0,0,0);
-            end.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMaximum(Calendar.DAY_OF_MONTH),23,59,59);
+            start.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMinimum(Calendar.MONTH));
+            end.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.getActualMaximum(Calendar.DAY_OF_MONTH));
             Event[] arr = EventDB.getInstance().getEventsInRange(start,end);
 
             //Goes through the events array and compares it to the dates in the grid to
